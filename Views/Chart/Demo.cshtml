@@ -1,0 +1,33 @@
+﻿@model List<ASPNET_MVC_ChartsDemo.Models.B20DmDvt>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Page Title</title>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mã Đvcs</th>
+                <th>Tên Đvcs</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dvcs in Model)
+            {
+                if (dvcs.Ma_Dvcs == "A02")
+                {
+                    <tr>
+                        <td>@dvcs.tendangnhap</td>
+                        <td>@dvcs.hoten</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>
+
