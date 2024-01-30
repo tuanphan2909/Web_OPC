@@ -408,6 +408,12 @@ namespace web4.Controllers
                     var NgayTT = Request.Cookies["Ngay_TT"].Value;
                     var Ngay_Ky = Request.Cookies["Ngay_Ky"].Value;
                     var ma_dvcs = Request.Cookies["MA_DVCS"].Value;
+                    if (ma_dvcs == "OPC_B1")
+                    {
+                        string ma_dvcsFirst3Chars = ma_dvcs == "OPC_B1" ? ma_dvcs.Substring(0, 3) : ma_dvcs;
+                        string first3Chars = ma_dvcsFirst3Chars.Substring(0, 3);
+                        ma_dvcs = first3Chars;
+                    }
                     var ma_dt = Request.Cookies["MaDT"].Value;
                     command.CommandTimeout = 950;
                     command.CommandType = CommandType.StoredProcedure;
@@ -435,7 +441,7 @@ namespace web4.Controllers
                                     So = row["So_Ct_hd"].ToString(),
                                     Ngay = row["Ngay_Ct_hd"].ToString(),
                                     TienHD = row["Tien_HD"].ToString(),
-                                    So1 = row["So_Ct_Tt"].ToString(),
+                                    So2 = row["So_Ct_Tt"].ToString(),
                                     Ngay1 = row["Ngay_Ct_Tt"].ToString(),
                                     SoTien = row["Tien_TT"].ToString(),
                                     CKTT = row["CKTT1"].ToString(),
@@ -937,9 +943,9 @@ namespace web4.Controllers
                         worksheet.Cells[startRow + row + 1, startColumn + 4].Value = rowData.So2;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 4]);
 
-                        worksheet.Cells[startRow + row + 1, startColumn + 5].Value = rowData.Ngay2;
+                        worksheet.Cells[startRow + row + 1, startColumn + 5].Value = rowData.Ngay1;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 5]);
-                        worksheet.Cells[startRow + row + 1, startColumn + 6].Value = rowData.SoTien2;
+                        worksheet.Cells[startRow + row + 1, startColumn + 6].Value = rowData.SoTien;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 6]);
                         worksheet.Cells[startRow + row + 1, startColumn + 7].Value = rowData.CKTT;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 7]);
@@ -1851,6 +1857,12 @@ namespace web4.Controllers
                     var ma_dvcs = Request.Cookies["MA_DVCS"].Value;
                     var ma_dt = Request.Cookies["MaDT"].Value;
                     var NgayKy = Request.Cookies["Ngay_Ky"].Value;
+                    if (ma_dvcs == "OPC_B1")
+                    {
+                        string ma_dvcsFirst3Chars = ma_dvcs == "OPC_B1" ? ma_dvcs.Substring(0, 3) : ma_dvcs;
+                        string first3Chars = ma_dvcsFirst3Chars.Substring(0, 3);
+                        ma_dvcs = first3Chars;
+                    }
                     command.CommandTimeout = 950;
                     command.CommandType = CommandType.StoredProcedure;
                     using (SqlDataAdapter sda = new SqlDataAdapter(command))
@@ -2604,9 +2616,9 @@ namespace web4.Controllers
                     var stt = 1;
                     int currentRow = startRow;
                     string previousTenDt = null;
-                    Dictionary<string, decimal> tongCongNoTT = new Dictionary<string, decimal>();
-                    Dictionary<string, decimal> tongCongNoST = new Dictionary<string, decimal>();
-                    Dictionary<string, decimal> tongCongNo = new Dictionary<string, decimal>();
+                    Dictionary<string, int> tongCongNoTT = new Dictionary<string, int>();
+                    Dictionary<string, int> tongCongNoST = new Dictionary<string, int>();
+                    Dictionary<string, int> tongCongNo = new Dictionary<string, int>();
                     for (int row = 0; row < combinedData.Count; row++)
                     {
                         var rowData = combinedData[row];
@@ -2672,9 +2684,9 @@ namespace web4.Controllers
                         // Tăng số thứ tự và dòng
                         stt++;
                         currentRow++;
-                        tongCongNoTT[rowData.TenDt] += rowData.CongNoTT;
-                        tongCongNoST[rowData.TenDt] += rowData.TienThue;
-                        tongCongNo[rowData.TenDt] += rowData.CongNo;
+                        tongCongNoTT[rowData.TenDt] += (int)rowData.CongNoTT;
+                        tongCongNoST[rowData.TenDt] += (int)rowData.TienThue;
+                        tongCongNo[rowData.TenDt] += (int)rowData.CongNo;
                     }
                     CreateEmptyRow(worksheet, startColumn, currentRow,
                   tongCongNoTT[previousTenDt],
@@ -2789,34 +2801,6 @@ namespace web4.Controllers
             var Dvcs = Request.Cookies["MA_DVCS"].Value == "" ? Request.Cookies["Dvcs3"].Value : Request.Cookies["MA_DVCS"].Value;
             //var MaTDV = Request.Cookies["Ma_CbNv"] != null ? Request.Cookies["Ma_CbNv"].Value : string.Empty;
             var MaDt = Request.Cookies["Ma_Dt"] != null ? Request.Cookies["Ma_Dt"].Value : string.Empty;
-
-
-            using (SqlCommand cmd = new SqlCommand(Pname, con))
-            {
-                cmd.CommandTimeout = 950;
-
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                {
-                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
-                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
-                    cmd.Parameters.AddWithValue("@_Ma_Dt", MaDt);
-
-                    cmd.Parameters.AddWithValue("@_ma_dvcs", Dvcs);
-                    sda.Fill(ds);
-
-                }
-            }
-            return View(ds);
-
-
-            Dvcs = Request.Cookies["MA_DVCS"].Value == "" ? Request.Cookies["Dvcs3"].Value : Request.Cookies["MA_DVCS"].Value;
-            //var MaTDV = Request.Cookies["Ma_CbNv"] != null ? Request.Cookies["Ma_CbNv"].Value : string.Empty;
-            MaDt = Request.Cookies["Ma_Dt"] != null ? Request.Cookies["Ma_Dt"].Value : string.Empty;
-
-
             using (SqlCommand cmd = new SqlCommand(Pname, con))
             {
                 cmd.CommandTimeout = 950;

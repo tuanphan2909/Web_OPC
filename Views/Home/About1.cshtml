@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿@{ ViewBag.Title = "Trang Chủ | OPCPHARMA";
+﻿﻿﻿﻿﻿﻿﻿@{ ViewBag.Title = "Trang Chủ | OPCPHARMA";
     @model System.Data.DataSet
     string username;
     username = Request.Cookies["UserName"].Value;
@@ -663,7 +663,7 @@
                     column: {
                         dataLabels: {
                             enabled: true,
-                            format: '{point.y}', // Hiển thị giá trị của cột
+                            format: '{point.y:,.0f}', // Hiển thị giá trị của cột
                             style: {
                                 fontWeight: 'bold',
                                 color: 'black'
@@ -1005,7 +1005,9 @@
                     }
                 },
                 labels: {
-                    format: '{value} M',
+                     formatter: function () {
+                        return (this.value / 1000000000) + ' M';
+                    },
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
