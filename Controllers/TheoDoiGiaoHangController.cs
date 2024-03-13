@@ -110,7 +110,7 @@ namespace web4.Controllers
                                 TheoDoiGiaoHang dataItem = new TheoDoiGiaoHang
                                 {
                                     So_HD = row["so_ct"].ToString(),
-                                    Ngay_HD = Convert.ToDateTime(row["Ngay_Ct1"]),
+                                    Ngay_HD = row["Ngay_Ct1"].ToString(),
                                     
                                     Ma_Dt = row["Ma_dt"].ToString(),
                                     Ten_Dt = row["Ten_Dt"].ToString(),
@@ -167,7 +167,7 @@ namespace web4.Controllers
                                 TheoDoiGiaoHang dataItem = new TheoDoiGiaoHang
                                 {
                                     So_HD = row["so_ct"].ToString(),
-                                    Ngay_HD = Convert.ToDateTime(row["Ngay_Ct1"]),
+                                    Ngay_HD = row["Ngay_Ct1"].ToString(),
 
                                     Ma_Dt = row["Ma_dt"].ToString(),
                                     Ten_Dt = row["Ten_Dt"].ToString(),
@@ -425,42 +425,42 @@ namespace web4.Controllers
         }
 
 
-        public ActionResult ExportToExcel()
-        {
-            // Đường dẫn đến file mẫu Excel
-            var templatePath = Server.MapPath("~/PathToYourTemplate/template.xlsx");
-            FileInfo fileInfo = new FileInfo(templatePath);
+        //public ActionResult ExportToExcel()
+        //{
+        //    // Đường dẫn đến file mẫu Excel
+        //    var templatePath = Server.MapPath("~/PathToYourTemplate/template.xlsx");
+        //    FileInfo fileInfo = new FileInfo(templatePath);
 
-            using (var package = new ExcelPackage(fileInfo))
-            {
-                // Chỉ định worksheet
-                var worksheet = package.Workbook.Worksheets["Sheet1"]; // Hoặc tên sheet mẫu của bạn
+        //    using (var package = new ExcelPackage(fileInfo))
+        //    {
+        //        // Chỉ định worksheet
+        //        var worksheet = package.Workbook.Worksheets["Sheet1"]; // Hoặc tên sheet mẫu của bạn
 
-                // Lấy dữ liệu từ database
-                var dataItems = LoadHD();
+        //        // Lấy dữ liệu từ database
+        //        var dataItems = LoadHD();
 
-                // Bắt đầu điền dữ liệu từ hàng nào đó, giả sử hàng thứ 10
-                int row = 10;
-                foreach (var item in dataItems)
-                {
-                    worksheet.Cells[row, 1].Value = item.So_HD;
-                    worksheet.Cells[row, 2].Value = item.Ngay_HD.ToString("dd/MM/yyyy");
-                    worksheet.Cells[row, 3].Value = item.Ten_Dt;
-                    worksheet.Cells[row, 4].Value = item.Tien_HD;
-                    // Điền tiếp các cột khác nếu cần
-                    row++;
-                }
+        //        // Bắt đầu điền dữ liệu từ hàng nào đó, giả sử hàng thứ 10
+        //        int row = 10;
+        //        foreach (var item in dataItems)
+        //        {
+        //            worksheet.Cells[row, 1].Value = item.So_HD;
+        //            worksheet.Cells[row, 2].Value = item.Ngay_HD.ToString("dd/MM/yyyy");
+        //            worksheet.Cells[row, 3].Value = item.Ten_Dt;
+        //            worksheet.Cells[row, 4].Value = item.Tien_HD;
+        //            // Điền tiếp các cột khác nếu cần
+        //            row++;
+        //        }
 
-                // Tự động điều chỉnh kích thước các cột
-                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+        //        // Tự động điều chỉnh kích thước các cột
+        //        worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
-                // Lưu vào luồng và trả về file để tải về
-                var stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
+        //        // Lưu vào luồng và trả về file để tải về
+        //        var stream = new MemoryStream();
+        //        package.SaveAs(stream);
+        //        stream.Position = 0;
 
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "TheoDoiGiaoHang.xlsx");
-            }
-        }
+        //        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "TheoDoiGiaoHang.xlsx");
+        //    }
+        //}
     }
 }
