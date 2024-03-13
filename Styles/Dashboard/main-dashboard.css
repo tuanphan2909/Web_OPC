@@ -598,7 +598,7 @@ tfoot {
     margin-bottom:20px;
    
    
-  height:max-content;
+    height:max-content;
 }
     .row-chart-2 .left-chart {
       /*  width: 70%;*/
@@ -636,3 +636,28 @@ tfoot {
 .table2-data.odd {
     background-color: #f2f2f2; /* Màu xám cho các dòng lẻ */
 }
+.row-chart-3{
+    height:200px;
+    width:100%;
+    justify-content:space-between;
+}
+.row-chart-3 .row-table .left .pie{
+    height:100%;
+    border-radius: 10px;
+    background-color:white;
+
+}
+.row-chart-3 .row-table .left{
+    height:200px;
+}
+    .row-chart-3 .row-table .right{
+        height:200px;
+    }
+    .row-chart-3 .row-table .right .pie {
+        height: 100%;
+        border-radius: 10px;
+        background-color: white;
+    }
+    .line-chart{
+        margin:10px;   
+    }

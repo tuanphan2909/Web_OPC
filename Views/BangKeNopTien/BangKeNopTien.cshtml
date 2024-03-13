@@ -621,6 +621,10 @@
                     </div>
 
                 </form>
+                <button onclick="onPrint('@Url.Action("BangKeNopTien_In", "BangKeNopTien")'
+                                                      )">
+                    Print
+                </button>
             </li>
         </ul>
     </div>
@@ -1178,7 +1182,13 @@
         });
 
     </script>
-
+    <script>
+        function onPrint(actionUrl) {
+            var url = actionUrl;
+            var newWindow = window.open('', '_blank');
+            newWindow.location.href = url;
+        }
+    </script>
 </body>
 
 </html>

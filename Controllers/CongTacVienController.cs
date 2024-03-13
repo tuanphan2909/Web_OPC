@@ -18,7 +18,7 @@ namespace web4.Controllers
         SqlDataReader dt;
         // GET: BaoCaoTienVeCN
        
-
+                                                                                                                                                                                                                                                              
         public void connectSQL()
         {
             con.ConnectionString = "Data source= " + "118.69.109.109" + ";database=" + "SAP_OPC" + ";uid=sa;password=Hai@thong";

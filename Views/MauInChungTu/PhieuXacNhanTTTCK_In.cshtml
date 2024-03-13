@@ -1,6 +1,8 @@
 ﻿﻿﻿﻿﻿﻿
 @{ ViewBag.Title = "Phiếu Xác Nhận Thanh Toán";
-
+    decimal totaltienBT = 0;
+    decimal CKTT = 0;
+    decimal tienthuTT = 0;
     string Dvcs = Request.Cookies["MA_DVCS"] != null ? HttpUtility.UrlDecode(Request.Cookies["MA_DVCS"].Value) : "";
     var CN = "";
 
@@ -532,8 +534,8 @@
                             <tr>
                                 <td>@stt</td>
                                 <td>@row2["So_Ct"]</td>
-                                <td>@row2["Ngay_HD"]</td>
-                                <td>@row2["Ngay_PT"]</td>
+                                <td>@row2["Ngay_HD1"]</td>
+                                <td>@row2["Ngay_Thu1"]</td>
                                 <td style="text-align:right;padding-right:5px">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tien"]))</td>
                                 <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", Convert.ToDecimal(row2["CKTT"]))</td>
                                 <td style="text-align: right; padding-right: 5px"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_Thu"]))</td>
@@ -542,18 +544,20 @@
 
                             </tr>
                             stt++;
-
+                            totaltienBT += Convert.ToDecimal(row2["Tien"]);
+                            CKTT += Convert.ToDecimal(row2["CKTT"]);
+                            tienthuTT += Convert.ToDecimal(row2["Tien_Thu"]);
 
                         }
                     </tbody>
                     <tfoot style=" display: table-row-group !important;">
                         <tr style="color:black;font-weight:bold;">
                             <td colspan="4">Tổng cộng</td>
-                            <td style="text-align: right; padding-right: 5px"></td>
+                            <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", totaltienBT).Replace(",",".") </td>
 
 
-                            <td style="text-align: right; padding-right: 5px"></td>
-                            <td style="text-align: right; padding-right: 5px"></td>
+                            <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", CKTT).Replace(",", ".") </td>
+                            <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", tienthuTT).Replace(",", ".") </td>
                         </tr>
                     </tfoot>
                 </table>

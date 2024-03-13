@@ -2243,7 +2243,7 @@ namespace web4.Controllers
             var toDate = Request.Cookies["To_Date"].Value;
             var Dvcs = Request.Cookies["Dvcs3"].Value;
             var LoaiCt = Request.Cookies["LoaiCt"].Value;
-
+            //var MaKho = Request.Cookies["Ma_Kho"].Value;
             using (SqlCommand cmd = new SqlCommand(Pname, con))
             {
                 cmd.CommandTimeout = 950;
@@ -2253,10 +2253,11 @@ namespace web4.Controllers
 
                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                 {
-                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);                                                                                                                                                                                                              
                     cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
                     cmd.Parameters.AddWithValue("@_Loai_Ct", LoaiCt);
                     cmd.Parameters.AddWithValue("@_ma_dvcs", Dvcs);
+                    //cmd.Parameters.AddWithValue("@_Ma_Kho", MaKho);
                     sda.Fill(ds);
 
                 }

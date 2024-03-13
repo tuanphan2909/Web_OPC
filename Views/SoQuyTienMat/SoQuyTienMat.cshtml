@@ -1,6 +1,4 @@
 ﻿
-
-
 @{ ViewBag.Title = "SỔ QUỸ TIỀN MẶT";
     var fromDate = Request.Cookies["From_date"].Value;
     var toDate = Request.Cookies["To_date"].Value;
@@ -10,9 +8,167 @@
     var formattedFromDate = fromDateValue.ToString("dd/MM/yyyy");
     var formattedToDate = toDateValue.ToString("dd/MM/yyyy");
     var MaTK = Request.Cookies["Ma_TK"].Value;
+    var MaNH = Request.Cookies["Ma_NH"].Value;
+    var TenNH ="";
     var ten = "";
     var title = "";
-    if(MaTK == "1111")
+    if (MaNH == "1605201013995" && MaTK !="1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if(MaNH == "001-033554-001" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TNHH MTC HSBC";
+    }
+    else if (MaNH == "007.137.1023892" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Ngoại Thương Việt Nam";
+    }
+    else if (MaNH == "1012756827_VCB" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Ngoại Thương Việt Nam";
+    }
+    else if (MaNH == "1037931581" && MaTK != "1111")
+    {
+        TenNH = "Ngân Hàng TMCP Công Thương Việt Nam";
+    }
+    else if (MaNH == "1037931581_VCB" && MaTK != "1111")
+    {
+        TenNH = "Ngân Hàng TMCP Ngoại Thương Việt Nam";
+    }
+    else if (MaNH == "111002637244_VIETIN" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công Thương Việt Nam";
+    }
+    else if (MaNH == "111101409003" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng thương mại Cổ phần Quân đội";
+    }
+    else if (MaNH == "116000030030" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công thương Việt Nam";
+    }
+    else if (MaNH == "118002874433" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công thương Việt Nam";
+    }
+    else if (MaNH == "118002929530" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công thương Việt Nam";
+    }
+    else if (MaNH == "12343939" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Việt Á - Chi Nhánh Sài Gòn";
+    }
+    else if (MaNH == "151703359" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Á Châu (ACB)";
+    }
+    else if (MaNH == "1605201011620" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "1605311200009" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "1890201002962" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "2000201348722" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "311100007727122" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Đầu tư và Phát Triển VN";
+    } else if (MaNH == "31110370007977" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Đầu tư và Phát Triển VN";
+    }
+    else if (MaNH == "3304000058249000" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Việt Á  - Chi Nhánh Sài Gòn";
+    }
+    else if (MaNH == "3601201002934" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và phát triển VN";
+    }
+    else if (MaNH == "4939668" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Á Châu (ACB)";
+    }
+    else if (MaNH == "5506201002874" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông Nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "6090201003970_AGRIBANK" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông Nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "6900201004039_AGRIBANK" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông Nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "700011141409" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TNHH MTV SHINHAN VIỆT NAM";
+    }
+    else if (MaNH == "71001023887" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Ngoại Thương VN";
+    }
+    else if (MaNH == "71010001751421" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Đầu Tư và Phát triển VN";
+    }
+    else if (MaNH == "907-18-071111-8" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng CTBC";
+    }
+    else if (MaNH == "907-18-071112-1" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng CTBC";
+    }
+    else if (MaNH == "CT_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "DN_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "HN_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "MD_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "NA_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "NT_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "OPC_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "OPC_VANG" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "TG_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+
+    if (MaTK == "1111")
     {
         title = "Sổ Quỹ Tiền Mặt";
         ten = "1111 - Tiền Mặt Việt Nam";
@@ -26,6 +182,11 @@
     {
         title = "Sổ Quỹ Ngân Hàng";
         ten = "1131 - Tiền Đang Chuyển (VND)";
+    }
+    if (MaTK == "1113")
+    {
+        title = "Sổ Quỹ Tiền Mặt";
+        ten = "1113 - Vàng";
     }
 }
 @using System.Data;
@@ -673,7 +834,7 @@
                             <option value="1111" data-tenTK="Tiền Mặt Việt Nam">1111 - Tiền Mặt Việt Nam</option>
                             <option value="1121" data-tenTK="Tiền Gửi Ngân Hàng VNĐ">1121 - Tiền Gửi Ngân Hàng VNĐ</option>
                             <option value="1131" data-tenTK="Tiền Đang Chuyển (VND)">1131 - Tiền Đang Chuyển (VND)</option>
-
+                            <option value="1113" data-tenTK="Vàng">1113 - Vàng</option>
                         </select>
                     </div>
                     <h6>Chọn Ngân Hàng</h6>
@@ -774,7 +935,7 @@
         }
         <h4 style="color:#3483bd">@title</h4>
         <h4 style="color:#3483bd">Từ @formattedFromDate đến @formattedToDate</h4>
-        <h6 style="color:#3483bd;font-weight:bold">@ten</h6>
+        <h6 style="color:#3483bd;font-weight:bold">@ten - @TenNH</h6>
     </header>
     <!-- =======  Data-Table  = Start  ========================== -->
 

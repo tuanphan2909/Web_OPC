@@ -1236,6 +1236,16 @@
     <Content Include="Views\SoChiTietPhaiTra\Index.cshtml" />
     <Content Include="Views\MauInChungTu\PhieuXacNhanTTTCK_In.cshtml" />
     <Content Include="Views\MauInChungTu\TonNo.cshtml" />
+    <Content Include="Views\TheKho\PhieuNhapKho_In.cshtml" />
+    <Content Include="Views\TheKho\PhieuXuatKho_In.cshtml" />
+    <Content Include="Views\TheKho\PhieuNhapKho_Fill.cshtml" />
+    <Content Include="Views\TheKho\PhieuXuatKho_Fill.cshtml" />
+    <Content Include="Views\TheKho\PhieuNhapKho.cshtml" />
+    <Content Include="Views\TheKho\PhieuXuatKho.cshtml" />
+    <Content Include="Views\TheKho\PhieuDatHang_In.cshtml" />
+    <Content Include="Views\TheKho\PhieuDatHang_Fill.cshtml" />
+    <Content Include="Views\TheKho\PhieuDatHang.cshtml" />
+    <Content Include="Views\BangKeNopTien\BangKeNopTien_In.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

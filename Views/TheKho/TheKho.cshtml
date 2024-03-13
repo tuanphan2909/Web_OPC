@@ -948,12 +948,17 @@
                 var tonCuoiKyRows = [];
                 var tongNhapXuatRows = [];
                 var otherRows = [];
+               /* var nullRows = [];*/
+
 
                 $.each(rows, function (_, row) {
                     switch (row.dienGiaiValue) {
                         case "TonDauKy":
                             tonDauKyRows.push(row);
                             break;
+                        //case "":
+                        //    nullRows.push(row);
+                        //    break;
                         case "TonCuoiKy":
                             tonCuoiKyRows.push(row);
                             break;
@@ -967,11 +972,12 @@
                 });
 
                 // Sắp xếp các nhóm
-                tonDauKyRows = tonDauKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
-                tonCuoiKyRows = tonCuoiKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
-                tongNhapXuatRows = tongNhapXuatRows.sort((a, b) => a.soCtValue - b.soCtValue);
-                otherRows = otherRows.sort((a, b) => a.soCtValue - b.soCtValue);
-
+                //tonDauKyRows = tonDauKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
+                //tonCuoiKyRows = tonCuoiKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
+                //tongNhapXuatRows = tongNhapXuatRows.sort((a, b) => a.soCtValue - b.soCtValue);
+            
+                //nullRows = nullRows.sort((a, b) => a.soCtValue - b.soCtValue);
+              /*  otherRows = otherRows.sort((a, b) => a.soCtValue - b.soCtValue);*/
                 // Thêm các nhóm vào bảng
                 $.each(tonDauKyRows.concat(otherRows, tonCuoiKyRows, tongNhapXuatRows), function (_, row) {
                     $('#example tbody').append(row.row);

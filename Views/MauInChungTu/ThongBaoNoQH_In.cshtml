@@ -558,25 +558,17 @@
 
                 </table>
                 <br />
-                <div style="width:700px;word-wrap:break-word">
-                    <h5>
-                        Kính đề nghị Quý Khách Hàng vui lòng đối chiếu và xác nhận số liệu gửi về Công Ty Cố Phần Dược Phẩm OPC - Chi nhánh @extractedText trước ngày<span style="color: black;font-weight:bold">
-                            @foreach (DataRow row3 in Model.Tables[3].Rows)
-                            {
-                                @row3["HanNgay"]
-
-                                var HanNgay = row3["HanNgay"].ToString();
-                                HttpCookie hanNgayCookie = new HttpCookie("HanNgay");
-                                hanNgayCookie.Value = HanNgay;
-                                Response.Cookies.Add(hanNgayCookie);
-                            }
+                <div style="width:700px;word-wrap:break-word;text-align:left">
+                    <h5 style="text-align:left">
+                        Kính đề nghị Quý Khách Hàng vui lòng đối chiếu và xác nhận số liệu gửi về Công Ty Cố Phần Dược Phẩm OPC - Chi nhánh @extractedText trước ngày<span style="color: black;font-weight:bold"id="date">
+                           
 
                         </span>. Đồng thời sớm thanh toán số dư nợ quá hạn trên cho Chi Nhánh chúng tôi bằng tiền mặt hoặc chuyển vào tài khoản: Công Ty Cố Phẩn Dược Phẩm OPC - Chi nhánh @extractedText.
                     </h5>
                 </div>
 
                 <div>
-                    <h5>
+                    <h5 style="text-align:left">
                         Số tài khoản:  @foreach (DataRow row4 in Model.Tables[4].Rows)
                         {@row4["Tk"]
                         var TK = row4["Tk"].ToString();
@@ -610,6 +602,7 @@
                     <h5 style="font-style:italic;text-align:left">Trân trọng!</h5>
                 </div>
                 <br />
+                
                 @*<h4 style="margin-left:auto">P. KHCU &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thủ kho&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xưởng sản xuất</h4>*@
                 <div style="display:inline-block">
                     <h4 style="display:inline-block;margin-left:50px">Khách Hàng Xác Nhận</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -666,7 +659,35 @@
         });
         </script>*@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script>
+      
+            // Hàm để đọc giá trị từ cookie
+            function getCookieValue(cookieName) {
+                var name = cookieName + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookieArray = decodedCookie.split(';');
+            for (var i = 0; i < cookieArray.length; i++) {
+                    var cookie = cookieArray[i].trim();
+            if (cookie.indexOf(name) == 0) {
+                        return cookie.substring(name.length, cookie.length);
+                    }
+                }
+            return "";
+            }
 
+            // Lấy giá trị từ cookie
+            var toDateCookie = getCookieValue("Ngay_Ky");
+
+            // Tách giá trị thành năm, tháng, ngày
+            var dateParts = toDateCookie.split("-");
+            var year = dateParts[0];
+            var month = dateParts[1];
+            var day = dateParts[2];
+
+            // Hiển thị lên HTML
+            var resultDiv = document.getElementById("date");
+            resultDiv.innerHTML = " " + day + "/" + month + "/" + year;
+    </script>
     <script>
         function showFileInput() {
             // Sử dụng JavaScript để kích hoạt hộp thoại chọn vị trí lưu tệp

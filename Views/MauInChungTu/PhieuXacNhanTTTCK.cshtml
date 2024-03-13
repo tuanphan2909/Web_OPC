@@ -1,8 +1,4 @@
 ﻿
-
-
-
-
 @{ ViewBag.Title = "PHIEU XAC NHAN TTTCK";
     var fromDate = Request.Cookies["From_date"].Value;
     var toDate = Request.Cookies["To_date"].Value;
@@ -703,8 +699,8 @@
                             {
                             <tr>
                                 <td>@row2["So_Ct"]</td>
-                                <td>@row2["Ngay_HD"]</td>
-                                <td>@row2["Ngay_PT"]</td>
+                                <td>@row2["Ngay_HD1"]</td>
+                                <td>@row2["Ngay_Thu1"]</td>
                                 <td>@String.Format("{0:n0}", Convert.ToDecimal(row2["Tien"]))</td>
                                 <td>@String.Format("{0:n0}", Convert.ToDecimal(row2["CKTT"]))</td>
                                 <td style="text-align: right; font-weight: bold"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_Thu"]))</td>

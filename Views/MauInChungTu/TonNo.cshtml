@@ -635,7 +635,7 @@
                     <datalist id="dropdownListTDV">
                         @foreach (var item in ViewBag.DataTDV)
                         {
-                            <option value="@item.Ma_CbNv" data-Ma_CbNv="@item.Ma_CbNv">@*@item.Ma_CbNv*@ @item.hoten</option>
+                            <option value="@item.Ma_CbNv" data-Ma_CbNv="@item.Ma_CbNv" data-ten="@item.hoten">@*@item.Ma_CbNv*@ @item.hoten</option>
                         }
                     </datalist>
                     <input type="hidden" name="Ma_TDV" id="selectedOptionTDV">
@@ -1090,10 +1090,13 @@
 
                     if (selectedOption) {
                         var MaTDV = selectedOption.getAttribute('data-Ma_CbNv');
+                        var TenTDV = selectedOption.getAttribute('data-ten');
                         document.cookie = 'Ma_TDV=' + MaTDV;
+                        document.cookie = 'Ten_TDV=' + TenTDV;
                     } else {
                         var selected = "";
                         document.cookie = 'Ma_TDV=' + selected;
+                        document.cookie = 'Ten_TDV=' + selected;
                     }
                 });
             }
