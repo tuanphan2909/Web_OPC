@@ -5,45 +5,55 @@
     int rowCount = 0;
     string dvcs = Request.Cookies["MA_DVCS"].Value;
     long KhoanNam = 0;
-
+    long KhoanThang = 0;
     if (Request.Cookies["MA_DVCS"].Value == "OPC_CT")
     {
         KhoanNam = 124001000000;
+        KhoanThang = 9921000000;
     }else if (Request.Cookies["MA_DVCS"].Value == "OPC_TG")
     {
         KhoanNam = 63998000000;
+        KhoanThang = 5121000000;
     }
     else if (Request.Cookies["MA_DVCS"].Value == "OPC_MD")
     {
         KhoanNam = 85936000000;
+        KhoanThang = 6877000000;
     }
     else if (Request.Cookies["MA_DVCS"].Value == "OPC_TP")
     {
         KhoanNam = 81200000000;
+        KhoanThang = 6496000000;
     }
     else if (Request.Cookies["MA_DVCS"].Value == "OPC_VT")
     {
         KhoanNam = 30441000000;
+        KhoanThang = 2438000000;
     }
     else if (Request.Cookies["MA_DVCS"].Value == "OPC_NT")
     {
         KhoanNam = 51294000000;
+        KhoanThang = 4104000000;
     }
     else if (Request.Cookies["MA_DVCS"].Value == "OPC_DN")
     {
         KhoanNam = 48000000000;
+        KhoanThang = 3840000000;
     }
     else if (Request.Cookies["MA_DVCS"].Value == "OPC_NA")
     {
         KhoanNam = 30001000000;
+        KhoanThang = 2398000000;
     }
     else if (Request.Cookies["MA_DVCS"].Value == "OPC_HN")
     {
         KhoanNam = 48548000000;
+        KhoanThang = 3884000000;
     }
     else
     {
         KhoanNam = 888282000000;
+        KhoanThang = 71070000000;
     }
 
 }
@@ -156,23 +166,31 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                                                       )">2.3 BC Bán Hàng CN</a>
                     <a href="#" onclick="runReport('@Url.Action("BaoCaoBanHangTDV_Fill", "BaoCaoBanHangTDV")'
                                                       )">2.4 BC Bán Hàng TDV</a>
-                    <a href="#" onclick="runReport('@Url.Action("BaoCaoTienVeCN_Fill", "BaoCaoTienVeCN")'
+                    @if (Request.Cookies["UserName"].Value == "vpct-nhatanh")
+                    {
+                        <a href="#" onclick="runReport('@Url.Action("BaoCaoTienVeCN2_Fill", "BaoCaoTienVeCN")'
                                                       )">2.5 BC Tiền Về CN</a>
-                    <a href="#" onclick="runReport('@Url.Action("BaoCaoTienVeTDV_Fill", "BaoCaoTienVeCN")'
+            }
+            else
+            {
+                <a href="#" onclick="runReport('@Url.Action("BaoCaoTienVeCN_Fill", "BaoCaoTienVeCN")'
+                                                      )">2.5 BC Tiền Về CN</a>
+            }
+                        <a href="#" onclick="runReport('@Url.Action("BaoCaoTienVeTDV_Fill", "BaoCaoTienVeCN")'
                                                       )">2.6 BC Tiền Về TDV</a>
-                    <a href="#" onclick="runReport('@Url.Action("BaoCaoDoanhThuGamHangTheoDoiTuong_Fill", "BaoCaoDoanhThuGamHangTheoDoiTuong")'
+                        <a href="#" onclick="runReport('@Url.Action("BaoCaoDoanhThuGamHangTheoDoiTuong_Fill", "BaoCaoDoanhThuGamHangTheoDoiTuong")'
                                                       )">2.7 BC DT Gam Theo Đối Tượng</a>
-                    @if (string.Equals(ViewBag.UserName, "OPCTCKT001", StringComparison.OrdinalIgnoreCase))
-                    {
-                        <a href="#" onclick="runReport('@Url.Action("BaoCaoDTTinhLuongCTV_Fill_CongTy", "BaoCaoBanHangCTV")'
+                        @if (string.Equals(ViewBag.UserName, "OPCTCKT001", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <a href="#" onclick="runReport('@Url.Action("BaoCaoDTTinhLuongCTV_Fill_CongTy", "BaoCaoBanHangCTV")'
                                                       )">2.8 BC DT Tính Lương CTV</a>
-                    }
-                    else
-                    {
-                        <a href="#" onclick="runReport('@Url.Action("BaoCaoDTTinhLuongCTV_Fill", "BaoCaoBanHangCTV")'
+                        }
+                        else
+                        {
+                            <a href="#" onclick="runReport('@Url.Action("BaoCaoDTTinhLuongCTV_Fill", "BaoCaoBanHangCTV")'
                                                       )">2.8 BC DT Tính Lương CTV</a>
-                    }
-                </div>
+                        }
+                    </div>
                 <button class="submenu-btn" onclick="toggleSubmenu('submenu1_3','arrow-subicon_3')">
                     3.Báo Cáo Công Nợ <div id="arrow-subicon_3" class="subicon-arrow">
                         <i class="fa-solid fa-chevron-down"></i>
@@ -189,7 +207,7 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                                                       )">3.1.1 Đối Chiếu Doanh Thu Công Nợ</a>
                         <a href="#" onclick="runReport('@Url.Action("BangDoiChieuDTCN_Fill", "MauInChungTu")'
                                                       )">3.1.2 Đối Chiếu Công Nợ</a>
-                        @if (string.Equals(ViewBag.Username, "vpct-nhatanh", StringComparison.OrdinalIgnoreCase))
+                        @if (Request.Cookies["UserName"].Value == "vpct-nhatanh")
                         {
 
                             <a href="#" onclick="runReport('@Url.Action("CongNoChiTietKH2_Fill", "CongNoChiTiet")'
@@ -240,7 +258,12 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                                                       )">
                         4.3 BC Chi Phí Khuyến Mãi
                     </a>
-                </div>
+                        <a href="#" style="display:flex" onclick="runReport('@Url.Action("BaoCaoDoanhThuGV_Fill", "BaoCaoDoanhThuGV")'
+                                                      )">
+                            4.4 BC Doanh Thu Giá Vốn
+                        </a>
+            
+                    </div>
 
                 <button class="submenu-btn" onclick="toggleSubmenu('submenu1_5','arrow-subicon_5')">
                     5.Báo Cáo Hợp Đồng <div id="arrow-subicon_5" class="subicon-arrow">
@@ -252,15 +275,24 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                                                       )">
                         5.1 Theo Dõi Hợp Đồng Thầu
                     </a>
-                    <a href="#" style="display:flex" onclick="runReport('@Url.Action("BangKeNopTien_Fill", "BangKeNopTien")'
+                    @if (Request.Cookies["UserName"].Value == "vpct-nhatanh")
+                    {
+                        <a href="#" style="display:flex" onclick="runReport('@Url.Action("Index", "BangKeNopTien")'
                                                       )">
-                        5.2 Theo Dõi Bảng Kê Nộp Tiền
-                    </a>
-                    <a href="#" style="display:flex" onclick="runReport('@Url.Action("PhanTichBanHang_Fill", "PhanTichBanHang")'
+                            5.2 Theo Dõi Bảng Kê Nộp Tiền
+                        </a>}
+            else
+            {
+                <a href="#" style="display:flex" onclick="runReport('@Url.Action("BangKeNopTien_Fill", "BangKeNopTien")'
                                                       )">
-                        5.3 Phân Tích Bán Hàng
-                    </a>
-                </div>
+                    5.2 Theo Dõi Bảng Kê Nộp Tiền
+                </a>
+            }
+                        <a href="#" style="display:flex" onclick="runReport('@Url.Action("PhanTichBanHang_Fill", "PhanTichBanHang")'
+                                                      )">
+                            5.3 Phân Tích Bán Hàng
+                        </a>
+                    </div>
 
                 <button class="submenu-btn" onclick="toggleSubmenu('submenu1_6','arrow-subicon_6')">
                     6.Báo Cáo Kho <div id="arrow-subicon_6" class="subicon-arrow">
@@ -282,6 +314,28 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                     </a>
                     <a href="#" style="display:flex" onclick="runReport('@Url.Action("PhieuNhapKho_Fill", "MauInChungTu")'
                                                       )">6.4.Phiếu Nhập Xuất Kho Khác</a>
+                </div>
+
+                <button class="submenu-btn" onclick="toggleSubmenu('submenu1_7','arrow-subicon_7')">
+                    7.Báo Cáo MAR <div id="arrow-subicon_6" class="subicon-arrow">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </button>
+                <div id="submenu1_7" class="submenu-container"> 
+                    <a href="#" style="display:flex" onclick="runReport('@Url.Action("BaoCaoMar_Fill", "BaoCaoMAR")'
+                                                      )">
+                        7.1 BC Doanh Thu Bán Hàng OTC
+                    </a>
+                    @*<a href="#" style="display:flex" onclick="runReport('@Url.Action("PhieuNhapKho_Fill", "TheKho")'
+                                                      )">
+                        6.2 Phiếu Nhập Kho
+                    </a>
+                    <a href="#" style="display:flex" onclick="runReport('@Url.Action("PhieuXuatKho_Fill", "TheKho")'
+                                                      )">
+                        6.3 Phiếu Xuất Kho
+                    </a>
+                    <a href="#" style="display:flex" onclick="runReport('@Url.Action("PhieuNhapKho_Fill", "MauInChungTu")'
+                                                      )">6.4.Phiếu Nhập Xuất Kho Khác</a>*@
                 </div>
             </div>
 
@@ -428,10 +482,18 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
             <div class="row-chart-1">
                 <div class="percent-chart">
                     <div class="top">
-                        <div class="pie"><h5>Tỷ lệ % so với kế hoạch (Năm)</h5><h6 style="font-size:13px;text-align:center">Khoán năm: @KhoanNam.ToString().Substring(0, 3)B (100%)</h6><canvas id="myPieChart" style="width:100%;height:100%"></canvas></div>
+                        <div class="pie"><h5>Tỷ lệ % so với kế hoạch (Năm)</h5><h6 style="font-size:13px;text-align:center">Khoán năm: @KhoanNam.ToString().Substring(0, 3) Tỷ (100%)</h6><canvas id="myPieChart" style="width:100%;height:100%"></canvas></div>
                         @*<div style="background-color:red;width:20px;height:20px;position:relative">Đạt được: 139M</div>*@
                     </div>
-                    <div class="bottom"><div class="pie"><h5>Tỷ lệ % so với kế hoạch (Tháng)</h5><canvas id="myPieChart2" style="width:100%;height:100%"></canvas></div></div>
+                    <div class="bottom"><div class="pie">
+    <h5>Tỷ lệ % so với kế hoạch (Tháng)</h5>@{
+        // Xác định độ dài của biến KhoanThang
+        int length = KhoanThang.ToString().Length;
+
+        // Chuỗi con mà bạn muốn hiển thị
+        string khoanThangSubstring = length <= 10 ? KhoanThang.ToString().Substring(0, 1) : KhoanThang.ToString().Substring(0, 2);
+    }<h6 style="font-size:13px;text-align:center">Khoán tháng: @khoanThangSubstring Tỷ (100%)</h6><canvas id="myPieChart2" style="width:100%;height:100%"></canvas>
+</div></div>
 
                 </div>
                 <div class="line-chart"><div id="combinedChartContainer" style="height: 100%;"></div></div>
@@ -1362,62 +1424,67 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
         });
     </script>
     <script>
-    // Tạo dữ liệu cho biểu đồ
+    function formatNumberWithUnit(value) {
+        if (value >= 1000000000) {
+            return Math.round(value / 1000000000) + " Tỷ";
+        } else if (value >= 1000000) {
+            return Math.round(value / 1000000) + " Triệu";
+        } else {
+            return value.toString();
+        }
+    }
+        @*var arr = @foreach (DataRow row3 in Model.Tables[1].Rows)
+                            {
+                               @Math.Round(Double.Parse(row3["Tong_Doanh_Thu_Thang"].ToString().Replace(",", "")))
+                };*@
     var data = {
         labels: ['Đạt được', 'Còn lại'],
         datasets: [{
-            data: [
-                @foreach (DataRow row3 in Model.Tables[1].Rows)
-                {
-                    @row3["Tong_Doanh_Thu_Thang"].ToString().Replace(",", "")
-                },
-                197580000000
+            data: [@foreach (DataRow row3 in Model.Tables[1].Rows)
+                            {
+                               @Math.Round(Double.Parse(row3["Tong_Doanh_Thu_Thang"].ToString().Replace(",", "")))
+                },  @(Math.Round(Convert.ToDouble(KhoanThang), MidpointRounding.AwayFromZero))
             ], // Sử dụng giá trị đã chuyển đổi
             backgroundColor: ['#2992a7', '#e0e0e0']
         }]
     };
-
-    // Tính tổng giá trị của mảng dữ liệu
     var total = data.datasets[0].data.reduce((a, b) => a + b, 0);
-
+    var remainingValue = data.datasets[0].data[0];
+    var ConLai = @KhoanThang - remainingValue;
     // Tính phần trăm cho mỗi giá trị trong mảng dữ liệu
-    var percentages = data.datasets[0].data.map(value => ((value / total) * 100).toFixed(2));
-
+    var percentages = ((remainingValue / @KhoanThang) * 100).toFixed(2);
+    var percentages2 = 100 - percentages;
     // Thêm phần trăm vào nhãn
-    var labels = data.labels.map((label, index) => label + " - " + percentages[index] + "%");
-
+    var labels = [
+        "Đạt được: " + formatNumberWithUnit(Math.round(data.datasets[0].data[0])) + " (" + percentages + "%)",
+        "Còn lại: " + formatNumberWithUnit(ConLai) + " (" + percentages2.toFixed(2) + "%)"
+    ];
     // Lấy thẻ canvas và vẽ biểu đồ
     var ctx = document.getElementById('myPieChart2').getContext('2d');
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: labels,
-            datasets: data.datasets
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'Tỷ lệ %'
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: data.datasets
             },
-            legend: {
-                display: true // Hiển thị chú thích
-            },
-            plugins: {
-                labels: {
-                    render: 'percentage',
-                    fontColor: ['black', 'black'], // Màu chữ của phần trăm cho mỗi phần
-                    precision: 2
+            options: {
+                plugins: {
+                    tooltip: {
+                        enabled: false, // Disable tooltips
+                    }
                 }
             }
-        }
-    });
+        });
+
+
+
     </script>
     <script>
     function formatNumberWithUnit(value) {
         if (value >= 1000000000) {
-            return Math.round(value / 1000000000) + "B";
+            return Math.round(value / 1000000000) + " Tỷ";
         } else if (value >= 1000000) {
-            return Math.round(value / 1000000) + "M";
+            return Math.round(value / 1000000) + " Triệu";
         } else {
             return value.toString();
         }
@@ -1454,18 +1521,15 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                 datasets: data.datasets
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Tỷ lệ %'
-                },
                 plugins: {
-                    tooltips: {
-                        enabled: false,  // Tắt tooltips
+                    tooltip: {
+                        enabled: false, // Disable tooltips
                     }
                 }
-                
             }
         });
+
+
 
     </script>
 

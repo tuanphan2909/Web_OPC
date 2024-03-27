@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/Application-Form.css">
     <style>
-        #dropdownInput, #selectedOption {
+        #dropdownInput, #selectedOption, #Ten_NVPhuKho {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 5px;
@@ -20,7 +20,7 @@
             width: 18%; /* Adjust width as needed */
         }
 
-        #selectedOption {
+        #selectedOption ,#Ten_NVPhuKho {
             width: 80%; /* Adjust width as needed */
         }
 
@@ -116,7 +116,7 @@
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <p><strong>3. Nhân Viên Giao Hàng&nbsp;</strong></p>
+                    <p><strong>3. TDV&nbsp;</strong></p>
                 </div>
                 <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục" name="Ma_NVGH">
                 <datalist id="dropdownList">
@@ -126,6 +126,12 @@
                     }
                 </datalist>
                 <input name="Ten_NVGH" id="selectedOption" readonly>
+
+                <div class="form-group mb-3">
+                    <p><strong>4. Nhân Viên Giao Hàng&nbsp;</strong></p>
+                </div>
+                <input type="text" id="Ten_NVPhuKho"  placeholder="Tìm kiếm danh mục" name="Ten_NVPhuKho">
+                <br /> 
                 <button type="button" id="LoadHd">Load Hóa đơn</button>
 
                 @*<datalist id="dropdownList">
@@ -142,7 +148,7 @@
             }
         </datalist>*@
                 <div class="form-group mb-3">
-                    <p><strong>4. Nội Dung&nbsp;</strong></p>
+                    <p><strong>5. Nội Dung&nbsp;</strong></p>
                 </div>
                 <input type="text" id="Ly_do" list="" placeholder="Nội Dung" name="Ly_do">
                 <br />
@@ -313,7 +319,7 @@
 
                     var option = $('<option>')
                         .val(item.So_HD)
-                        .attr('data-NgayHD', readableDate)
+                        .attr('data-NgayHD', item.Ngay_HD)
                         .attr('data-MaDt', item.Ma_Dt)
                         .attr('data-ten', item.Ten_Dt)
                         .attr('data-NvGN', item.Ma_NVGH)
@@ -422,6 +428,7 @@
             var maNVGH = document.getElementById('dropdownInput').value;
             var tenNVGH = document.getElementById('selectedOption').value;
             var ghichu = document.getElementById('Ly_do').value;
+            var TenGH = document.getElementById('Ten_NVPhuKho').value;
           
 
 
@@ -429,12 +436,13 @@
             // Set the cookie for Ma_NVGH
             setCookie('Ma_NVGH', maNVGH, 7);
             setCookie('Ten_NVGH', tenNVGH, 7);// The cookie will expire in 7 days
-
+            setCookie('NV_GiaoNhan', TenGH,7);
             var queryParams = 'Ngay_Ct=' + encodeURIComponent(ngayCt) +
                 '&So_Ct=' + encodeURIComponent(soCt) +
                 '&Ma_NVGH=' + encodeURIComponent(maNVGH) +
                 '&Ly_Do=' + encodeURIComponent(ghichu) +
                 '&Ten_NVGH=' + encodeURIComponent(tenNVGH);            // Redirect or submit form after a short delay
+                '&Ten_NVPhuKho=' + encodeURIComponent(TenGH);
             setTimeout(function () {
                 window.location.href = 'InsetGiaoHangLoadHD?' + queryParams;
             }, 1000); // Adjust the time as needed

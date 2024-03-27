@@ -316,7 +316,9 @@
     <Compile Include="Controllers\BaoCaoBanHangCTVController.cs" />
     <Compile Include="Controllers\BaoCaoBanHangTDVController.cs" />
     <Compile Include="Controllers\BaoCaoChiPhiKhuyenMaiController.cs" />
+    <Compile Include="Controllers\BaoCaoDoanhThuGVController.cs" />
     <Compile Include="Controllers\BaoCaoKetQuaKinhDoanhController.cs" />
+    <Compile Include="Controllers\BaoCaoMARController.cs" />
     <Compile Include="Controllers\CongNoChiTietController.cs" />
     <Compile Include="Controllers\CongTacVienController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
@@ -1246,6 +1248,20 @@
     <Content Include="Views\TheKho\PhieuDatHang_Fill.cshtml" />
     <Content Include="Views\TheKho\PhieuDatHang.cshtml" />
     <Content Include="Views\BangKeNopTien\BangKeNopTien_In.cshtml" />
+    <Content Include="Views\SoQuyTienMat\SoQuyTienMat.cshtml" />
+    <Content Include="Views\SoQuyTienMat\SoQuyTienMat_Fill.cshtml" />
+    <Content Include="Views\SoQuyTienMat\SoQuyTienMat_In.cshtml" />
+    <Content Include="Views\BaoCaoMAR\BaoCaoMar_Fill.cshtml" />
+    <Content Include="Views\BaoCaoMAR\BaoCaoMar.cshtml" />
+    <Content Include="Views\BaoCaoTienVeCN\BaoCaoTienVeCN2_Fill.cshtml" />
+    <Content Include="Views\BaoCaoTienVeCN\BaoCaoTienVeCN2.cshtml" />
+    <Content Include="Views\BangKeNopTien\Index.cshtml" />
+    <Content Include="Views\BangKeNopTien\BangKeNopTien2_Fill.cshtml" />
+    <Content Include="Views\BangKeNopTien\BangKeNopTien2.cshtml" />
+    <Content Include="Views\BangKeNopTien\BangKeNopTien2_In.cshtml" />
+    <Content Include="Views\BaoCaoDoanhThuGV\BaoCaoDoanhThuGV_Fill.cshtml" />
+    <Content Include="Views\BaoCaoDoanhThuGV\BaoCaoDoanhThuGV.cshtml" />
+    <Content Include="Views\SoChiTietPhaiThu\SoChiTietPhaiThu_In.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

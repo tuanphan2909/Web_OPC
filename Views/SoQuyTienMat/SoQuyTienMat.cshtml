@@ -9,14 +9,15 @@
     var formattedToDate = toDateValue.ToString("dd/MM/yyyy");
     var MaTK = Request.Cookies["Ma_TK"].Value;
     var MaNH = Request.Cookies["Ma_NH"].Value;
-    var TenNH ="";
+    var TenNH = "";
     var ten = "";
     var title = "";
-    if (MaNH == "1605201013995" && MaTK !="1111")
+
+    if (MaNH == "1605201013995" && MaTK != "1111")
     {
         TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
     }
-    else if(MaNH == "001-033554-001" && MaTK != "1111")
+    else if (MaNH == "001-033554-001" && MaTK != "1111")
     {
         TenNH = "Ngân hàng TNHH MTC HSBC";
     }
@@ -840,7 +841,7 @@
                     <h6>Chọn Ngân Hàng</h6>
 
                     <div class="select-btn2" style="width:250px;margin-top:10px">
-                        <input type="text" id="searchInput" oninput="filterDropdown()" placeholder="Tìm kiếm..."autocomplete="off">
+                        <input type="text" id="searchInput" oninput="filterDropdown()" placeholder="Tìm kiếm..." autocomplete="off">
                         <select name="Nhom" id="nhomtheoselect2" size="5" onchange="saveSelectedValueToCookie2()">
 
                             <option value="001-033554-001">(OPC)Ngân hàng TNHH MTC HSBC</option>
@@ -917,8 +918,8 @@
 
     <header class="header_part" style="background-color: #aec9e0; color: #3483bd ">
         @if (Request.Cookies["UserName"].Value == "Admin-cnct" || Request.Cookies["UserName"].Value == "Admin-cntg" || Request.Cookies["UserName"].Value == "Admin-cnmd" || Request.Cookies["UserName"].Value == "Admin-cnh1" || Request.Cookies["UserName"].Value == "Admin-cnvt"
-                      || Request.Cookies["UserName"].Value == "Admin-cnnt" || Request.Cookies["UserName"].Value == "Admin - cndn" || Request.Cookies["UserName"].Value == "Admin - cnna" || Request.Cookies["UserName"].Value == "Admin - cnhn" && Request.Cookies["UserName"].Value == "admin-cnct" || Request.Cookies["UserName"].Value == "admin-cntg" || Request.Cookies["UserName"].Value == "admin-cnmd" || Request.Cookies["UserName"].Value == "admin-cnh1" || Request.Cookies["UserName"].Value == "admin-cnvt"
-                      || Request.Cookies["UserName"].Value == "admin-cnnt" || Request.Cookies["UserName"].Value == "admin - cndn" || Request.Cookies["UserName"].Value == "admin - cnna" || Request.Cookies["UserName"].Value == "admin - cnhn")
+              || Request.Cookies["UserName"].Value == "Admin-cnnt" || Request.Cookies["UserName"].Value == "Admin - cndn" || Request.Cookies["UserName"].Value == "Admin - cnna" || Request.Cookies["UserName"].Value == "Admin - cnhn" && Request.Cookies["UserName"].Value == "admin-cnct" || Request.Cookies["UserName"].Value == "admin-cntg" || Request.Cookies["UserName"].Value == "admin-cnmd" || Request.Cookies["UserName"].Value == "admin-cnh1" || Request.Cookies["UserName"].Value == "admin-cnvt"
+              || Request.Cookies["UserName"].Value == "admin-cnnt" || Request.Cookies["UserName"].Value == "admin - cndn" || Request.Cookies["UserName"].Value == "admin - cnna" || Request.Cookies["UserName"].Value == "admin - cnhn")
         {
 
 
@@ -956,8 +957,8 @@
                             <tr>
 
                                 <th colspan="3">Chứng Từ</th>
-                                <th rowspan="2" style="width:80px">Tên Đối Tượng</th>
-                                <th rowspan="2"style="width:80px">Diễn giải</th>
+                                <th rowspan="2" style="width:120px">Tên Đối Tượng</th>
+                                <th rowspan="2">Diễn giải</th>
                                 <th rowspan="2">TK đối ứng</th>
                                 <th colspan="2">Phát sinh</th>
                                 <th rowspan="2">Số dư</th>
@@ -974,27 +975,145 @@
 
                             </tr>
                         </thead>
+                        @*<tbody>
+                                @foreach (DataRow row2 in Model.Tables[0].Rows)
+                                {
+                                    <tr class="data-row">
+                                        <td>@row2["Ngay_Ct1"]</td>
+                                        <td data-format="string">@row2["So_NumBer"].ToString()</td>
+                                        <td>@row2["So_Ct"].ToString()</td>
+                                        <td style="text-align:left">@row2["Ten_Dt"]</td>
+                                        <td class="text" style="text-align:left">@row2["Dien_Giai"]</td>
+                                        <td>@row2["Tk_Du"]</td>
+                                        <td data-t="n" class="num" style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_No"])).Replace(",", ".")</td>
+                                        <td data-t="n" style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_Co"])).Replace(",", ".")</td>
+                                        <td data-t="n" style='text-align:right;'> @String.Format("{0:n0}", Convert.ToDecimal(row2["Du_Cuoi"])).Replace(",", ".")</td>
+
+
+                                    </tr>
+
+
+
+                                }
+                            </tbody>*@
                         <tbody>
-                            @foreach (DataRow row2 in Model.Tables[0].Rows)
-                            {
-                                <tr class="data-row">
-                                    <td>@row2["Ngay_Ct1"]</td>
-                                    <td data-format="string">@row2["So_NumBer"].ToString()</td>
-                                    <td>@row2["So_Ct"].ToString()</td>
-                                    <td style="text-align:left">@row2["Ten_Dt"]</td>
-                                    <td class="text" style="text-align:left">@row2["Dien_Giai"]</td>
-                                    <td>@row2["Tk_Du"]</td>
-                                    <td data-t="n" class="num" style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_No"])).Replace(",", ".")</td>
-                                    <td data-t="n" style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_Co"])).Replace(",", ".")</td>
-                                    <td data-t="n" style='text-align:right;'> @String.Format("{0:n0}", Convert.ToDecimal(row2["Du_Cuoi"])).Replace(",", ".")</td>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td style="font-weight:bold;text-align:left;width:150px">Dư Đầu Kỳ</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="DuDauKy"style="font-weight:bold;text-align:right"></td>
+                            </tr>
+                            @{
+                                decimal Du_Cuoi_FirstRow = 0; // Khởi tạo biến lưu giá trị Du_Cuoi của hàng đầu tiên
+                                bool firstLoopSkipped = false;
+                                decimal Du_Cuoi_Calculated = 0;
+                                bool isFirstRowFound = false;
+                                decimal DuCuoiKy = 0;
+                                decimal sumThu = 0;
+                                decimal sumChi = 0;
+                                string formattedDuCuoi = "";
+                                string formattedThu = "";
+                                string formattedChi = "";
+                                string formattedDuCuoiKy = "";
+                                foreach (DataRow row2 in Model.Tables[0].Rows)
+                                {
+                                    if (row2["Ngay_Ct1"] != DBNull.Value && !string.IsNullOrEmpty(row2["Ngay_Ct1"].ToString()))
+                                    {
+                                        DateTime ngayCt;
+                                        if (DateTime.TryParseExact(row2["Ngay_Ct1"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out ngayCt))
+                                        {
+                                            if (!firstLoopSkipped)
+                                            {
+                                                Du_Cuoi_FirstRow = Convert.ToDecimal(row2["Du_Cuoi"]); // Lấy giá trị Du_Cuoi của hàng đầu tiên
+                                                firstLoopSkipped = true;
+                                                continue;
+                                            }
+
+                                            DateTime fromDate1;
+                                            DateTime toDate1;
+                                            if (DateTime.TryParseExact(formattedFromDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fromDate1) &&
+                                                DateTime.TryParseExact(formattedToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out toDate1))
+                                            {
+                                                // Đảo ngược vị trí ngày và tháng
+                                                string formattedNgayCt = ngayCt.ToString("dd/MM/yyyy");
+                                                ngayCt.ToString("MM/dd/yyyy");
+                                                if (ngayCt.Day >= fromDate1.Day && ngayCt.Day <= toDate1.Day)
+                                                {
+                                                    if (!isFirstRowFound)
+                                                    {
+                                                        decimal PS_No = Convert.ToDecimal(row2["Ps_No"]);
+                                                        decimal PS_Co = Convert.ToDecimal(row2["Ps_Co"]);
+                                                        Du_Cuoi_Calculated = Convert.ToDecimal(row2["Du_Cuoi"]) - PS_No + PS_Co; 
+                                                        isFirstRowFound = true; // Đánh dấu là đã tìm thấy giá trị đầu tiên
+                                                        formattedDuCuoi = String.Format(Du_Cuoi_Calculated.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",",".");
 
 
-                                </tr>
+                                                    }
 
+                                                    <tr class="data-row">
+                                                        <td>@formattedNgayCt</td>
+                                                        <td data-format="string">@row2["So_NumBer"].ToString()</td>
+                                                        <td>@row2["So_Ct"].ToString()</td>
+                                                        <td style="text-align:left">@row2["Ten_Dt"]</td>
+                                                        <td class="text" style="text-align:left">@row2["Dien_Giai"]</td>
+                                                        <td>@row2["Tk_Du"]</td>
+                                                        <td data-t="n" class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_No"])).Replace(",", ".")</td>
+                                                        <td data-t="n" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_Co"])).Replace(",", ".")</td>
+                                                        <td data-t="n" style="text-align:right;">@String.Format("{0:n0}", Convert.ToDecimal(row2["Du_Cuoi"])).Replace(",", ".")</td>
+                                                    </tr>
+                                                    decimal Thu = Convert.ToDecimal(row2["PS_No"]);
+                                                    decimal Chi = Convert.ToDecimal(row2["PS_Co"]);
+                                                    sumThu += Thu;
+                                                    sumChi += Chi;
+                                                    formattedChi = String.Format(sumChi.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",", ".");
+                                                    formattedThu = String.Format(sumThu.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",", ".");
+                                                    DuCuoiKy = Convert.ToDecimal(row2["Du_Cuoi"]);
+                                                    formattedDuCuoiKy = String.Format(DuCuoiKy.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",", ".");
 
-
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
+                            <tr style="font-weight:bold">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Tổng Phát Sinh</td>
+                                <td></td>
+                                <td class="ThuCuoiKy"style="font-weight:bold;text-align:right"></td>
+                                <td class="ChiCuoiKy"style="font-weight:bold;text-align:right"></td>
+
+                                <td></td>
+                            </tr>
+                            <tr style="font-weight:bold">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Dư Cuối Kỳ</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="DuCuoiKy"style="font-weight:bold;text-align:right"></td>
+
+                            </tr>
                         </tbody>
+
+
+
+
+
+
+
                     </table>
                 </div>
             </div>
@@ -1021,6 +1140,12 @@
                 ExcellentExport.excel(this, 'example', 'Sheet 1');
             });
         </script>*@
+<script>
+    $(".DuDauKy").text('@formattedDuCuoi');
+    $(".ThuCuoiKy").text('@formattedThu');
+     $(".ChiCuoiKy").text('@formattedChi');
+     $(".DuCuoiKy").text('@formattedDuCuoiKy');
+</script>
     <script>
         function exportToExcel() {
             // Lấy danh sách cột cần xuất từ bảng gốc
@@ -1102,7 +1227,7 @@
 
             // Gọi hàm để nhóm dữ liệu dựa trên giá trị đã chọn
         }
-     
+
     </script>
     @*<script>
             document.getElementById("exportbutton").addEventListener('click', function () {
@@ -1244,7 +1369,7 @@
 
 
     </script>
-   
+
     <script>
         function runReport() {
 

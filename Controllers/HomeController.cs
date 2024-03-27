@@ -80,6 +80,10 @@ namespace web4.Controllers
             ViewBag.Username = username;
 
             string ma_dvcs = Request.Cookies["MA_DVCS"].Value;
+            if(Request.Cookies["MA_DVCS"].Value =="OPC")
+            {
+                ma_dvcs = "OPC_B1";
+            }
             DataSet ds = new DataSet();
             connectSQL();
 

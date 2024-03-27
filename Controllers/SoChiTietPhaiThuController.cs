@@ -169,6 +169,50 @@ namespace web4.Controllers
             }
             return View(ds);
         }
-        
+        public ActionResult SoChiTietPhaiThu_In()
+        {
+            List<MauInChungTu> dmDlist = LoadDmDt("");
+            List<BKHoaDonGiaoHang> dmDlistTDV = LoadDmTDV();
+            string ma_dvcs = Request.Cookies["MA_DVCS"].Value;
+            var fromDate = Request.Cookies["From_date"].Value;
+            var toDate = Request.Cookies["To_Date"].Value;
+            var MaDt = Request.Cookies["Ma_Dt"] != null ? Request.Cookies["Ma_Dt"].Value : string.Empty;
+            var MaTDV = Request.Cookies["Ma_TDV"].Value;
+            DataSet ds = new DataSet();
+
+            ViewBag.DataTDV = dmDlistTDV;
+            ViewBag.DataItems = dmDlist;
+            connectSQL();
+            //var SoCT = Request.Cookies["So_Ct"] != null ? Request.Cookies["So_Ct"].Value : "";
+            //MauIn.So_Ct = Request.Cookies["SoCt"].Value;
+
+            //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+            string Pname = "[usp_SoChiTietPhaiThuKH_SAP]";
+
+            using (SqlCommand cmd = new SqlCommand(Pname, con))
+            {
+                cmd.CommandTimeout = 950;
+
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //MauIn.From_date = Request.Cookies["From_date"].Value;
+                //MauIn.To_date = Request.Cookies["To_Date"].Value;
+                con.Open();
+
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+                    cmd.Parameters.AddWithValue("@_Ma_Dt", MaDt);
+                    cmd.Parameters.AddWithValue("@_Ma_CbNv", MaTDV);
+                    cmd.Parameters.AddWithValue("@_Ma_DvCs", ma_dvcs);
+                    sda.Fill(ds);
+
+                }
+            }
+            return View(ds);
+        }
+
     }
 }
