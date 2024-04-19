@@ -693,9 +693,9 @@
                     <thead class="table-dark" id="head">
                         <tr>
 
-                            <th colspan="3">Chứng Từ</th>
-                            <th rowspan="2" style="width:120px">Tên Đối Tượng</th>
-                            <th rowspan="2">Diễn giải</th>
+                            <th colspan="4">Chứng Từ</th>
+                            <th rowspan="2" style="width:160px">Tên Đối Tượng</th>
+                            <th rowspan="2"style="width:60px">Diễn giải</th>
                             <th rowspan="2">TK đối ứng</th>
                             <th colspan="2">Phát sinh</th>
                             <th rowspan="2">Số dư</th>
@@ -703,8 +703,9 @@
                         </tr>
                         <tr>
                             <th>Ngày</th>
-                            <th style="width:150px">Số</th>
-                            <th>Số trên SAP</th>
+                            <th style="width:110px">Số</th>
+                            <th>Payment</th>
+                            <th>Payment Advice</th>
                             <th>Thu</th>
                             <th>Chi</th>
 
@@ -739,6 +740,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
 
                             <td style="font-weight:bold;text-align:left;width:150px">Dư Đầu Kỳ</td>
                             <td></td>
@@ -747,8 +749,8 @@
                             <td class="DuDauKy" style="font-weight:bold;text-align:right"></td>
                         </tr>
                         @{
-                            decimal Du_Cuoi_FirstRow = 0; // Khởi tạo biến lưu giá trị Du_Cuoi của hàng đầu tiên
-                            bool firstLoopSkipped = false;
+                            //decimal Du_Cuoi_FirstRow = 0; // Khởi tạo biến lưu giá trị Du_Cuoi của hàng đầu tiên
+                            //bool firstLoopSkipped = false;
                             decimal Du_Cuoi_Calculated = 0;
                             bool isFirstRowFound = false;
                             decimal DuCuoiKy = 0;
@@ -765,12 +767,12 @@
                                     DateTime ngayCt;
                                     if (DateTime.TryParseExact(row2["Ngay_Ct1"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out ngayCt))
                                     {
-                                        if (!firstLoopSkipped)
-                                        {
-                                            Du_Cuoi_FirstRow = Convert.ToDecimal(row2["Du_Cuoi"]); // Lấy giá trị Du_Cuoi của hàng đầu tiên
-                                            firstLoopSkipped = true;
-                                            continue;
-                                        }
+                                        //if (!firstLoopSkipped)
+                                        //{
+                                        //    Du_Cuoi_FirstRow = Convert.ToDecimal(row2["Du_Cuoi"]); // Lấy giá trị Du_Cuoi của hàng đầu tiên
+                                        //    firstLoopSkipped = true;
+                                        //    continue;
+                                        //}
 
                                         DateTime fromDate1;
                                         DateTime toDate1;
@@ -797,6 +799,7 @@
                                                     <td>@formattedNgayCt</td>
                                                     <td data-format="string">@row2["So_NumBer"].ToString()</td>
                                                     <td>@row2["So_Ct"].ToString()</td>
+                                                    <td>@row2["So_Ct_Chi"].ToString()</td>
                                                     <td style="text-align:left">@row2["Ten_Dt"]</td>
                                                     <td class="text" style="text-align:left">@row2["Dien_Giai"]</td>
                                                     <td>@row2["Tk_Du"]</td>
@@ -824,6 +827,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             <td>Tổng Phát Sinh</td>
                             <td></td>
                             <td class="ThuCuoiKy" style="font-weight:bold;text-align:right"></td>
@@ -832,6 +836,7 @@
                             <td></td>
                         </tr>
                         <tr style="font-weight:bold">
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

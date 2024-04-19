@@ -1,6 +1,6 @@
 ﻿
 
-@{ ViewBag.Title = " THEO DÕI BẢNG KÊ NỘP TIỀN ";
+@{ ViewBag.Title = "THEO DÕI BẢNG KÊ NỘP TIỀN";
     var fromDate = Request.Cookies["From_date"].Value;
     var toDate = Request.Cookies["To_date"].Value;
     var fromDateValue = DateTime.ParseExact(fromDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -555,7 +555,7 @@
 
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title> THEO DÕI BẢNG KÊ NỘP TIỀN</title>
+    <title>THEO DÕI BẢNG KÊ NỘP TIỀN</title>
     <meta content="" name="description">
     <meta content="Author" name="MJ Maraz">
     <link href="~/assets/images/favicon.png" rel="icon">
@@ -647,7 +647,7 @@
                 <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
             </a>
         }
-        <h4 style="color: #3483bd"> THEO DÕI BẢNG KÊ NỘP TIỀN</h4>
+        <h4 style="color: #3483bd">THEO DÕI BẢNG KÊ NỘP TIỀN</h4>
         <h4 style="color: #3483bd">Từ @formattedFromDate đến @formattedToDate </h4>
     </header>
     <!-- =======  Data-Table  = Start  ========================== -->
@@ -661,18 +661,23 @@
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th>Mã Đối Tượng</th>
                                 <th style="width:100px">Khách hàng</th>
+                                <th>Mã Đối Tượng</th>
                                 <th>Số Hóa Đơn</th>
+                                <th>Số Hợp Đồng Ex</th>
                                 <th>Ngày Hóa Đơn</th>
-                                <th>Thời Hạn Nợ</th>
                                 <th>Ngày Đến Hạn</th>
+                                <th>Tiền Hóa Đơn</th>
+                                <th>Số Phiếu Thu</th>
+                                <th>Số External</th>
                                 <th>Ngày Phiếu Thu</th>
                                 <th>Tiền TT</th>
-                                <th>Số External</th>
-                                <th>Tiền Hóa Đơn</th>
-
-                               
+                                <th>Loại Chứng Từ</th>
+                                <th>Số Chứng Từ</th>
+                                <th>Mã TDV</th>
+                                <th>Tên TDV</th>
+                                <th>Mã LKH</th>
+                                <th>Tên LKH</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -680,20 +685,25 @@
                             {
 
 
-                            <tr>
-                                <td>@row2["Ma_Dt"]</td>
-                                <td>@row2["Ten_Dt"]</td>
-                                <td>@row2["So_HD_InV"]</td>
-                                <td>@row2["Ngay_HD"]</td>
-                                <td></td>
-                                <td>@row2["Ngay_Den_Han"]</td>
-                                <td>@row2["Ngay_PT"]</td>
-                                <td style="text-align:right">@String.Format("{0:#,###}", row2["Tien_TT"]).Replace(".", ",")</td>
-                                <td>@row2["So_External_Sap"]</td>
-                                <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_HD_InV"])).Replace(".", ",")</td>
-
-                              
-                            </tr>
+                                <tr>
+                                    <td>@row2["Ten_Dt"]</td>
+                                    <td>@row2["Ma_Dt"]</td>
+                                    <td>@row2["So_HD_InV"]</td>
+                                    <td>@row2["So_Hop_Dong_Ex"]</td>
+                                    <td>@row2["Ngay_HD"]</td>
+                                    <td>@row2["Ngay_Den_Han"]</td>
+                                    <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_HD_InV"])).Replace(".", ",")</td>
+                                    <td>@row2["So_PT"]</td>
+                                    <td>@row2["So_External_Sap"]</td>
+                                    <td>@row2["Ngay_PT"]</td>
+                                    <td style="text-align:right">@String.Format("{0:#,###}", row2["Tien_TT"]).Replace(".", ",")</td>
+                                    <td>@row2["Loai_Ct"]</td>
+                                    <td>@row2["So_Ct"]</td>
+                                    <td>@row2["Ma_TDV"]</td>
+                                    <td>@row2["Ten_TDV"]</td>
+                                    <td>@row2["Ma_LKH"]</td>
+                                    <td>@row2["Ten_LKH"]</td>
+                                </tr>
 
 
 
@@ -701,14 +711,24 @@
                         </tbody>
                         <tfoot>
                             <tr id="total-row" style="background-color: burlywood">
-                                <td colspan="9"><strong>Tổng trang:</strong></td>
+                                <td colspan="10"><strong>Tổng trang:</strong></td>
                                 <td class="total-tien" style="text-align:right"></td>
-                               
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr id="total-row-tong-cong" style="background-color: burlywood">
-                                <td colspan="9"><strong>Tổng cộng(Tất cả):</strong></td>
+                                <td colspan="10"><strong>Tổng cộng(Tất cả):</strong></td>
                                 <td class="total-tienTT" style="text-align:right"></td>
-                            
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -803,7 +823,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Lấy tất cả các ô chứa giá trị cột "Tiền TT"
-            var tienTTCells = document.querySelectorAll('#example tbody td:nth-child(10)');
+            var tienTTCells = document.querySelectorAll('#example tbody td:nth-child(11)');
 
             // Biến để tính tổng
             var totalTienTT = 0;
@@ -827,7 +847,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             function calculateTotal() {
                 // Lấy tất cả các ô chứa giá trị cột "Tiền TT"
-                var tienTTCells = document.querySelectorAll('#example tbody td:nth-child(10)');
+                var tienTTCells = document.querySelectorAll('#example tbody td:nth-child(11)');
 
                 // Biến để tính tổng Tiền TT
                 var totalTienTT = 0;

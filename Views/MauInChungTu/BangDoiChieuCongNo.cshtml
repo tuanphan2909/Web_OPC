@@ -481,7 +481,13 @@
                             break;
                         }
                     </h5>
-                    <h5 style="color:black;text-align:left">Địa Chỉ khách hàng:   @Dia_Chi</h5>
+                    <h5 style="color:black;text-align:left">
+                        Địa Chỉ khách hàng:   @foreach (DataRow row in Model.Tables[0].Rows)
+                        {
+                            @row["Dia_Chi"];
+                            break;
+                        }
+                    </h5>
                     <h5 style="margin-top: 5px; color: black; text-align: left">
                         <span style="color:black;font-weight:bold">
                             I. Số dư nợ trước ngày:
@@ -804,9 +810,9 @@
                     </div>
                     <div>
                         <br />
-                        <div style="width:700px;color:black">
+                        <div style="width:max-content;color:black">
                             <h5 style="text-align:left;margin-left:30px;margin-bottom:5px">
-                                Xin vui lòng xác nhận và gửi lại cho @Dvcs trước ngày <span style="color:black;font-weight:bold">
+                                Xin vui lòng xác nhận và gửi lại cho Công Ty Cổ Phần Dược Phẩm OPC - @Dvcs trước ngày <span style="color:black;font-weight:bold">
                                     @foreach (DataRow row3 in Model.Tables[7].Rows)
                                     {
                                         @row3["Ngay_TT"]
@@ -844,7 +850,7 @@
 
                         <div style="word-wrap: break-word; color: black; margin-left: 30px;">
                             <h5 style="text-align: left;">
-                                Số tiền còn nợ đề nghị Quý khách hàng thanh toán bằng tiền mặt hoặc chuyển khoản vào tài khoản @Dvcs, số tài khoản: @foreach (DataRow row3 in Model.Tables[4].Rows)
+                                Số tiền còn nợ đề nghị Quý khách hàng thanh toán bằng tiền mặt hoặc chuyển khoản vào tài khoản Công Ty Cổ Phần Dược Phẩm OPC - @Dvcs, số tài khoản: @foreach (DataRow row3 in Model.Tables[4].Rows)
                                 {
                                     @row3["TK"]
                                     var TK = row3["TK"].ToString();

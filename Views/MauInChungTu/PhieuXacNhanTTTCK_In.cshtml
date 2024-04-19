@@ -477,7 +477,7 @@
             <br />
 
             <div>
-                <h3 style="font-size: 20px; color: black; font-weight: bold">XÁC NHẬN THANH TOÁN TIỀN CKTT VÀ BÙ TRỪ CODE KM, PMD</h3>
+                <h3 style="font-size: 20px; color: black; font-weight: bold">XÁC NHẬN THANH TOÁN TIỀN CKTT</h3>
 
                 <h5 id="quarterYear" style="font-style: italic; color: black;text-align:center">
                     <!-- The content will be dynamically set by JavaScript -->
@@ -486,24 +486,41 @@
             </div>
             <div style="width:600px">
                 <h5 style="text-align:left">-Căn cứ Luật thương mại số 36/2005/QH11 ngày 14/06/2005</h5>
-                <h5 style="text-align: left">-Căn cứ vào hợp đồng số: ................../HĐNT-CNCT/2020, thỏa thuận của đôi bên.</h5>
-            </div>
+                <h5 style="text-align: left">-Căn cứ vào hợp đồng số: ................../HĐNT-CNCT/2024, thỏa thuận của đôi bên.</h5>
+            </div> 
 
             <div class="flex-container" style="width:600px">
                 <h5 style="display: inline-block; color: black; font-weight: bold; text-align: left;">
                     Khách hàng: <span style="font-size: 15px;">
-                        @foreach (DataRow row2 in Model.Tables[0].Rows)
-                        {
-                            @row2["Ten_Dt"];
-                            break;
-                        }
-                    </span>
+    @foreach (DataRow row2 in Model.Tables[0].Rows)
+    {
+
+        @row2["Ten_Dt"];
+        break;
+    }
+   
+
+</span>
                 </h5>
 
-                <h5 style="display: inline-block; color: black; font-weight: bold">Mã số:</h5>
+                <h5 style="display: inline-block; color: black; font-weight: bold">
+                    Mã số:    @foreach (DataRow row2 in Model.Tables[0].Rows)
+                    {
+
+                        @row2["Ma_Dt"];
+                        break;
+                    }
+                </h5>
             </div>
             <div style="color:black;font-weight:bold; font-size:15px;width:600px">
-                <h5 style="text-align: left;">Điều kiện thanh toán: </h5>
+                <h5 style="text-align: left;">
+                    Điều kiện thanh toán: @foreach (DataRow row2 in Model.Tables[1].Rows)
+                    {
+
+                        @row2["Han_TT"];
+                        break;
+                    } Ngày
+                </h5> 
             </div>
 
             <br />
@@ -520,7 +537,7 @@
                             <th style="width:80px">SỐ HĐ</th>
                             <th style="width:80px">NGÀY HĐ</th>
                             <th style="width:80px">NGÀY THU/BÙ TRỪ</th>
-                            <th style="width:80px">TIỀN BÙ TRỪ</th>
+                            <th style="width:80px">TIỀN HÓA ĐƠN</th>
 
 
                             <th style="width:80px">TIỀN CKTT</th>
@@ -531,18 +548,19 @@
                         @{var stt = 1; }
                         @foreach (DataRow row2 in Model.Tables[0].Rows)
                         {
-                            <tr>
-                                <td>@stt</td>
-                                <td>@row2["So_Ct"]</td>
-                                <td>@row2["Ngay_HD1"]</td>
-                                <td>@row2["Ngay_Thu1"]</td>
-                                <td style="text-align:right;padding-right:5px">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tien"]))</td>
-                                <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", Convert.ToDecimal(row2["CKTT"]))</td>
-                                <td style="text-align: right; padding-right: 5px"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_Thu"]))</td>
+                        <tr>
+                            <td>@stt</td>
+                            <td>@row2["So_Ct"]</td>
+                            <td>@row2["Ngay_HD1"]</td>
+                            <td>@row2["Ngay_Thu1"]</td>
+
+                            <td style="text-align:right;padding-right:5px">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tien"])).Replace(",", ".")</td>
+                            <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", Convert.ToDecimal(row2["CKTT"])).Replace(",", ".")</td>
+                            <td style="text-align: right; padding-right: 5px"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_Thu"])).Replace(",", ".")</td>
 
 
 
-                            </tr>
+                        </tr>
                             stt++;
                             totaltienBT += Convert.ToDecimal(row2["Tien"]);
                             CKTT += Convert.ToDecimal(row2["CKTT"]);
@@ -553,7 +571,7 @@
                     <tfoot style=" display: table-row-group !important;">
                         <tr style="color:black;font-weight:bold;">
                             <td colspan="4">Tổng cộng</td>
-                            <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", totaltienBT).Replace(",",".") </td>
+                            <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", totaltienBT).Replace(",", ".") </td>
 
 
                             <td style="text-align: right; padding-right: 5px">@String.Format("{0:n0}", CKTT).Replace(",", ".") </td>
@@ -567,7 +585,7 @@
                     <h5 style="word-wrap: break-word;font-size:15px;text-align:left;">Nhận chiết khấu thanh toán số tiền:............................</h5>
                 </div><br />
                 <div style="text-align:right;margin-right:30px">
-                    <h4 class="branch">Ngày.......tháng......năm..... </h4>
+                   <span style="color: black;font-weight:bold"id="date"></span>
 
                 </div>
                 @*<h4 style="margin-left:auto">P. KHCU &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thủ kho&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xưởng sản xuất</h4>*@
@@ -586,7 +604,35 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+    <script>
 
+        // Hàm để đọc giá trị từ cookie
+        function getCookieValue(cookieName) {
+            var name = cookieName + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookieArray = decodedCookie.split(';');
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookie = cookieArray[i].trim();
+                if (cookie.indexOf(name) == 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+            return "";
+        }
+
+        // Lấy giá trị từ cookie
+        var toDateCookie = getCookieValue("Ngay_Ky");
+
+        // Tách giá trị thành năm, tháng, ngày
+        var dateParts = toDateCookie.split("-");
+        var year = dateParts[0];
+        var month = dateParts[1];
+        var day = dateParts[2];
+
+        // Hiển thị lên HTML
+        var resultDiv = document.getElementById("date");
+        resultDiv.innerHTML = "Ngày " + day + " tháng " + month + " năm " + year;
+    </script>
     <script>
         document.getElementById("dropdownInput").addEventListener("input", function () {
             var inputValue = this.value;

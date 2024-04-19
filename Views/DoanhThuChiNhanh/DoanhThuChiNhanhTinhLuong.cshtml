@@ -528,6 +528,10 @@
             background-color: aquamarine;
             color: black; /* Màu nền bạn muốn đặt */
         }
+        tr td:nth-child(17) {
+            background-color: aquamarine;
+            color: black; /* Màu nền bạn muốn đặt */
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -730,6 +734,7 @@
                                 <th style="background-color: gold">Doanh Thu OTC 25</th>
                                 <th style="background-color:gold">Doanh Thu ETC 25</th>
                                 <th style="background-color: aquamarine">Doanh Thu Combo</th>
+                                <th style="background-color: aquamarine">Doanh Thu Thương Mại</th>
                                 <th style="background-color: aquamarine">Doanh Thu Khác</th>
                                 <th style="background-color:aquamarine">Tổng Thực Hiện</th>
                             </tr>
@@ -755,6 +760,7 @@
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OTC_TW25"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ETC_TW25"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ComBo"])).Replace(".", ",")</td>
+                                    <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TM"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Khac"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Thuc_Hien"])).Replace(".", ",")</td>
 
@@ -779,6 +785,7 @@
                                 <td class="total-dtotc-25" style="text-align:right"></td>
                                 <td class="total-dtetc-25" style="text-align:right"></td>
                                 <td class="total-dtcombo" style="text-align:right"></td>
+                                <td class="total-dtTM" style="text-align:right"></td>
                                 <td class="total-dtkhac" style="text-align:right"></td>
                                 <td class="total-tongthuchien" style="text-align:right"></td>
                             </tr>

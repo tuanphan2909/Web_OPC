@@ -669,7 +669,7 @@
                 <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
             </a>
         }
-        <h4 style="color: #3483bd">PHIẾU XÁC NHẬN THANH TOÁN TIỀN CKTT VÀ BÙ TRỪ CODE KM, PMH</h4>
+        <h4 style="color: #3483bd">PHIẾU XÁC NHẬN THANH TOÁN TIỀN CKTT</h4>
         <h4 style="color: #3483bd">Từ @formattedFromDate đến @formattedToDate </h4>
     </header>
     <!-- =======  Data-Table  = Start  ========================== -->
@@ -701,9 +701,9 @@
                                 <td>@row2["So_Ct"]</td>
                                 <td>@row2["Ngay_HD1"]</td>
                                 <td>@row2["Ngay_Thu1"]</td>
-                                <td>@String.Format("{0:n0}", Convert.ToDecimal(row2["Tien"]))</td>
-                                <td>@String.Format("{0:n0}", Convert.ToDecimal(row2["CKTT"]))</td>
-                                <td style="text-align: right; font-weight: bold"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_Thu"]))</td>
+                                <td>@String.Format("{0:n0}", Convert.ToDecimal(row2["Tien"])).Replace(",",".")</td>
+                                <td>@String.Format("{0:n0}", Convert.ToDecimal(row2["CKTT"])).Replace(",", ".")</td>
+                                <td style="text-align: right; font-weight: bold"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Tien_Thu"])).Replace(",", ".")</td>
 
 
 

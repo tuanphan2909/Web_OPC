@@ -17,6 +17,8 @@ using OfficeOpenXml.Style;
 using System.IO;
 using OfficeOpenXml.Table;
 using System.Globalization;
+using System.Configuration;
+
 
 namespace ASPNET_MVC_ChartsDemo.Controllers
 {
@@ -77,7 +79,7 @@ namespace ASPNET_MVC_ChartsDemo.Controllers
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("SELECT tendangnhap, hoten, Ma_Dvcs FROM view_user", connection))
+                    using (SqlCommand command = new SqlCommand("select * from B30ViengThamKH", connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -85,9 +87,9 @@ namespace ASPNET_MVC_ChartsDemo.Controllers
                             {
                                 B20DmDvt dvcs = new B20DmDvt
                                 {
-                                    tendangnhap = reader.GetString(0),       // Thay đổi index nếu cần
-                                    hoten = reader.GetString(1),   // Thay đổi index nếu cần
-                                    Ma_Dvcs = reader.GetString(2)      // Thay đổi index nếu cần
+                                    tendangnhap = reader.GetString(1),       // Thay đổi index nếu cần
+                                    hoten = reader.GetString(5),   // Thay đổi index nếu cần
+                                   Hinh_Anh2 = reader.GetString(14) // Thay đổi index nếu cần
                                 };
 
                                 dvcsList.Add(dvcs);
@@ -104,6 +106,56 @@ namespace ASPNET_MVC_ChartsDemo.Controllers
             return dvcsList;
         }
     }
-   
+    //public ActionResult Index()
+    //{
+    //    List<B20DmDvt> images = GetImages();
+    //    return View(images);
+    //}
+
+    //[HttpPost]
+    //public ActionResult Index(int imageId)
+    //{
+    //    List<B20DmDvt> images = GetImages();
+    //    GetImages image = images.Find(p => p.tendangnhap == imageId);
+    //    if (image != null)
+    //    {
+    //        image.IsSelected = true;
+    //        ViewBag.Base64String = "data:image/png;base64," + Convert.ToBase64String(image.Data, 0, image.Data.Length);
+    //    }
+    //    return View(images);
+    //}
+
+    //public List<B20DmDvt> GetImages()
+    //{
+    //    string query = "select * from B30ViengThamKH";
+    //    List<B20DmDvt> images = new List<B20DmDvt>();
+    //    string constr = ConfigurationManager.ConnectionStrings["ConString"].ConnectionString;
+    //    using (SqlConnection con = new SqlConnection(constr))
+    //    {
+    //        using (SqlCommand cmd = new SqlCommand(query))
+    //        {
+    //            cmd.CommandType = CommandType.Text;
+    //            cmd.Connection = con;
+    //            con.Open();
+    //            using (SqlDataReader sdr = cmd.ExecuteReader())
+    //            {
+    //                while (sdr.Read())
+    //                {
+    //                    images.Add(new B20DmDvt
+    //                    {
+                           
+    //                        Ten_Dvcs = sdr["Ma_Dvcs"].ToString(),
+    //                        Hinh_Anh2 = sdr["Ten_Dt"].ToString(),
+    //                        Hinh_Anh = (byte[])sdr["Hinh_Anh"]
+    //                    });
+    //                }
+    //            }
+    //            con.Close();
+    //        }
+
+    //        return images;
+    //    }
+    //    return View();
+    //}
 
 }

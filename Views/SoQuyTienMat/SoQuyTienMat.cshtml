@@ -950,13 +950,13 @@
                     <span>Search: <input type="Text" name="" id="myInput" placeholder="Tìm kiếm" onkeyup="searchFun()"></span>
                     <div class="search"></div>
                 </div>
-                <div class="data_table" style="max-height:1500px;width:1100px">
+                <div class="data_table" style="max-height:1500px;width:1200px">
 
                     <table id="example" class="table table-striped table-bordered" data-excel-name="Sheet 1">
                         <thead class="table-dark" id="head">
                             <tr>
 
-                                <th colspan="3">Chứng Từ</th>
+                                <th colspan="4">Chứng Từ</th>
                                 <th rowspan="2" style="width:120px">Tên Đối Tượng</th>
                                 <th rowspan="2">Diễn giải</th>
                                 <th rowspan="2">TK đối ứng</th>
@@ -967,7 +967,8 @@
                             <tr>
                                 <th>Ngày</th>
                                 <th style="width:150px">Số</th>
-                                <th>Số trên SAP</th>
+                                <th>Payment</th>
+                                <th>Payment Advice</th>
                                 <th>Thu</th>
                                 <th>Chi</th>
 
@@ -1002,6 +1003,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
 
                                 <td style="font-weight:bold;text-align:left;width:150px">Dư Đầu Kỳ</td>
                                 <td></td>
@@ -1010,8 +1012,8 @@
                                 <td class="DuDauKy"style="font-weight:bold;text-align:right"></td>
                             </tr>
                             @{
-                                decimal Du_Cuoi_FirstRow = 0; // Khởi tạo biến lưu giá trị Du_Cuoi của hàng đầu tiên
-                                bool firstLoopSkipped = false;
+                                //decimal Du_Cuoi_FirstRow = 0; // Khởi tạo biến lưu giá trị Du_Cuoi của hàng đầu tiên
+                                //bool firstLoopSkipped = false;
                                 decimal Du_Cuoi_Calculated = 0;
                                 bool isFirstRowFound = false;
                                 decimal DuCuoiKy = 0;
@@ -1028,12 +1030,12 @@
                                         DateTime ngayCt;
                                         if (DateTime.TryParseExact(row2["Ngay_Ct1"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out ngayCt))
                                         {
-                                            if (!firstLoopSkipped)
-                                            {
-                                                Du_Cuoi_FirstRow = Convert.ToDecimal(row2["Du_Cuoi"]); // Lấy giá trị Du_Cuoi của hàng đầu tiên
-                                                firstLoopSkipped = true;
-                                                continue;
-                                            }
+                                            //if (!firstLoopSkipped)
+                                            //{
+                                            //    Du_Cuoi_FirstRow = Convert.ToDecimal(row2["Du_Cuoi"]); // Lấy giá trị Du_Cuoi của hàng đầu tiên
+                                            //    firstLoopSkipped = true;
+                                            //    continue;
+                                            //}
 
                                             DateTime fromDate1;
                                             DateTime toDate1;
@@ -1049,7 +1051,7 @@
                                                     {
                                                         decimal PS_No = Convert.ToDecimal(row2["Ps_No"]);
                                                         decimal PS_Co = Convert.ToDecimal(row2["Ps_Co"]);
-                                                        Du_Cuoi_Calculated = Convert.ToDecimal(row2["Du_Cuoi"]) - PS_No + PS_Co; 
+                                                        Du_Cuoi_Calculated = Convert.ToDecimal(row2["Du_Cuoi"]) - PS_No + PS_Co;
                                                         isFirstRowFound = true; // Đánh dấu là đã tìm thấy giá trị đầu tiên
                                                         formattedDuCuoi = String.Format(Du_Cuoi_Calculated.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",",".");
 
@@ -1060,6 +1062,7 @@
                                                         <td>@formattedNgayCt</td>
                                                         <td data-format="string">@row2["So_NumBer"].ToString()</td>
                                                         <td>@row2["So_Ct"].ToString()</td>
+                                                        <td>@row2["So_Ct_Chi"].ToString()</td>
                                                         <td style="text-align:left">@row2["Ten_Dt"]</td>
                                                         <td class="text" style="text-align:left">@row2["Dien_Giai"]</td>
                                                         <td>@row2["Tk_Du"]</td>
@@ -1087,6 +1090,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td>Tổng Phát Sinh</td>
                                 <td></td>
                                 <td class="ThuCuoiKy"style="font-weight:bold;text-align:right"></td>
@@ -1095,6 +1099,7 @@
                                 <td></td>
                             </tr>
                             <tr style="font-weight:bold">
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

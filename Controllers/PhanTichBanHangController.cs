@@ -232,6 +232,11 @@ namespace web4.Controllers
             var Ma_TDV = Request.Cookies["Ma_TDV"].Value;
             var Ma_Dt = Request.Cookies["Ma_Dt"].Value;
             var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+           var Dvcs = Request.Cookies["MA_DVCS"].Value;
+            if(Dvcs == "OPC_B1")
+            {
+                Dvcs = "OPC";
+            }
             ViewBag.ProcedureName = Pname;
 
             using (SqlCommand cmd = new SqlCommand(Pname, con))
@@ -240,13 +245,13 @@ namespace web4.Controllers
 
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                Acc.Ma_DvCs_1 = Request.Cookies["MA_DVCS"].Value;
+               
                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                 {
 
                     cmd.Parameters.AddWithValue("@_Tu_Ngay", Acc.From_date);
                     cmd.Parameters.AddWithValue("@_Den_Ngay", Acc.To_date);
-                    cmd.Parameters.AddWithValue("@_ma_dvcs", Acc.Ma_DvCs_1);
+                    cmd.Parameters.AddWithValue("@_ma_dvcs", Dvcs);
                     cmd.Parameters.AddWithValue("@_Ma_Dt", Ma_Dt);
                     cmd.Parameters.AddWithValue("@_Ma_CbNv", Ma_TDV);
                     cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);

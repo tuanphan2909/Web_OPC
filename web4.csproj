@@ -327,6 +327,8 @@
     <Compile Include="Controllers\SoChiTietPhaiThuController.cs" />
     <Compile Include="Controllers\SoChiTietPhaiTraController.cs" />
     <Compile Include="Controllers\SoQuyTienMatController.cs" />
+    <Compile Include="Controllers\SoTHPhaiThuController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TheKhoController.cs" />
     <Compile Include="Controllers\TheoDoiGiaoHangController.cs" />
     <Compile Include="Controllers\TheoDoiHDThauController.cs" />
@@ -339,10 +341,13 @@
     <Compile Include="Controllers\DoanhThuChiNhanhController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MauInChungTuController.cs" />
+    <Compile Include="Controllers\THNhapXuatTonTheoTKController.cs" />
     <Compile Include="Controllers\Top10VatTuController.cs" />
+    <Compile Include="Controllers\ViengThamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageModels.cs" />
     <Compile Include="Models\B30CTV.cs">
       <DependentUpon>Detail.tt</DependentUpon>
     </Compile>
@@ -424,6 +429,7 @@
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\custom.js" />
+    <Content Include="assets\js\datatable.min1.js" />
     <Content Include="assets\js\datatables.min.js" />
     <Content Include="assets\js\JavaScriptfor.js" />
     <None Include="assets\js\jquery-1.10.2.intellisense.js" />
@@ -441,6 +447,7 @@
     <Content Include="assets\js\respond.min.js" />
     <Content Include="assets\js\Script.js" />
     <Content Include="assets\js\script.min.js" />
+    <Content Include="assets\js\table2excel.js" />
     <Content Include="assets\js\vfs_fonts.js" />
     <None Include="assets\js\_references.js" />
     <Content Include="assets\php\authication.php" />
@@ -1060,6 +1067,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jsrender.min.js" />
+    <Content Include="Scripts\lightbox-min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\multi-select-tag.js" />
     <Content Include="Scripts\table2excel.js" />
@@ -1075,6 +1083,7 @@
     <Content Include="Styles\hinh4.css" />
     <Content Include="Styles\icon-font-min.css" />
     <Content Include="Styles\jquery-ui.css" />
+    <Content Include="Styles\lightbox-min.css" />
     <Content Include="Styles\loader.css" />
     <Content Include="Styles\login.css" />
     <Content Include="Styles\Dashboard\main-dashboard.css" />
@@ -1262,6 +1271,30 @@
     <Content Include="Views\BaoCaoDoanhThuGV\BaoCaoDoanhThuGV_Fill.cshtml" />
     <Content Include="Views\BaoCaoDoanhThuGV\BaoCaoDoanhThuGV.cshtml" />
     <Content Include="Views\SoChiTietPhaiThu\SoChiTietPhaiThu_In.cshtml" />
+    <Content Include="Views\BangKeNopTien\BaoCaoTienVeThuong_Fill.cshtml" />
+    <Content Include="Views\BangKeNopTien\BaoCaoTienVeThuong.cshtml" />
+    <Content Include="Views\BangKeNopTien\BaoCaoTienVeThuong_Index.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\ViengTham\QuanLyTrungBay_Fill.cshtml" />
+    <Content Include="Views\ViengTham\QuanLyTrungBay.cshtml" />
+    <Content Include="Views\ViengTham\QuanLyTrungBay_Detail.cshtml" />
+    <Content Include="Views\MauInChungTu\PhieuXacNhanTTTCK2.cshtml" />
+    <Content Include="Views\MauInChungTu\PhieuXacNhanTTTCK2_In.cshtml" />
+    <Content Include="Views\MauInChungTu\PhieuXacNhanTTTCK2_Fill.cshtml" />
+    <Content Include="Views\SoChiTietPhaiTra\SoChiTietPhaiTra2_Fill.cshtml" />
+    <Content Include="Views\SoChiTietPhaiTra\Index2.cshtml" />
+    <Content Include="Views\SoChiTietPhaiTra\SoChiTietPhaiTra2.cshtml" />
+    <Content Include="Views\SoChiTietPhaiTra\ChonCN.cshtml" />
+    <Content Include="Views\TheKho\TongNhapXuatTonTheoLo_Fill.cshtml" />
+    <Content Include="Views\TheKho\TongNhapXuatTonTheoLo.cshtml" />
+    <Content Include="Views\TheKho\TongNhapXuatTonTheoLo_In.cshtml" />
+    <Content Include="Views\SoTHPhaiThu\SoTongHopCongNoPhaiThu_Fill.cshtml" />
+    <Content Include="Views\SoTHPhaiThu\SoTongHopCongNoPhaiThu.cshtml" />
+    <Content Include="Views\SoTHPhaiThu\SoTongHopCongNoPhaiThu_In.cshtml" />
+    <Content Include="Views\TheKho\TheKho_In.cshtml" />
+    <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_Fill.cshtml" />
+    <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy.cshtml" />
+    <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_In.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

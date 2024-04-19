@@ -5,70 +5,17 @@
     decimal sumrow = 0;
     string ten = null;
     string ngay = null;
-    string tinh = null;
+  
     //decimal tax = 0;
     //string diachi = null;
     string chinhanh = null;
     //string mst = null;
     ////string dvcs = null;
-    string diachi1 = null;
+
     decimal totalThanhTien = 0;
     //decimal tienST = 0;
     //string tkNo = null;
-    if (Request.Cookies["MA_DVCS"].Value == "OPC_CT")
-    {
-        tinh = "Cần Thơ";
-        diachi1 = "Số 172, Khu đô thị hai bên đường Nguyễn Văn Cừ, Khu Vực 8, Phường An Bình, Q. Ninh Kiều, TP.Cần Thơ.";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_TG")
-    {
-        tinh = "Tiền Giang";
-        diachi1 = "297 Nguyễn Thị Thập, Phường 5, Thành Phố Mỹ Tho, Tiền Giang";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_MD")
-    {
-        tinh = "Miền Đông";
-        diachi1 = "09/ĐX 04-TH,Tổ 7, Kp. Tân Hóa, P. Tân Vĩnh Hiệp, Tp. Tân Uyên, Bình Dương.";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_TP")
-    {
-        tinh = "Hồ Chí Minh";
-        diachi1 = "1017 Hồng Bàng, Phường 12, Quận 6, TP.Hồ Chí Minh";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_VT")
-    {
-        tinh = "Vũng Tàu";
-        diachi1 = "38 Trương Văn Bang, phường 7, Tp. Vũng Tàu";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_NT")
-    {
-        tinh = "Nha Trang";
-        diachi1 = "STH03A.01-06, Đường số 6, Khu đô thị mới Lê Hồng Phong II, Phường Phước Hải, TP. Nha Trang, Tỉnh Khánh Hòa";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_DN")
-    {
-        tinh = "Đà Nẵng";
-        diachi1 = "số 612 Nguyễn Hữu Thọ - Phường Khuê Trung - Quận Cẩm Lệ - TP.Đà Nẵng";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_NA")
-    {
-        tinh = "Nghệ An";
-        diachi1 = "Số 99B, đường Nguyễn Thái Học, phường Lê Lợi, thành phố Vinh, tỉnh Nghệ An";
-
-    }
-    else if (Request.Cookies["MA_DVCS"].Value == "OPC_HN")
-    {
-        tinh = "Hà Nội";
-        //diachi1 = "Số 99B, đường Nguyễn Thái Học, phường Lê Lợi, thành phố Vinh, tỉnh Nghệ An";
-
-    }
+  
 
     foreach (DataRow row3 in Model.Tables[0].Rows)
     {
@@ -598,32 +545,32 @@
         <form>
 
             @*<div style="width: max-content;align-items:center;justify-content:space-between">
-                <div style="width: 200px;background-color:green;text-align:left">
-                    <h3 style="margin-left:-50%; font-size:13px;"><span style="color:black;font-weight:bold">Bộ Phận: </span>CÔNG TY CỔ PHẦN DƯỢC PHẨM OPC</h3>
-                    <h3 style="margin-left: -50%;font-size:13px"><span style="color:black;font-weight:bold">Địa chỉ: </span>1017 Hồng Bàng - Phường 12, Quận 6 - Tp.Hồ Chí Minh,TP Hồ Chí Minh</h3>
-                </div>
+        <div style="width: 200px;background-color:green;text-align:left">
+            <h3 style="margin-left:-50%; font-size:13px;"><span style="color:black;font-weight:bold">Bộ Phận: </span>CÔNG TY CỔ PHẦN DƯỢC PHẨM OPC</h3>
+            <h3 style="margin-left: -50%;font-size:13px"><span style="color:black;font-weight:bold">Địa chỉ: </span>1017 Hồng Bàng - Phường 12, Quận 6 - Tp.Hồ Chí Minh,TP Hồ Chí Minh</h3>
+        </div>
 
-                <div style="width: 200px;background-color:blue;text-align:right">
-                    <h3 style=" font-size:13px;"><span style="color:black;font-weight:bold">Bộ Phận: </span>CÔNG TY CỔ PHẦN DƯỢC PHẨM OPC</h3>
-                    <h3 style="font-size:13px"><span style="color:black;font-weight:bold">Địa chỉ: </span>1017 Hồng Bàng - Phường 12, Quận 6 - Tp.Hồ Chí Minh,TP Hồ Chí Minh</h3>
-                </div>
+        <div style="width: 200px;background-color:blue;text-align:right">
+            <h3 style=" font-size:13px;"><span style="color:black;font-weight:bold">Bộ Phận: </span>CÔNG TY CỔ PHẦN DƯỢC PHẨM OPC</h3>
+            <h3 style="font-size:13px"><span style="color:black;font-weight:bold">Địa chỉ: </span>1017 Hồng Bàng - Phường 12, Quận 6 - Tp.Hồ Chí Minh,TP Hồ Chí Minh</h3>
+        </div>
 
-                </div>*@
-            <div style="float:right;font-size:13px">Phụ lục.......... - LRO...........</div>
+        </div>*@
+
             <br />
             <div>
                 <div style="float: left;text-align:left;width:300px">
-                    <div style="font-size: 13px; font-weight: bold;">CTY CP DP OPC</div>
+                    <div style="font-size: 13px; font-weight: bold;">CÔNG TY CỔ PHẦN DƯỢC PHẨM OPC</div>
                     <div style="font-size: 13px; font-weight: bold;">@chinhanh</div>
                     <div style="font-size: 13px; font-weight: 100;word-wrap:break-word">Số: @soCtFromUrl</div>
                 </div>
-                <div style="float:right">
 
-                    <br />
-                    <div style="margin-right:130px;font-size:13px">@tinh, Ngày: @ngay</div>
-                </div>
             </div>
+            <div style="float:right">
 
+                <br />
+                <div style="margin-right:130px;font-size:13px"> Ngày: @ngay</div>
+            </div>
             <br />
             <br />
             <br />
@@ -635,21 +582,18 @@
             <br />
             <div style="text-align:left;line-height: 20px">
 
-                <div style=" font-size: 13px;">@chinhanh có nhu cầu đặt Quý Khách các mặt hàng sau: </div>
+                <div style=" font-size: 13px;">@chinhanh có nhu cầu đặt các mặt hàng sau: </div>
 
             </div>
             <div>
                 <table border="1" style="width:700px">
                     <tr>
                         <th>STT</th>
-                        <th width="120px">Mã Vật Tư</th>
-                        <th>Tên Vật Tư</th>
+                        <th width="120px">Mã Sản Phẩm</th>
+                        <th>Tên Sản Phẩm</th>
                         <th style="width:50px">ĐVT</th>
                         <th>Số Lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Thành Tiền</th>
-
-                        <th>Ghi chú (lịch giao Hàng)</th>
+                        <th>Ghi chú</th>
                     </tr>
 
 
@@ -674,8 +618,6 @@
                                         <td>@row3["dvt"]</td>
 
                                         <td style="text-align:right">@string.Format("{0:#,###}", row3["So_Luong"])</td>
-                                        <td style="text-align:right">@string.Format("{0:#,###}", row3["Don_Gia"])</td>
-                                        <td style="text-align:right">@string.Format("{0:#,###}", row3["Tien"])</td>
                                         <td></td>
 
                                     </tr>
@@ -692,37 +634,34 @@
                     <tfoot>
                         <tr>
                             <td colspan="3" style="text-align:left;font-weight:bold">Tổng cộng: @sumrow khoản</td>
-                            <td colspan="4" style="text-align:right;font-weight:bold"class="para">@string.Format("{0:#,###}", totalThanhTien).Replace(",",".")</td>
-                            <td></td>
+                            <td colspan="3" style="text-align:right;font-weight:bold" class="para">@string.Format("{0:#,###}", totalThanhTien).Replace(",", ".")</td>
+
                         </tr>
                         @*<tr>
-                                <td colspan="5" style="font-weight: 100;text-align:right">Cộng tiền hàng:(Chưa VAT)</td>
-                                <td style="text-align:right;font-weight:bold">@string.Format("{0:#,###}", totalThanhTien)</td>
-                                <td></td>
-                            </tr>
+                        <td colspan="5" style="font-weight: 100;text-align:right">Cộng tiền hàng:(Chưa VAT)</td>
+                        <td style="text-align:right;font-weight:bold">@string.Format("{0:#,###}", totalThanhTien)</td>
+                        <td></td>
+                    </tr>
 
-                            <tr>
-                                <td colspan="5" style="font-weight: 100;text-align:right">Tiền Thuế GTGT:</td>
-                                <td style="text-align:right;font-weight:bold">@string.Format("{0:#,###}", tax)</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" style="font-weight: 100;text-align:right">Tổng cộng tiền thanh toán:</td>
-                                <td style="text-align:right;font-weight:bold">@string.Format("{0:#,###}", tienST)</td>
-                                <td></td>
-                            </tr>*@
+                    <tr>
+                        <td colspan="5" style="font-weight: 100;text-align:right">Tiền Thuế GTGT:</td>
+                        <td style="text-align:right;font-weight:bold">@string.Format("{0:#,###}", tax)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="font-weight: 100;text-align:right">Tổng cộng tiền thanh toán:</td>
+                        <td style="text-align:right;font-weight:bold">@string.Format("{0:#,###}", tienST)</td>
+                        <td></td>
+                    </tr>*@
                     </tfoot>
                 </table>
 
 
-                <br />
-                <div style="float:left;display:flex "><div style="font-size:11px;font-style:italic;font-weight:bold">Tổng tiền (bằng chữ): <span id="resultDiv1" style="font-weight:bold"></span></div> </div>
-                <br />
-                <div style="font-size:13px;text-align:left">Giá trên chưa bao gồm VAT</div>
+
                 @*<div style="font-size:13px;word-wrap:break-word;text-align:left;width:700px">** Y/C không làm dư hàng. Trước khi giao hàng từ 1 đến 2 ngày Quý Khách vui lòng thông báo cho chúng tôi biết trước để Công Ty chúng tôi sắp xếp nhận hàng.</div>*@
                 <br />
-                <div style="text-align:left;font-size:11px">Địa điểm giao hàng: Tại kho OPC @tinh.</div>
-                <div style="text-align:left;font-size:11px">Địa chỉ: @diachi1.</div>
+                <div style="text-align:left;font-size:11px">Địa điểm giao hàng tại Kho: @chinhanh.</div>
+                @*<div style="text-align:left;font-size:11px">Địa chỉ: @diachi1.</div>*@
                 <br />
 
                 <div class="header" style="text-align:center;align-content:space-between;display:flex;font-size:15px">
@@ -731,10 +670,10 @@
 
                 </div>
                 @*<div class="header" style="text-align:center;align-content:space-between;display:flex;font-size:13px;font-weight:100">
-                    <div>Ký nhận và Fax: 0274.363.2345 gửi lại cty OPC</div>
-                    <div style="margin-right:50px;font-weight:bold">GIÁM ĐỐC KH - CUNG ỨNG</div>
+                <div>Ký nhận và Fax: 0274.363.2345 gửi lại cty OPC</div>
+                <div style="margin-right:50px;font-weight:bold">GIÁM ĐỐC KH - CUNG ỨNG</div>
 
-                </div>*@
+            </div>*@
             </div>
         </form>
     </div>

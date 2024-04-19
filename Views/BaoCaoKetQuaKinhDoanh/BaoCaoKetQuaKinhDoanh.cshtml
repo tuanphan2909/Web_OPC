@@ -585,6 +585,9 @@
         .expandable-content_detail25 {
             display: none;
         }
+        .expandable-content_detailTM {
+            display: none;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -726,11 +729,11 @@
 
                                 @*<tr class="table-dark expandable-content">
 
-                                        <th style="background-color: #f1f1f1; border-top: hidden; border-bottom: hidden; border-left: none "></th>
-                                        <th>Doanh Thu OPC</th>
-                                        <th>Khoán OPC</th>
-                                        <th>Tỷ lệ OPC</th>
-                                    </tr>*@
+                <th style="background-color: #f1f1f1; border-top: hidden; border-bottom: hidden; border-left: none "></th>
+                <th>Doanh Thu OPC</th>
+                <th>Khoán OPC</th>
+                <th>Tỷ lệ OPC</th>
+            </tr>*@
                                 <tr class="expandable-content">
                                     <td style="font-weight:bold">OPC  <span class="material-symbols-outlined expandable-icon noExl" onclick="toggleRowsOPC(this)"><i class="fa-solid fa-caret-down"></i></span></td>
                                     <td style='text-align:right;mso-number-format:" #,##0.00"'>@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC"]))</td>
@@ -864,7 +867,38 @@
 
                                 }
 
+
+                                <tr class="expandable-content">
+                                    <td style="font-weight:bold">TM<span class="material-symbols-outlined expandable-icon" onclick="toggleRowsTM(this)"><i class="fa-solid fa-caret-down"></i></span></td>
+                                    <td style='text-align:right;mso-number-format:" #,##0.00"'>@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TM"]))</td>
+                                    <td style='text-align:right;mso-number-format:" #,##0.00"'></td>
+                                    <td style='text-align:right;mso-number-format:" #,##0.00"'></td>
+
+                                </tr>
+                                <tr class="expandable-content_detailTM" style="background-color:antiquewhite">
+
+                                    <th style="background-color: antiquewhite; border-top: hidden; border-bottom: hidden; border-left: none ">Mã Vật Tư- Tên Vật Tư</th>
+                                    <th>Số Lượng</th>
+                                    <th>Tổng Tiền</th>
+                                    <th>Tỷ Trọng</th>
+                                </tr>
+                                foreach (DataRow row in Model.Tables[6].Rows)
+                                {
+                                    if (row["Gam_hang"].ToString() == "TM")
+                                    {
+                                        <tr class="expandable-content_detailTM">
+                                            <td style="text-align:left">@row["Ma_Vt"] - @row["Ten_Vt"]</td>
+                                            <td style='text-align:right;mso-number-format:" #,##0.00"'>@String.Format("{0:n0}", Convert.ToDecimal(row["So_Luong"]))</td>
+                                            <td style='text-align:right;mso-number-format:" #,##0.00"'>@String.Format("{0:n0}", Convert.ToDecimal(row["Tong_Tien"]))</td>
+                                            <td style='text-align:right;mso-number-format:" #,##0.00"'>@row["Ty_Trong"]%</td>
+                                        </tr>
+                                    }
+
+                                }
                             }
+
+
+
 
                         </tbody>
                     </table>
@@ -1369,6 +1403,21 @@
                 }
             }
         }
+
+        function toggleRowsTM(cell) {
+            var rowIndex = cell.parentElement.parentElement.rowIndex; // Adjusted to get the index of the parent row
+            var table = document.getElementById('example');
+            var rows = table.rows;
+
+            for (var i = rowIndex + 1; i < rows.length; i++) {
+                var row = rows[i];
+                if (row.classList.contains('expandable-content_detailTM')) {
+                    row.style.display = (row.style.display === 'none' || row.style.display === '') ? 'table-row' : 'none';
+                } else if (row.classList.contains('table-dark')) {
+                    break;
+                }
+            }
+        }
         //window.onload = function () {
         //    // Ẩn các dòng con có class "expandable-contentOTC"
         //    var table2 = document.getElementById('example');
@@ -1499,7 +1548,18 @@
             tongDoanhThu += parseInt(cell.innerText.replace(/[^0-9]/g, ''), 10);
         });
         doanhThuOTCCells.forEach(function (cell) {
-            tongDoanhThuOTC += parseInt(cell.innerText.replace(/[^0-9]/g, ''), 10);
+            //tongDoanhThuOTC += parseInt(cell.innerText.replace(/[^0-9]/g, ''), 10);
+            var isNegative = cell.innerText.includes('-');
+            // Loại bỏ tất cả các ký tự không phải số khỏi chuỗi
+            var numberString = cell.innerText.replace(/[^0-9]/g, '');
+            // Chuyển đổi chuỗi thành số nguyên
+            var number = parseInt(numberString, 10);
+            // Nếu là số âm, đổi dấu
+            if (isNegative) {
+                number *= -1;
+            }
+            // Thêm vào tổng
+            tongDoanhThuOTC += number;
         });
         doanhThuETCCells.forEach(function (cell) {
             tongDoanhThuETC += parseInt(cell.innerText.replace(/[^0-9]/g, ''), 10);
@@ -1517,7 +1577,18 @@
 
         // Tính tổng cột "Doanh Thu"
         doanhThuCells.forEach(function (cell) {
-            tongDoanhThu += parseInt(cell.innerText.replace(/[^0-9]/g, ''), 10);
+            //tongDoanhThu += parseInt(cell.innerText.replace(/[^0-9]/g, ''), 10);
+            var isNegative = cell.innerText.includes('-');
+            // Loại bỏ tất cả các ký tự không phải số khỏi chuỗi
+            var numberString = cell.innerText.replace(/[^0-9]/g, '');
+            // Chuyển đổi chuỗi thành số nguyên
+            var number = parseInt(numberString, 10);
+            // Nếu là số âm, đổi dấu
+            if (isNegative) {
+                number *= -1;
+            }
+            // Thêm vào tổng
+            tongDoanhThu += number;
         });
         console.log(tongDoanhThu);
 

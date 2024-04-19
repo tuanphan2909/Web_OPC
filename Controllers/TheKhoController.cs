@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Web;
 using web4.Models;
@@ -79,6 +80,40 @@ namespace web4.Controllers
             return View();
         }
         public ActionResult TheKho()
+        {
+            List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+            ViewBag.DataVT = dmDlistVT;
+            var fromDate = Request.Cookies["From_date"].Value;
+            var toDate = Request.Cookies["To_Date"].Value;
+            DataSet ds = new DataSet();
+            connectSQL();
+            var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+            var Ma_Kho = Request.Cookies["Ma_Kho"].Value;
+            var Ma_DV = Request.Cookies["Ma_DV"].Value;
+            //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+            string Pname = "[usp_TheKho_SAP]";
+
+            using (SqlCommand cmd = new SqlCommand(Pname, con))
+            {
+                cmd.CommandTimeout = 950;
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+                    cmd.Parameters.AddWithValue("@_Don_Vi", Ma_DV);
+                    cmd.Parameters.AddWithValue("@_Ma_Kho", Ma_Kho);
+                    cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);
+                    sda.Fill(ds);
+
+                }
+            }
+            return View(ds);
+        }
+        public ActionResult TheKho_In()
         {
             List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
             ViewBag.DataVT = dmDlistVT;
@@ -259,7 +294,7 @@ namespace web4.Controllers
             var toDate = Request.Cookies["To_Date"].Value;
             DataSet ds = new DataSet();
             connectSQL();
-            //var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+            var Username = Request.Cookies["UserName"].Value;
             var dvcs = Request.Cookies["MA_DVCS"].Value;
             //var Ma_Kho = Request.Cookies["Ma_Kho"].Value;
             //var Ma_DV = Request.Cookies["Ma_DV"].Value;
@@ -278,6 +313,7 @@ namespace web4.Controllers
                     cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
                     cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
                     cmd.Parameters.AddWithValue("@_Ma_Dvcs", dvcs);
+                    cmd.Parameters.AddWithValue("@_username", Username);
                     //cmd.Parameters.AddWithValue("@_Ma_Kho", dvcs);
                     //cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);
                     sda.Fill(ds);
@@ -292,7 +328,7 @@ namespace web4.Controllers
             var toDate = Request.Cookies["To_Date"].Value;
             DataSet ds = new DataSet();
             connectSQL();
-            //var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+            var Username = Request.Cookies["UserName"].Value;
             var dvcs = Request.Cookies["MA_DVCS"].Value;
             //var Ma_Kho = Request.Cookies["Ma_Kho"].Value;
             //var Ma_DV = Request.Cookies["Ma_DV"].Value;
@@ -311,7 +347,7 @@ namespace web4.Controllers
                     cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
                     cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
                     cmd.Parameters.AddWithValue("@_Ma_Dvcs", dvcs);
-                    //cmd.Parameters.AddWithValue("@_Ma_Kho", dvcs);
+                    cmd.Parameters.AddWithValue("@_username", Username);
                     //cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);
                     sda.Fill(ds);
 
@@ -322,6 +358,238 @@ namespace web4.Controllers
         public ActionResult PhieuDatHang_Fill()
         {
             return View();
+        }
+        //public ActionResult TongNhapXuatTonTheoKy_Fill()
+        //{
+        //    List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+        //    ViewBag.DataVT = dmDlistVT;
+        //    return View();
+        //}
+        //public ActionResult TongNhapXuatTonTheoKy()
+        //{
+        //    List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+        //    ViewBag.DataVT = dmDlistVT;
+        //    var fromDate = Request.Cookies["From_date"].Value;
+        //    var toDate = Request.Cookies["To_Date"].Value;
+        //    DataSet ds = new DataSet();
+        //    connectSQL();
+
+        //    var Tk = Request.Cookies["Ma_Tk"].Value;
+
+
+        //        var Ma_Dv = Request.Cookies["Ma_Dv"].Value;
+
+
+        //    var dvcs = Request.Cookies["Ma_Dvcs"].Value;
+        //    var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+        //    //var Ma_Kho = Request.Cookies["Ma_Kho"].Value;
+        //    //var Ma_DV = Request.Cookies["Ma_DV"].Value;
+        //    //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+        //    if(dvcs == "")
+        //    {
+        //        dvcs = "OPC";
+        //    }
+        //    string Pname = "[usp_TongHopNhapXuatTonTheoTK_SAP]";
+
+        //    using (SqlCommand cmd = new SqlCommand(Pname, con))
+        //    {
+        //        cmd.CommandTimeout = 950;
+        //        cmd.Connection = con;
+        //        cmd.CommandType = CommandType.StoredProcedure;
+
+        //        con.Open();
+        //        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+        //        {
+        //            cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+        //            cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+        //            cmd.Parameters.AddWithValue("@_Ma_Dvcs", dvcs);
+        //            cmd.Parameters.AddWithValue("@_Tk", Tk);
+        //            cmd.Parameters.AddWithValue("@_Ma_Dv", Ma_Dv);
+        //            cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);
+        //            sda.Fill(ds);
+
+        //        }
+        //    }
+        //    return View(ds);
+        //}
+        //public ActionResult TongNhapXuatTonTheoKy_In()
+        //{
+        //    List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+        //    ViewBag.DataVT = dmDlistVT;
+        //    var fromDate = Request.Cookies["From_date"].Value;
+        //    var toDate = Request.Cookies["To_Date"].Value;
+        //    DataSet ds = new DataSet();
+        //    connectSQL();
+
+        //    var Tk = Request.Cookies["Ma_Tk"].Value;
+
+
+        //    var Ma_Dv = Request.Cookies["Ma_Dv"].Value;
+
+
+        //    var dvcs = Request.Cookies["Ma_Dvcs"].Value;
+        //    var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+        //    //var Ma_Kho = Request.Cookies["Ma_Kho"].Value;
+        //    //var Ma_DV = Request.Cookies["Ma_DV"].Value;
+        //    //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+        //    if (dvcs == "")
+        //    {
+        //        dvcs = "OPC";
+        //    }
+        //    string Pname = "[usp_TongHopNhapXuatTonTheoTK_SAP]";
+
+        //    using (SqlCommand cmd = new SqlCommand(Pname, con))
+        //    {
+        //        cmd.CommandTimeout = 950;
+        //        cmd.Connection = con;
+        //        cmd.CommandType = CommandType.StoredProcedure;
+
+        //        con.Open();
+        //        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+        //        {
+        //            cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+        //            cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+        //            cmd.Parameters.AddWithValue("@_Ma_Dvcs", dvcs);
+        //            cmd.Parameters.AddWithValue("@_Tk", Tk);
+        //            cmd.Parameters.AddWithValue("@_Ma_Dv", Ma_Dv);
+        //            cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);
+        //            sda.Fill(ds);
+
+        //        }
+        //    }
+        //    return View(ds);
+        //}
+        //public List<DmKhoSAP> GetDvcsData()
+        //{
+        //    List<DmKhoSAP> dvcsList = new List<DmKhoSAP>();
+
+        //    try
+        //    {
+        //        using (SqlConnection connection = new SqlConnection("Data source= " + "118.69.109.109" + ";database=" + "SAP_OPC" + ";uid=sa;password=Hai@thong"))
+        //        {
+        //            connection.Open();
+
+        //            using (SqlCommand command = new SqlCommand("select * from [dbo.tbl_DmKhoSAP]", connection))
+        //            {
+        //                using (SqlDataReader reader = command.ExecuteReader())
+        //                {
+        //                    while (reader.Read())
+        //                    {
+        //                        DmKhoSAP dvcs = new DmKhoSAP
+        //                        {
+        //                            Company = reader.GetString(1),       // Thay đổi index nếu cần
+        //                            Site = reader.GetString(2),   // Thay đổi index nếu cần
+        //                            TenSite = reader.GetString(3), // Thay đổi index nếu cần
+        //                            MaKho = reader.GetString(4), // Thay đổi index nếu cần
+        //                            TenKho = reader.GetString(5) // Thay đổi index nếu cần
+        //                        };
+
+        //                        dvcsList.Add(dvcs);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Xử lý lỗi nếu cần
+        //    }
+
+        //    return dvcsList;
+        //}
+        public ActionResult TongNhapXuatTonTheoLo_Fill()
+        {
+            List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+    
+            ViewBag.DataVT = dmDlistVT;
+          
+            return View();
+        }
+        public ActionResult TongNhapXuatTonTheoLo()
+        {
+            List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+            ViewBag.DataVT = dmDlistVT;
+            var fromDate = Request.Cookies["From_date"].Value;
+            var toDate = Request.Cookies["To_Date"].Value;
+            DataSet ds = new DataSet();
+            connectSQL();
+
+            //var Tk = Request.Cookies["Ma_Tk"].Value;
+            var Ma_Dv = Request.Cookies["Ma_Dv"].Value;
+            var dvcs = Request.Cookies["Ma_Dvcs_2"].Value;
+            var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+            //var Ma_Kho = Request.Cookies["Ma_Kho"].Value;
+            //var Ma_DV = Request.Cookies["Ma_DV"].Value;
+            //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+            if (dvcs == "")
+            {
+                dvcs = "OPC";
+            }
+            string Pname = "[usp_TongHopNhapXuatTonTheoKho_SAP]";
+
+            using (SqlCommand cmd = new SqlCommand(Pname, con))
+            {
+                cmd.CommandTimeout = 950;
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+                    cmd.Parameters.AddWithValue("@_Ma_Dvcs", dvcs);
+                    //cmd.Parameters.AddWithValue("@_Tk", Tk);
+                    cmd.Parameters.AddWithValue("@_Ma_Kho", Ma_Dv);
+                    cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);
+                    sda.Fill(ds);
+
+                }
+            }
+            return View(ds);
+        }
+        public ActionResult TongNhapXuatTonTheoLo_In()
+        {
+            List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+            ViewBag.DataVT = dmDlistVT;
+            var fromDate = Request.Cookies["From_date"].Value;
+            var toDate = Request.Cookies["To_Date"].Value;
+            DataSet ds = new DataSet();
+            connectSQL();
+
+            //var Tk = Request.Cookies["Ma_Tk"].Value;
+            var Ma_Dv = Request.Cookies["Ma_Dv"].Value;
+            var dvcs = Request.Cookies["Ma_Dvcs_2"].Value;
+            var Ma_Vt = Request.Cookies["Ma_Vt"].Value;
+            //var Ma_Kho = Request.Cookies["Ma_Kho"].Value;
+            //var Ma_DV = Request.Cookies["Ma_DV"].Value;
+            //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+            if (dvcs == "")
+            {
+                dvcs = "OPC";
+            }
+            string Pname = "[usp_TongHopNhapXuatTonTheoKho_SAP]";
+
+            using (SqlCommand cmd = new SqlCommand(Pname, con))
+            {
+                cmd.CommandTimeout = 950;
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+                    cmd.Parameters.AddWithValue("@_Ma_Dvcs", dvcs);
+                    //cmd.Parameters.AddWithValue("@_Tk", Tk);
+                    cmd.Parameters.AddWithValue("@_Ma_Kho", Ma_Dv);
+                    cmd.Parameters.AddWithValue("@_Ma_Vt", Ma_Vt);
+                    sda.Fill(ds);
+
+                }
+            }
+            return View(ds);
         }
     }
 }

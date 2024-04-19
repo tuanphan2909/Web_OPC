@@ -887,10 +887,13 @@
 
                     if (selectedOption) {
                         var tenDt = selectedOption.getAttribute('data-maVT');
+                        var tenVt = selectedOption.getAttribute('data-TenVt');
                         document.cookie = 'Ma_Vt=' + tenDt;
+                        document.cookie = 'Ten_Vt=' + tenVt;
                     } else {
                         var selected = "";
                         document.cookie = 'Ma_Vt=' + selected;
+                        document.cookie = 'Ten_Vt=' + selected;
                     }
                 });
             }
