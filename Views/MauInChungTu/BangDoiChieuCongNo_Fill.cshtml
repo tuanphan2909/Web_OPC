@@ -419,6 +419,81 @@
             width: max-content;
           
         }
+        input[type="checkbox"] {
+            margin: 0;
+            padding: 0;
+            height: 16px;
+            width: 16px;
+            vertical-align: bottom;
+        }
+        /* Customize the label (the container) */
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 17px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            /* Hide the browser's default checkbox */
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border:1px solid black;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .container:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .container input:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
     </style>
 </head>
 <body style="background-color: #e0e8ee ">
@@ -453,22 +528,32 @@
                             @{ var l = ViewBag.DataItems;
                                 foreach (var item in l)
                                 {
-                                    <option value="@item.Ma_Dt" data-madt="@item.Ma_Dt"data-ten="@item.Ten_Dt" data-diachi="@item.Dia_Chi" data-dvcs="@item.Dvcs" data-dvcs1="@item.Dvcs1">@item.Ten_Dt</option>
+                                    <option value="@item.Ma_Dt" data-madt="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-diachi="@item.Dia_Chi" data-dvcs="@item.Dvcs" data-dvcs1="@item.Dvcs1">@item.Ten_Dt</option>
                                 }
                             }
                         </datalist>
                         <input type="hidden" name="Ma_Dt" id="selectedOption">
 
                         @*<select id="multipleSelect" multiple name="native-select" placeholder="Chọn Đối Tượng" data-search="true" data-silent-initial-value-set="true" noOptionsText="Không tìm thấy" onChange="handleSelectChange(event)">
-                            @{ var l = ViewBag.DataItems;
-                                foreach (var item in l)
-                                {
-                                    <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-diachi="@item.Dia_Chi" data-dvcs="@item.Dvcs" data-dvcs1="@item.Dvcs1">@item.Ma_Dt @item.Ten_Dt</option>
+                                @{ var l = ViewBag.DataItems;
+                                    foreach (var item in l)
+                                    {
+                                        <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-diachi="@item.Dia_Chi" data-dvcs="@item.Dvcs" data-dvcs1="@item.Dvcs1">@item.Ma_Dt @item.Ten_Dt</option>
+                                    }
                                 }
-                            }
 
 
-                        </select>*@
+                            </select>*@
+
+                        @*<div style="display:flex;margin-top:10px">
+                            <label class="container">
+
+                                <input type="checkbox" class="rowCheckbox" data-ma-kh="1">
+                                <span class="checkmark"></span>
+                            </label>
+                            <div style="">Gộp Mã</div>
+                        </div>*@
+
                         <div>
                             <button class="submit" type="submit" id="runReportButton" onclick="runReport()"> Chạy Báo Cáo </button>
                         </div>
@@ -618,21 +703,49 @@
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
     <script type="text/javascript" src="~/Scripts/virtual-select.min.js"></script>
     <script type="text/javascript">
-      VirtualSelect.init({
-          ele: 'select',
- 
-  
-});
+        VirtualSelect.init({
+            ele: 'select',
+
+
+        });
 
     </script>
     <script>
+        // Lấy tất cả các ô checkbox trong hàng
+        const checkboxes = document.querySelectorAll('.rowCheckbox');
+
+        // Thêm lắng nghe sự kiện cho mỗi ô checkbox
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                // Nếu ô checkbox đang được kiểm tra
+                if (this.checked) {
+                    // Lấy giá trị của cột Ma_KH từ thuộc tính data
+                    const maKH = this.getAttribute('data-ma-kh');
+                    // Đặt cookie với tên GopMa và giá trị là maKH
+                    document.cookie = `GopMa=${maKH}`;
+                } else {
+                    // Nếu ô checkbox không được kiểm tra
+                    // Cập nhật cookie GopMa với giá trị là 0
+                    document.cookie = `GopMa=0`;
+                }
+                // Hủy chọn tất cả các ô checkbox trừ ô checkbox trong hàng hiện tại
+                checkboxes.forEach(cb => {
+                    if (cb !== this) {
+                        cb.checked = false;
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
         function handleSelectChange(event) {
             var selectedOption = event.target.options[event.target.selectedIndex];
-       /*     var selectedValue = event.target.value;*/
+            /*     var selectedValue = event.target.value;*/
             var tenDt = selectedOption.getAttribute('data-ten');
 
             // Gửi giá trị lên cookie với tên là "Ma_Dt" và "Ten_Dt"
-          /*  document.cookie = "Ma_Dt=" + selectedValue;*/
+            /*  document.cookie = "Ma_Dt=" + selectedValue;*/
             document.cookie = "Ten_Dt=" + tenDt;
         }
 
@@ -710,13 +823,20 @@
             var toDate = document.getElementById('den_ngay').value;
             var ngayTT = document.getElementById("Ngay_TT").value;
             var ngayKy = document.getElementById("Ngay_Ky").value;
-            // Save values in cookies 
+            // Save values in cookies
             document.cookie = 'From_date=' + fromDate + '; path=/';
             document.cookie = 'To_date=' + toDate + '; path=/';
+            document.cookie = 'From_dateDTCN=' + fromDate + '; path=/';
+            document.cookie = 'To_dateDTCN=' + toDate + '; path=/';
             document.cookie = "Ngay_Ky=" + ngayKy;
             document.cookie = "Ngay_TT=" + ngayTT;
             const spanElement = document.getElementById("spanText");
             spanElement.style.display = "block";
+
+            const gopMaCheckbox = document.querySelector('.rowCheckbox');
+            const gopMaValue = gopMaCheckbox.checked ? "1" : "0";
+            document.cookie = `GopMa=${gopMaValue}`;
+
         }
         // Set the "Từ Ngày" input to the first day of the current month
         function setFirstDayOfCurrentMonth() {

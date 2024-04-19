@@ -679,7 +679,7 @@
                             <option value="OPC_B2/TKX_B2_01">Kho thống kê xưởng sản xuất</option>
                             <option value="OPC_B2/TKX_B2_02">Kho thống kê hóa dược 2</option>
                             <option value="OPC_B2/TP_B1_CXL">Kho thành phẩm Trụ sở chờ xử lý</option>
-                            
+
                             <option value="OPC_B2/TP_B1_NC">Kho thành phẩm Nghiên Cứu điều phối</option>
                             <option value="OPC_B2/TP_B1_PHIEN">Kho vị thuốc cổ truyền Trụ sở</option>
                             <option value="OPC_B2/TP_B1_PHIEN_CXL">Kho vị thuốc cổ truyền trụ sở chờ xử lý</option>
@@ -773,13 +773,12 @@
                     </div>
 
                 </form>
-                <button style="border-radius: 10px; margin-left: 10px; margin-bottom: 10px;margin-top:10px; background-color: #aec9e0; color: #3483bd ">  
-                <a onclick="return ExcellentExport.excel(this, 'example', 'Sheet 1');" download="TheKho.xls" style="color: #3483bd">Xuất Excel </a> </button>
-                @*<div>
-                        <button onclick="printPage()">
-                            <i class="fa-solid fa-print"></i>
-                        </button>
-                    </div>*@
+                <button style="border-radius: 10px; margin-left: 10px; margin-bottom: 10px;margin-top:10px; background-color: #aec9e0; color: #3483bd ">
+                    <a onclick="return ExcellentExport.excel(this, 'example', 'Sheet 1');" download="TheKho.xls" style="color: #3483bd">Xuất Excel </a>
+                </button>
+                <button onclick="printPage()" style="border-radius: 10px; margin-left: 10px; margin-bottom: 10px;margin-top:10px; background-color: #aec9e0; color: #3483bd;padding:10px ">
+                    Print
+                </button>
             </li>
         </ul>
     </div>
@@ -948,12 +947,17 @@
                 var tonCuoiKyRows = [];
                 var tongNhapXuatRows = [];
                 var otherRows = [];
+               /* var nullRows = [];*/
+
 
                 $.each(rows, function (_, row) {
                     switch (row.dienGiaiValue) {
                         case "TonDauKy":
                             tonDauKyRows.push(row);
                             break;
+                        //case "":
+                        //    nullRows.push(row);
+                        //    break;
                         case "TonCuoiKy":
                             tonCuoiKyRows.push(row);
                             break;
@@ -967,11 +971,12 @@
                 });
 
                 // Sắp xếp các nhóm
-                tonDauKyRows = tonDauKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
-                tonCuoiKyRows = tonCuoiKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
-                tongNhapXuatRows = tongNhapXuatRows.sort((a, b) => a.soCtValue - b.soCtValue);
-                otherRows = otherRows.sort((a, b) => a.soCtValue - b.soCtValue);
-
+                //tonDauKyRows = tonDauKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
+                //tonCuoiKyRows = tonCuoiKyRows.sort((a, b) => a.soCtValue - b.soCtValue);
+                //tongNhapXuatRows = tongNhapXuatRows.sort((a, b) => a.soCtValue - b.soCtValue);
+            
+                //nullRows = nullRows.sort((a, b) => a.soCtValue - b.soCtValue);
+              /*  otherRows = otherRows.sort((a, b) => a.soCtValue - b.soCtValue);*/
                 // Thêm các nhóm vào bảng
                 $.each(tonDauKyRows.concat(otherRows, tonCuoiKyRows, tongNhapXuatRows), function (_, row) {
                     $('#example tbody').append(row.row);
@@ -1339,29 +1344,18 @@
         });
 
     </script>
-    <script>
-        function printPage() {
-            // Mở cửa sổ in mới
-            var printWindow = window.open('', '_blank');
 
-            // Lấy nội dung của bảng để in
-            var tableContent = document.getElementById('example').outerHTML;
+        <script>
+            function printPage() {
+                // Mở cửa sổ in mới
+                var printWindow = window.open('', '_blank');
+            printWindow.location.href = "/TheKho/TheKho_In";
 
-            // Ghi nội dung vào cửa sổ in
-            printWindow.document.write('<html><head><title>In Trang</title>');
-            printWindow.document.write('<style>');
-            printWindow.document.write('table {border-collapse: collapse; width: 100%;}');
-            printWindow.document.write('th, td {border: 1px solid black; padding: 8px; white-space: nowrap;}'); // Áp dụng white-space: nowrap;
-            printWindow.document.write('</style>');
-            printWindow.document.write('</head><body>' + tableContent + '</body></html>');
 
-            // In cửa sổ in
-            printWindow.print();
 
-            // Đóng cửa sổ in
-            printWindow.close();
-        }
+            }
     </script>
+  
 
 
 

@@ -581,6 +581,9 @@
                         <a>Đến Ngày</a><br /><br />
                         <input class="den_ngay" id="den_ngay" placeholder=" Đến Ngày" name="To_date" type="DATE" format="YYYY-MM-DD" value="@Request.QueryString["To_date"]" /><br /><br />
                         <script>$("#den_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script>
+                        <a>Ngày Ký</a><br /><br />
+                        <input class="den_ngay" id="Ngay_Ky" placeholder=" Đến Ngày" name="Ngay_ky" type="DATE" format="YYYY-MM-DD" value="@Request.QueryString["To_date"]" /><br /><br />
+                        <script>$("#den_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script>
                     </div>
                     @*<h6>Chọn Tài Khoản</h6>
                     <div class="select-btn" style="width:100px;margin-top:10px">
@@ -658,7 +661,7 @@
                 <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
             </a>
         }
-    <h4 style="color: #3483bd">XÁC NHẬN THANH TOÁN TIỀN CKTT VÀ BÙ TRỪ CODE KM, PMH</h4>
+    <h4 style="color: #3483bd">XÁC NHẬN THANH TOÁN TIỀN CKTT</h4>
     </header>
     <!-- =======  Data-Table  = Start  ========================== -->
 
@@ -859,7 +862,8 @@
                     uncheckedCheckboxIndexes.push(index);
                 }
             });
-
+            var ngayKy = document.getElementById("Ngay_Ky").value;
+            document.cookie = "Ngay_Ky=" + ngayKy;
             // Lưu trạng thái vào Local Storage
             localStorage.setItem('uncheckedCheckboxIndexes', JSON.stringify(uncheckedCheckboxIndexes));
             // Hiển thị thẻ span có id là "spanText"
@@ -886,6 +890,11 @@
         });
     </script>
     <script>
+        function setCurrentDateKy() {
+            const currentDate = new Date();
+            const formattedToDate = formatDate(currentDate);
+            document.getElementById("Ngay_Ky").value = formattedToDate;
+        }
         function saveNgay() {
             var from_date = document.getElementById("tu_ngay").value;
             var to_date = document.getElementById("den_ngay").value;

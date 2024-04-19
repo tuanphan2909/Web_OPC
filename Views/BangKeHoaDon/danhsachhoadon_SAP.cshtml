@@ -1,4 +1,4 @@
-﻿@using System.Data;
+﻿﻿@using System.Data;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -567,7 +567,7 @@
             </li>
         </ul>
     </div>
-    <header class="header_part"style="background-color: #aec9e0; color: #3483bd ">
+    <header class="header_part" style="background-color: #aec9e0; color: #3483bd ">
         @if (Request.Cookies["UserName"].Value == "Admin-cnct" || Request.Cookies["UserName"].Value == "Admin-cntg" || Request.Cookies["UserName"].Value == "Admin-cnmd" || Request.Cookies["UserName"].Value == "Admin-cnh1" || Request.Cookies["UserName"].Value == "Admin-cnvt"
                      || Request.Cookies["UserName"].Value == "Admin-cnnt" || Request.Cookies["UserName"].Value == "Admin - cndn" || Request.Cookies["UserName"].Value == "Admin - cnna" || Request.Cookies["UserName"].Value == "Admin - cnhn")
         {
@@ -615,6 +615,7 @@
                                 <th>Tiền (+VAT)</th>
                                 <th>Số HDĐT</th>
                                 <th>Ngày HDĐT</th>
+                                <th>Tên Hợp đồng </th>
                                 <th>Kho Xuất</th>
                                 <th>số lô</th>
                                 <th>hạn dùng</th>
@@ -627,28 +628,29 @@
                             @foreach (DataRow row2 in Model.Tables[0].Rows)
                             {
                                 <tr>
-                                    <td style="text-align:right">@row2["Ngay_Ct1"]</td>
-                                    <td style="text-align:right">@row2["so_ct"]</td>
-                                    <td style="text-align:right">@row2["ma_dt"]</td>
-                                    <td>@row2["ten_dt"]</td>
-                                    <td style="text-align:right">@row2["ma_vt"]</td>
-                                    <td>@row2["ten_vt"]</td>
+                                    <td style="text-align:center">@row2["Ngay_Ct1"]</td>
+                                    <td style="text-align:center">@row2["so_ct"]</td>
+                                    <td style="text-align:center">@row2["ma_dt"]</td>
+                                    <td style="text-align:left">@row2["ten_dt"]</td>
+                                    <td style="text-align:center">@row2["ma_vt"]</td>
+                                    <td style="text-align:left">@row2["ten_vt"]</td>
                                     <td>@row2["ma_km"]</td>
                                     <td>@row2["Ma_TDV"]</td>
-                                    <td>@row2["ten_tdv"]</td>
+                                    <td style="text-align:left">@row2["ten_tdv"]</td>
                                     <td style="text-align:right">@row2["Discount"]%</td>
-                                    <td>@row2["Loai_Vt"]</td>
-                                    <td style="text-align:right">@row2["DVT"]</td>
+                                    <td style="text-align:left">@row2["Loai_Vt"]</td>
+                                    <td style="text-align:center">@row2["DVT"]</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["so_luong_HD"]))</td>
-                                    <td style="text-align:right">@row2["DVT_HD"]</td>
+                                    <td style="text-align:center">@row2["DVT_HD"]</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tien"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_tien"])).Replace(".", ",")</td>
-                                    <td style="text-align:right">@row2["so_HDDT"]</td>
+                                    <td style="text-align:center">@row2["so_HDDT"]</td>
                                     <td style="text-align:right">@row2["Ngay_HDDT"]</td>
-                                    <td style="text-align:right">@row2["kho_xuat"]</td>
+                                    <td style="text-align:left">@row2["Ten_HD"]</td>
+                                    <td style="text-align:center">@row2["kho_xuat"]</td>
                                     <td style="text-align:right">@row2["so_lo"]</td>
                                     <td style="text-align:right">@row2["Han_Dung"]</td>
-                                    <td style="text-align:right">@row2["kenh"]</td>
+                                    <td style="text-align:center">@row2["kenh"]</td>
                                     <td>@row2["Trang_Thai"]</td>
 
                                 </tr>
@@ -657,6 +659,19 @@
 
                         </tbody>
                         <tfoot>
+                            <tr id="total-row" style="background-color: burlywood">
+                                <td colspan="14"><strong>Tổng trang:</strong></td>
+                                <td class="total-tien" style="text-align:right"></td>
+                                <td class="total-tien-q1" style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                                <td style="text-align:right"></td>
+                            </tr>
                             @foreach (DataRow row in Model.Tables[1].Rows)
                             {
                                 <tr style="background-color: burlywood">
@@ -670,10 +685,10 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-
+                                    <td></td>
                                 </tr>
                             }
-                            </tfoot>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -690,8 +705,77 @@
     <script src="~/assets/js/vfs_fonts.js"></script>
     <script src="~/assets/js/custom.js"></script>
     @*<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>*@
-   
 
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            function calculateTotal() {
+                // Lấy tất cả các ô chứa giá trị cột "Tiền TT"
+                var tienTTCells = document.querySelectorAll('#example tbody td:nth-child(15)');
+                var tienQ1 = document.querySelectorAll('#example tbody td:nth-child(16)');
+                /*   var tienQ2 = document.querySelectorAll('#example tbody td:nth-child(18)');*/
+                //var tienQ3 = document.querySelectorAll('#example tbody td:nth-child(20)');
+                //var tienQ4 = document.querySelectorAll('#example tbody td:nth-child(21)');
+                //var tienQ5 = document.querySelectorAll('#example tbody td:nth-child(22)');
+                // Biến để tính tổng Tiền TT
+                var totalTienTT = 0;
+                var totalTienQ1 = 0;
+                //var totalTienQ2 = 0;
+                //var totalTienQ3 = 0;
+                //var totalTienQ4 = 0;
+                //var totalTienQ5 = 0;
+                // Lặp qua từng ô và tính tổng
+                tienTTCells.forEach(function (cell) {
+                    var valueWithoutCommas = cell.textContent.replace(/,/g, ''); // Loại bỏ dấu phẩy
+                    totalTienTT += parseFloat(valueWithoutCommas);
+                });
+                tienQ1.forEach(function (cell) {
+                    var valueWithoutCommas = cell.textContent.replace(/,/g, '');
+                    totalTienQ1 += parseFloat(valueWithoutCommas);
+                });
+                //tienQ2.forEach(function (cell) {
+                //    var valueWithoutCommas = cell.textContent.replace(/,/g, '');
+                //    totalTienQ2 += parseFloat(valueWithoutCommas);
+                //});
+                //tienQ3.forEach(function (cell) {
+                //    var valueWithoutCommas = cell.textContent.replace(/,/g, '');
+                //    totalTienQ3 += parseFloat(valueWithoutCommas);
+                //});
+                //tienQ4.forEach(function (cell) {
+                //    var valueWithoutCommas = cell.textContent.replace(/,/g, '');
+                //    totalTienQ4 += parseFloat(valueWithoutCommas);
+                //});
+                //tienQ5.forEach(function (cell) {
+                //    var valueWithoutCommas = cell.textContent.replace(/,/g, '');
+                //    totalTienQ5 += parseFloat(valueWithoutCommas);
+                //});
+                // Gán tổng Tiền TT vào ô của hàng tfoot "Tổng trang"
+                document.querySelector('#total-row .total-tien').textContent = formatCurrency(totalTienTT);
+                document.querySelector('#total-row .total-tien-q1').textContent = formatCurrency(totalTienQ1);
+                /*document.querySelector('#total-row .total-tien-q2').textContent = formatCurrency(totalTienQ2);*/
+                //document.querySelector('#total-row .total-tien-q3').textContent = formatCurrency(totalTienQ3);
+                //document.querySelector('#total-row .total-tien-q4').textContent = formatCurrency(totalTienQ4);
+                //document.querySelector('#total-row .total-tien-q5').textContent = formatCurrency(totalTienQ5);
+
+                // Gán tổng Tiền TT vào ô của hàng tfoot "Tổng cộng(Tất cả)"
+                /* document.querySelector('#total-row-tong-cong .total-tienTT').textContent = formatCurrency(totalTienTT);*/
+            }
+
+            // Gọi hàm calculateTotal khi trang được tải và khi có sự kiện thay đổi trên trang
+            calculateTotal();
+
+            // Hàm định dạng số tiền thành chuỗi có dấu phẩy
+            function formatCurrency(amount) {
+                return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            // Thêm sự kiện cho việc thay đổi trang
+            $('#example').on('draw.dt', function () {
+                calculateTotal();
+            });
+        });
+
+    </script>
     <script>
         document.getElementById("dropdownInput").addEventListener("input", function () {
             var inputValue = this.value;
@@ -967,9 +1051,9 @@
                 const newTab = document.createElement("li");
                 newTab.classList.add("tab", "selected");
                 newTab.innerHTML = `
-                                                                                            <a href="${tabHref}">${tabTitle}</a>
-                                                                                            <a class="closeTab" href="">✕</a>
-                                                                                        `;
+                                                                                                    <a href="${tabHref}">${tabTitle}</a>
+                                                                                                    <a class="closeTab" href="">✕</a>
+                                                                                                `;
                 tabControlTabs.appendChild(newTab);
 
                 // Sự kiện khi người dùng nhấp vào nút đóng tab
@@ -1191,9 +1275,9 @@
                 const newTab = document.createElement("li");
                 newTab.classList.add("tab", "selected");
                 newTab.innerHTML = `
-                                                            <a href="${subMenuLinkHref}">${tabTitle}</a>
-                                                            <a class="closeTab" href="">✕</a>
-                                                        `;
+                                                                    <a href="${subMenuLinkHref}">${tabTitle}</a>
+                                                                    <a class="closeTab" href="">✕</a>
+                                                                `;
                 tabControlTabs.appendChild(newTab);
 
                 // Chuyển view tới thẻ li tương ứng
@@ -1239,9 +1323,9 @@
                 const newTab = document.createElement("li");
                 newTab.classList.add("tab", "selected");
                 newTab.innerHTML = `
-                                                    <a href="${subMenuLinkHref}">${tabTitle}</a>
-                                                    <a class="closeTab" href="">✕</a>
-                                                `;
+                                                            <a href="${subMenuLinkHref}">${tabTitle}</a>
+                                                            <a class="closeTab" href="">✕</a>
+                                                        `;
                 tabControlTabs.appendChild(newTab);
 
                 // Chuyển view tới thẻ li tương ứng

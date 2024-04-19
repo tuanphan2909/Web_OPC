@@ -1,6 +1,13 @@
 ﻿
 
 @{ ViewBag.Title = "SỔ QUỸ TIỀN MẶT - IN";
+    var fromDate = Request.Cookies["From_date"].Value;
+    var toDate = Request.Cookies["To_date"].Value;
+    var fromDateValue = DateTime.ParseExact(fromDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+    var toDateValue = DateTime.ParseExact(toDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+    var formattedFromDate = fromDateValue.ToString("dd/MM/yyyy");
+    var formattedToDate = toDateValue.ToString("dd/MM/yyyy");
     var DenNgay = Request.Cookies["To_date"].Value;
     DateTime ngay = DateTime.ParseExact(DenNgay, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -8,7 +15,239 @@
     string ngayDaChinhSua = ngay.ToString("dd/MM/yyyy");
     HttpCookie ngayDaChinhSuaCookie = new HttpCookie("NgayDaChinhSua", ngayDaChinhSua);
     ngayDaChinhSuaCookie.Expires = DateTime.Now.AddDays(1); // Ví dụ: sống trong 1 ngày
- 
+
+    var TuNgay = Request.Cookies["From_date"].Value;
+    DateTime tungay = DateTime.ParseExact(TuNgay, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+    string tungayDaChinhSua = tungay.ToString("dd/MM/yyyy");
+    HttpCookie tungayDaChinhSuaCookie = new HttpCookie("TungayDaChinhSua", tungayDaChinhSua);
+    var MaTK = Request.Cookies["Ma_TK"].Value;
+    var title = "";
+    var MaNH = Request.Cookies["Ma_NH"].Value;
+    var TenNH = "";
+    string Dvcs = Request.Cookies["MA_DVCS"] != null ? HttpUtility.UrlDecode(Request.Cookies["MA_DVCS"].Value) : "";
+    if (MaNH == "1605201013995" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "001-033554-001" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TNHH MTC HSBC";
+    }
+    else if (MaNH == "007.137.1023892" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Ngoại Thương Việt Nam";
+    }
+    else if (MaNH == "1012756827_VCB" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Ngoại Thương Việt Nam";
+    }
+    else if (MaNH == "1037931581" && MaTK != "1111")
+    {
+        TenNH = "Ngân Hàng TMCP Công Thương Việt Nam";
+    }
+    else if (MaNH == "1037931581_VCB" && MaTK != "1111")
+    {
+        TenNH = "Ngân Hàng TMCP Ngoại Thương Việt Nam";
+    }
+    else if (MaNH == "111002637244_VIETIN" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công Thương Việt Nam";
+    }
+    else if (MaNH == "111101409003" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng thương mại Cổ phần Quân đội";
+    }
+    else if (MaNH == "116000030030" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công thương Việt Nam";
+    }
+    else if (MaNH == "118002874433" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công thương Việt Nam";
+    }
+    else if (MaNH == "118002929530" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Công thương Việt Nam";
+    }
+    else if (MaNH == "12343939" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Việt Á - Chi Nhánh Sài Gòn";
+    }
+    else if (MaNH == "151703359" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Á Châu (ACB)";
+    }
+    else if (MaNH == "1605201011620" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "1605311200009" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "1890201002962" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "2000201348722" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "311100007727122" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Đầu tư và Phát Triển VN";
+    }
+    else if (MaNH == "31110370007977" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Đầu tư và Phát Triển VN";
+    }
+    else if (MaNH == "3304000058249000" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Việt Á  - Chi Nhánh Sài Gòn";
+    }
+    else if (MaNH == "3601201002934" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông nghiệp và phát triển VN";
+    }
+    else if (MaNH == "4939668" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Á Châu (ACB)";
+    }
+    else if (MaNH == "5506201002874" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông Nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "6090201003970_AGRIBANK" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông Nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "6900201004039_AGRIBANK" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng Nông Nghiệp và Phát Triển VN";
+    }
+    else if (MaNH == "700011141409" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TNHH MTV SHINHAN VIỆT NAM";
+    }
+    else if (MaNH == "71001023887" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Ngoại Thương VN";
+    }
+    else if (MaNH == "71010001751421" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng TMCP Đầu Tư và Phát triển VN";
+    }
+    else if (MaNH == "907-18-071111-8" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng CTBC";
+    }
+    else if (MaNH == "907-18-071112-1" && MaTK != "1111")
+    {
+        TenNH = "Ngân hàng CTBC";
+    }
+    else if (MaNH == "CT_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "DN_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "HN_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "MD_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "NA_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "NT_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "OPC_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "OPC_VANG" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    else if (MaNH == "TG_QUYTM" && MaTK != "1111")
+    {
+        TenNH = "";
+    }
+    if (MaTK == "1111")
+    {
+        title = "SỔ QUỸ TIỀN MẶT";
+
+    }
+    if (MaTK == "1121")
+    {
+        title = "SỔ QUỸ NGÂN HÀNG";
+
+    }
+    if (MaTK == "1131")
+    {
+        title = "SỔ QUỸ NGÂN HÀNG";
+
+    }
+    if (MaTK == "1113")
+    {
+        title = "SỔ QUỸ TIỀN MẶT";
+
+    }
+
+    if (Request.Cookies["MA_DVCS"].Value == "OPC_CT")
+    {
+        Dvcs = "Chi Nhánh Cần Thơ";
+       
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_DN")
+    {
+        Dvcs = "Chi Nhánh Đà Nẵng";
+      
+
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_TG")
+    {
+        Dvcs = "Chi Nhánh Tiền Giang";
+        
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_MD")
+    {
+        Dvcs = "Chi Nhánh Miền Đông";
+       
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_VT")
+    {
+        Dvcs = "Chi Nhánh Vũng Tàu";
+        
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_NT")
+    {
+        Dvcs = "Chi Nhánh Nha Trang";
+      
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_TP")
+    {
+        Dvcs = "Chi Nhánh Hồ Chí Minh";
+     
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_NA")
+    {
+        Dvcs = "Chi Nhánh Nghệ An";
+      
+    }
+    else if (Request.Cookies["MA_DVCS"].Value == "OPC_HN")
+    {
+        Dvcs = "Chi Nhánh Hà Nội";
+      
+    }
 }
 
 
@@ -81,7 +320,7 @@
             font-weight: bold;
             color: black;
         }
-      
+
         table, td, th {
             border: 1px solid black;
             align-items: center;
@@ -422,14 +661,18 @@
         tr {
             page-break-inside: avoid; /* Tránh chuyển trang giữa các dòng */
         }
+        tr td{
+            padding:5px;
+        }
     </style>
 </head>
 <body>
     <div class="forms-container">
         <form class="data-form" id="data-form">
             <div style="display:flex;justify-content:space-between;align-items:center">
-                <div style=" display: flex; justify-content: space-between; align-items: center;text-align:left">
-
+                <div style="justify-content: space-between;text-align:left;text-align:center">
+                    <div>@Dvcs</div>
+                    <div style="height:30px"></div>
                 </div>
                 <div style="text-align:center;width:300px">
                     <h5 style="font-weight:bold">Mẫu số: S07-DN</h5>
@@ -437,11 +680,11 @@
                     <br />
                 </div>
             </div>
-      
+
             <div style="text-align:center">
-                <h3 style="font-size: 25px; color: black; font-weight: bold">SỔ QUỸ TIỀN MẶT</h3>
-                <h5>Ngày @ngayDaChinhSua</h5>
-                <h5 style="font-weight:bold">Tài khoản: @Request.Cookies["Ma_TK"].Value</h5>
+                <h3 style="font-size: 25px; color: black; font-weight: bold">@title</h3>
+                <h5>Từ ngày @tungayDaChinhSua đến ngày @ngayDaChinhSua</h5>
+                <h5 style="font-weight:bold">Tài khoản: @Request.Cookies["Ma_TK"].Value - @TenNH</h5>
                 <br />
             </div>
 
@@ -450,18 +693,19 @@
                     <thead class="table-dark" id="head">
                         <tr>
 
-                            <th colspan="3">Chứng Từ</th>
-                            <th rowspan="2" style="width:150px">Tên Khách Hàng</th>
-                            <th rowspan="2">Diễn giải</th>
+                            <th colspan="4">Chứng Từ</th>
+                            <th rowspan="2" style="width:160px">Tên Đối Tượng</th>
+                            <th rowspan="2"style="width:60px">Diễn giải</th>
                             <th rowspan="2">TK đối ứng</th>
-                            <th colspan="2"style="width:50px">Phát sinh</th>
+                            <th colspan="2">Phát sinh</th>
                             <th rowspan="2">Số dư</th>
 
                         </tr>
                         <tr>
                             <th>Ngày</th>
-                            <th>Số</th>
-                            <th>Số trên SAP</th>
+                            <th style="width:110px">Số</th>
+                            <th>Payment</th>
+                            <th>Payment Advice</th>
                             <th>Thu</th>
                             <th>Chi</th>
 
@@ -469,27 +713,149 @@
 
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach (DataRow row2 in Model.Tables[0].Rows)
-                        {
-                            <tr class="data-row">
-                                <td>@row2["Ngay_Ct1"]</td>
-                                <td style="text-align: center; padding: 5px">@row2["So_NumBer"]</td>
-                                <td style="text-align:center">@row2["So_Ct"]</td>
-                                <td style="text-align: left; padding-left: 5px">@row2["Ten_Dt"]</td>
-                                <td class="text" style="text-align:left;padding-left:5px">@row2["Dien_Giai"]</td>
-                                <td style="text-align:center">@row2["Tk_Du"]</td>
-                                <td style="text-align: right; padding-right: 5px"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_No"]))</td>
-                                <td style="text-align: right; padding-right: 5px"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_Co"]))</td>
-                                <td style="text-align: right; padding-right: 5px"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Du_Cuoi"]))</td>
+                    @*<tbody>
+                            @foreach (DataRow row2 in Model.Tables[0].Rows)
+                            {
+                                <tr class="data-row">
+                                    <td>@row2["Ngay_Ct1"]</td>
+                                    <td data-format="string">@row2["So_NumBer"].ToString()</td>
+                                    <td>@row2["So_Ct"].ToString()</td>
+                                    <td style="text-align:left">@row2["Ten_Dt"]</td>
+                                    <td class="text" style="text-align:left">@row2["Dien_Giai"]</td>
+                                    <td>@row2["Tk_Du"]</td>
+                                    <td data-t="n" class="num" style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_No"])).Replace(",", ".")</td>
+                                    <td data-t="n" style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_Co"])).Replace(",", ".")</td>
+                                    <td data-t="n" style='text-align:right;'> @String.Format("{0:n0}", Convert.ToDecimal(row2["Du_Cuoi"])).Replace(",", ".")</td>
 
 
-                            </tr>
+                                </tr>
 
 
 
+                            }
+                        </tbody>*@
+                    <tbody style="padding:5px">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            <td style="font-weight:bold;text-align:left;width:150px">Dư Đầu Kỳ</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="DuDauKy" style="font-weight:bold;text-align:right"></td>
+                        </tr>
+                        @{
+                            //decimal Du_Cuoi_FirstRow = 0; // Khởi tạo biến lưu giá trị Du_Cuoi của hàng đầu tiên
+                            //bool firstLoopSkipped = false;
+                            decimal Du_Cuoi_Calculated = 0;
+                            bool isFirstRowFound = false;
+                            decimal DuCuoiKy = 0;
+                            decimal sumThu = 0;
+                            decimal sumChi = 0;
+                            string formattedDuCuoi = "";
+                            string formattedThu = "";
+                            string formattedChi = "";
+                            string formattedDuCuoiKy = "";
+                            foreach (DataRow row2 in Model.Tables[0].Rows)
+                            {
+                                if (row2["Ngay_Ct1"] != DBNull.Value && !string.IsNullOrEmpty(row2["Ngay_Ct1"].ToString()))
+                                {
+                                    DateTime ngayCt;
+                                    if (DateTime.TryParseExact(row2["Ngay_Ct1"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out ngayCt))
+                                    {
+                                        //if (!firstLoopSkipped)
+                                        //{
+                                        //    Du_Cuoi_FirstRow = Convert.ToDecimal(row2["Du_Cuoi"]); // Lấy giá trị Du_Cuoi của hàng đầu tiên
+                                        //    firstLoopSkipped = true;
+                                        //    continue;
+                                        //}
+
+                                        DateTime fromDate1;
+                                        DateTime toDate1;
+                                        if (DateTime.TryParseExact(formattedFromDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fromDate1) &&
+                                            DateTime.TryParseExact(formattedToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out toDate1))
+                                        {
+                                            // Đảo ngược vị trí ngày và tháng
+                                            string formattedNgayCt = ngayCt.ToString("dd/MM/yyyy");
+                                            ngayCt.ToString("MM/dd/yyyy");
+                                            if (ngayCt.Day >= fromDate1.Day && ngayCt.Day <= toDate1.Day)
+                                            {
+                                                if (!isFirstRowFound)
+                                                {
+                                                    decimal PS_No = Convert.ToDecimal(row2["Ps_No"]);
+                                                    decimal PS_Co = Convert.ToDecimal(row2["Ps_Co"]);
+                                                    Du_Cuoi_Calculated = Convert.ToDecimal(row2["Du_Cuoi"]) - PS_No + PS_Co;
+                                                    isFirstRowFound = true; // Đánh dấu là đã tìm thấy giá trị đầu tiên
+                                                    formattedDuCuoi = String.Format(Du_Cuoi_Calculated.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",", ".");
+
+
+                                                }
+
+                                                <tr class="data-row">
+                                                    <td>@formattedNgayCt</td>
+                                                    <td data-format="string">@row2["So_NumBer"].ToString()</td>
+                                                    <td>@row2["So_Ct"].ToString()</td>
+                                                    <td>@row2["So_Ct_Chi"].ToString()</td>
+                                                    <td style="text-align:left">@row2["Ten_Dt"]</td>
+                                                    <td class="text" style="text-align:left">@row2["Dien_Giai"]</td>
+                                                    <td>@row2["Tk_Du"]</td>
+                                                    <td data-t="n" class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_No"])).Replace(",", ".")</td>
+                                                    <td data-t="n" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Ps_Co"])).Replace(",", ".")</td>
+                                                    <td data-t="n" style="text-align:right;">@String.Format("{0:n0}", Convert.ToDecimal(row2["Du_Cuoi"])).Replace(",", ".")</td>
+                                                </tr>
+                                                decimal Thu = Convert.ToDecimal(row2["PS_No"]);
+                                                decimal Chi = Convert.ToDecimal(row2["PS_Co"]);
+                                                sumThu += Thu;
+                                                sumChi += Chi;
+                                                formattedChi = String.Format(sumChi.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",", ".");
+                                                formattedThu = String.Format(sumThu.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",", ".");
+                                                DuCuoiKy = Convert.ToDecimal(row2["Du_Cuoi"]);
+                                                formattedDuCuoiKy = String.Format(DuCuoiKy.ToString("#,##0", CultureInfo.InvariantCulture)).Replace(",", ".");
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
+                        <tr style="font-weight:bold;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Tổng Phát Sinh</td>
+                            <td></td>
+                            <td class="ThuCuoiKy" style="font-weight:bold;text-align:right"></td>
+                            <td class="ChiCuoiKy" style="font-weight:bold;text-align:right"></td>
+
+                            <td></td>
+                        </tr>
+                        <tr style="font-weight:bold">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Dư Cuối Kỳ</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="DuCuoiKy" style="font-weight:bold;text-align:right"></td>
+
+                        </tr>
                     </tbody>
+
+
+
+
+
+
+
                 </table>
 
 
@@ -521,6 +887,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+    $(".DuDauKy").text('@formattedDuCuoi');
+    $(".ThuCuoiKy").text('@formattedThu');
+     $(".ChiCuoiKy").text('@formattedChi');
+     $(".DuCuoiKy").text('@formattedDuCuoiKy');
+    </script>
     @*<script>
         // Bắt sự kiện click vào nút "Xuất Excel"
         document.getElementById("export-button").addEventListener("click", function () {

@@ -659,14 +659,17 @@
                         <thead class="table-dark">
                             <tr>
                                 <th rowspan="2">Mã KH</th>
-                                <th colspan="2">Hóa Đơn</th>
+                                <th colspan="3">Hóa Đơn</th>
                                 <th rowspan="2" style="width:100px">Tên Khách Hàng</th>
                                 <th rowspan="2" style="width:100px">NV theo dõi công nợ</th>
                                 <th rowspan="2">Hạn mức nợ</th>
+                                <th rowspan="2">Credit Limit</th>
                                 <th rowspan="2" style="width:100px">Thời hạn CKTT</th>
                                 <th rowspan="2">Mã LKH</th>
                                 <th rowspan="2" style="width:100px">Tên LKH</th>
                                 <th rowspan="2" style="width:100px">Số Hợp Đồng</th>
+                                <th rowspan="2" style="width:100px">Diễn Giải</th>
+
                                 <th rowspan="2">Tổng tiền</th>
 
                                 <th rowspan="2">Ngày đến hạn TT</th>
@@ -674,6 +677,7 @@
                                 <th colspan="4">Số tiền nợ quá hạn</th>
                             </tr>
                             <tr>
+                                <th>Số hóa đơn SAP</th>
                                 <th>Số</th>
                                 <th>Ngày</th>
                                 <th>Từ 1 đến 3 tháng</th>
@@ -687,32 +691,35 @@
                         <tbody>
                             @foreach (DataRow row2 in Model.Tables[0].Rows)
                             {
-                                <tr>
-                                    <td>@row2["Ma_Dt"]</td>
-                                    <td>@row2["So_Ct_Einv"]</td>
-                                    <td>@row2["Ngay_Ct2"]</td>
-                                    <td style="text-align:left">@row2["Ten_Dt"]</td>
-                                    <td>@row2["Ten_TDV"]</td>
-                                    <td>@row2["Han_Muc_No"]</td>
-                                    <td>@row2["Han_CKTT"]</td>
-                                    <td>@row2["Ma_LKH"]</td>
-                                    <td>@row2["Ten_LKH"]</td>
-                                    <td>@row2["So_Hop_Dong"]</td>
-                                    <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Cong_No"])).Replace(".", ",")</td>
+                            <tr>
+                                <td>@row2["Ma_Dt"]</td>
+                                <td>@row2["So_Ct"]</td>
+                                <td>@row2["So_Ct_Einv"]</td>
+                                <td>@row2["Ngay_Ct2"]</td>
+                                <td style="text-align:left">@row2["Ten_Dt"]</td>
+                                <td>@row2["Ten_TDV"]</td>
+                                <td>@row2["Han_Muc_No"]</td>
+                                <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Gioi_Han_No"])).Replace(".", ",")</td>
+                                <td>@row2["Han_CKTT"]</td>
+                                <td>@row2["Ma_LKH"]</td>
+                                <td>@row2["Ten_LKH"]</td>
+                                <td>@row2["So_Hop_Dong"]</td>
+                                <td>@row2["Dien_Giai_HD"]</td>
+                                <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Cong_No"])).Replace(".", ",")</td>
 
 
 
 
 
-                                    <td>@row2["Ngay_Den_Han2"]</td>
-                                    <td>@row2["So_Ngay_QH"]</td>
+                                <td>@row2["Ngay_Den_Han2"]</td>
+                                <td>@row2["So_Ngay_QH"]</td>
 
-                                    <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_1"])).Replace(".", ",")</td>
-                                    <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_2"])).Replace(".", ",")</td>
-                                    <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_3"])).Replace(".", ",")</td>
-                                    <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_4"])).Replace(".", ",")</td>
+                                <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_1"])).Replace(".", ",")</td>
+                                <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_2"])).Replace(".", ",")</td>
+                                <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_3"])).Replace(".", ",")</td>
+                                <td style="text-align:right"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Tien_QH_4"])).Replace(".", ",")</td>
 
-                                </tr>
+                            </tr>
 
 
 
@@ -720,7 +727,7 @@
                         </tbody>
                         <tfoot>
                             <tr id="total-row" style="background-color: burlywood">
-                                <td colspan="10"><strong>Tổng trang:</strong></td>
+                                <td colspan="13"><strong>Tổng trang:</strong></td>
                                 <td class="total-tien" style="text-align:right"></td>
                                 <td></td>
                                 <td></td>
@@ -734,7 +741,7 @@
                             @foreach (DataRow row in Model.Tables[1].Rows)
                             {
                                 <tr style="background-color: burlywood">
-                                    <td colspan="10"><strong>Tổng cộng:</strong></td>
+                                    <td colspan="13"><strong>Tổng cộng:</strong></td>
                                     <td style="text-align:right">@row["Tong_CN"]</td>
                                     <td></td>
                                     <td></td>
@@ -852,11 +859,11 @@
         document.addEventListener('DOMContentLoaded', function () {
             function calculateTotal() {
                 // Lấy tất cả các ô chứa giá trị cột "Tiền TT"
-                var tienTTCells = document.querySelectorAll('#example tbody td:nth-child(11)');
-                var tienQ1 = document.querySelectorAll('#example tbody td:nth-child(14)');
-                var tienQ2 = document.querySelectorAll('#example tbody td:nth-child(15)');
-                var tienQ3 = document.querySelectorAll('#example tbody td:nth-child(16)');
-                var tienQ4 = document.querySelectorAll('#example tbody td:nth-child(17)');
+                var tienTTCells = document.querySelectorAll('#example tbody td:nth-child(14)');
+                var tienQ1 = document.querySelectorAll('#example tbody td:nth-child(17)');
+                var tienQ2 = document.querySelectorAll('#example tbody td:nth-child(18)');
+                var tienQ3 = document.querySelectorAll('#example tbody td:nth-child(19)');
+                var tienQ4 = document.querySelectorAll('#example tbody td:nth-child(20)');
                 // Biến để tính tổng Tiền TT
                 var totalTienTT = 0;
                 var totalTienQ1 = 0;

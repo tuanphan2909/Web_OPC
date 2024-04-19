@@ -603,6 +603,7 @@
                             <option value="1111" data-tenTK="Tiền Mặt Việt Nam">1111 - Tiền Mặt Việt Nam</option>
                             <option value="1121" data-tenTK="Tiền Gửi Ngân Hàng VNĐ">1121 - Tiền Gửi Ngân Hàng VNĐ</option>
                             <option value="1131" data-tenTK="Tiền Đang Chuyển (VND)">1131 - Tiền Đang Chuyển (VND)</option>
+                             <option value="1113" data-tenTK="Vàng">1113 - Vàng</option>
 
                         </select>
                     </div>
@@ -804,21 +805,25 @@
 
             // Lấy giá trị đã chọn từ select
             var selectedValue = select.value;
+            var selectedBankName = select.options[select.selectedIndex].text; // Lấy tên ngân hàng từ option đã chọn
 
             // Cập nhật giá trị của ô input
             input.value = selectedValue;
 
             // Đặt giá trị vào cookie, bao gồm trường hợp selectedValue là null hoặc undefined
             document.cookie = 'Ma_NH=' + (selectedValue != null ? selectedValue : '');
+            document.cookie = 'Ten_Ngan_Hang=' + (selectedBankName != null ? encodeURIComponent(selectedBankName) : ''); // Thêm biến cookie với tên ngân hàng đã chọn
 
             // Ẩn dropdown select
             select.style.display = "none";
 
             // Thực hiện các bước khác theo yêu cầu của bạn.
             console.log("Đã chọn giá trị: " + selectedValue);
+            console.log("Tên ngân hàng: " + selectedBankName);
 
             // Gọi hàm để nhóm dữ liệu dựa trên giá trị đã chọn
         }
+
 
         //function saveSelectedValueToCookie() {
         //    var select = document.getElementById("nhomtheoselect");

@@ -408,6 +408,12 @@ namespace web4.Controllers
                     var NgayTT = Request.Cookies["Ngay_TT"].Value;
                     var Ngay_Ky = Request.Cookies["Ngay_Ky"].Value;
                     var ma_dvcs = Request.Cookies["MA_DVCS"].Value;
+                    if (ma_dvcs == "OPC_B1")
+                    {
+                        string ma_dvcsFirst3Chars = ma_dvcs == "OPC_B1" ? ma_dvcs.Substring(0, 3) : ma_dvcs;
+                        string first3Chars = ma_dvcsFirst3Chars.Substring(0, 3);
+                        ma_dvcs = first3Chars;
+                    }
                     var ma_dt = Request.Cookies["MaDT"].Value;
                     command.CommandTimeout = 950;
                     command.CommandType = CommandType.StoredProcedure;
@@ -435,7 +441,7 @@ namespace web4.Controllers
                                     So = row["So_Ct_hd"].ToString(),
                                     Ngay = row["Ngay_Ct_hd"].ToString(),
                                     TienHD = row["Tien_HD"].ToString(),
-                                    So1 = row["So_Ct_Tt"].ToString(),
+                                    So2 = row["So_Ct_Tt"].ToString(),
                                     Ngay1 = row["Ngay_Ct_Tt"].ToString(),
                                     SoTien = row["Tien_TT"].ToString(),
                                     CKTT = row["CKTT1"].ToString(),
@@ -474,6 +480,7 @@ namespace web4.Controllers
         public ActionResult BangDoiChieuCongNo(MauInChungTu MauIn)
         {
             string ma_dvcs = Request.Cookies["Ma_dvcs"].Value;
+            //string GopMa = Request.Cookies["GopMa"].Value;
             DataSet ds = new DataSet();
             connectSQL();
             var Ma_Dt = Request.Cookies["MaDT"].Value;
@@ -937,9 +944,9 @@ namespace web4.Controllers
                         worksheet.Cells[startRow + row + 1, startColumn + 4].Value = rowData.So2;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 4]);
 
-                        worksheet.Cells[startRow + row + 1, startColumn + 5].Value = rowData.Ngay2;
+                        worksheet.Cells[startRow + row + 1, startColumn + 5].Value = rowData.Ngay1;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 5]);
-                        worksheet.Cells[startRow + row + 1, startColumn + 6].Value = rowData.SoTien2;
+                        worksheet.Cells[startRow + row + 1, startColumn + 6].Value = rowData.SoTien;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 6]);
                         worksheet.Cells[startRow + row + 1, startColumn + 7].Value = rowData.CKTT;
                         FormatCellNoQH(worksheet.Cells[startRow + row + 1, startColumn + 7]);
@@ -1851,6 +1858,12 @@ namespace web4.Controllers
                     var ma_dvcs = Request.Cookies["MA_DVCS"].Value;
                     var ma_dt = Request.Cookies["MaDT"].Value;
                     var NgayKy = Request.Cookies["Ngay_Ky"].Value;
+                    if (ma_dvcs == "OPC_B1")
+                    {
+                        string ma_dvcsFirst3Chars = ma_dvcs == "OPC_B1" ? ma_dvcs.Substring(0, 3) : ma_dvcs;
+                        string first3Chars = ma_dvcsFirst3Chars.Substring(0, 3);
+                        ma_dvcs = first3Chars;
+                    }
                     command.CommandTimeout = 950;
                     command.CommandType = CommandType.StoredProcedure;
                     using (SqlDataAdapter sda = new SqlDataAdapter(command))
@@ -2231,7 +2244,7 @@ namespace web4.Controllers
             var toDate = Request.Cookies["To_Date"].Value;
             var Dvcs = Request.Cookies["Dvcs3"].Value;
             var LoaiCt = Request.Cookies["LoaiCt"].Value;
-
+            //var MaKho = Request.Cookies["Ma_Kho"].Value;
             using (SqlCommand cmd = new SqlCommand(Pname, con))
             {
                 cmd.CommandTimeout = 950;
@@ -2241,10 +2254,11 @@ namespace web4.Controllers
 
                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                 {
-                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);                                                                                                                                                                                                              
                     cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
                     cmd.Parameters.AddWithValue("@_Loai_Ct", LoaiCt);
                     cmd.Parameters.AddWithValue("@_ma_dvcs", Dvcs);
+                    //cmd.Parameters.AddWithValue("@_Ma_Kho", MaKho);
                     sda.Fill(ds);
 
                 }
@@ -2604,9 +2618,9 @@ namespace web4.Controllers
                     var stt = 1;
                     int currentRow = startRow;
                     string previousTenDt = null;
-                    Dictionary<string, decimal> tongCongNoTT = new Dictionary<string, decimal>();
-                    Dictionary<string, decimal> tongCongNoST = new Dictionary<string, decimal>();
-                    Dictionary<string, decimal> tongCongNo = new Dictionary<string, decimal>();
+                    Dictionary<string, int> tongCongNoTT = new Dictionary<string, int>();
+                    Dictionary<string, int> tongCongNoST = new Dictionary<string, int>();
+                    Dictionary<string, int> tongCongNo = new Dictionary<string, int>();
                     for (int row = 0; row < combinedData.Count; row++)
                     {
                         var rowData = combinedData[row];
@@ -2672,9 +2686,9 @@ namespace web4.Controllers
                         // Tăng số thứ tự và dòng
                         stt++;
                         currentRow++;
-                        tongCongNoTT[rowData.TenDt] += rowData.CongNoTT;
-                        tongCongNoST[rowData.TenDt] += rowData.TienThue;
-                        tongCongNo[rowData.TenDt] += rowData.CongNo;
+                        tongCongNoTT[rowData.TenDt] += (int)rowData.CongNoTT;
+                        tongCongNoST[rowData.TenDt] += (int)rowData.TienThue;
+                        tongCongNo[rowData.TenDt] += (int)rowData.CongNo;
                     }
                     CreateEmptyRow(worksheet, startColumn, currentRow,
                   tongCongNoTT[previousTenDt],
@@ -2789,34 +2803,6 @@ namespace web4.Controllers
             var Dvcs = Request.Cookies["MA_DVCS"].Value == "" ? Request.Cookies["Dvcs3"].Value : Request.Cookies["MA_DVCS"].Value;
             //var MaTDV = Request.Cookies["Ma_CbNv"] != null ? Request.Cookies["Ma_CbNv"].Value : string.Empty;
             var MaDt = Request.Cookies["Ma_Dt"] != null ? Request.Cookies["Ma_Dt"].Value : string.Empty;
-
-
-            using (SqlCommand cmd = new SqlCommand(Pname, con))
-            {
-                cmd.CommandTimeout = 950;
-
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                {
-                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
-                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
-                    cmd.Parameters.AddWithValue("@_Ma_Dt", MaDt);
-
-                    cmd.Parameters.AddWithValue("@_ma_dvcs", Dvcs);
-                    sda.Fill(ds);
-
-                }
-            }
-            return View(ds);
-
-
-            Dvcs = Request.Cookies["MA_DVCS"].Value == "" ? Request.Cookies["Dvcs3"].Value : Request.Cookies["MA_DVCS"].Value;
-            //var MaTDV = Request.Cookies["Ma_CbNv"] != null ? Request.Cookies["Ma_CbNv"].Value : string.Empty;
-            MaDt = Request.Cookies["Ma_Dt"] != null ? Request.Cookies["Ma_Dt"].Value : string.Empty;
-
-
             using (SqlCommand cmd = new SqlCommand(Pname, con))
             {
                 cmd.CommandTimeout = 950;
@@ -2982,6 +2968,15 @@ namespace web4.Controllers
             ViewBag.DataTDV = dmDlistTDV;
             return View();
         }
+        public ActionResult PhieuXacNhanTTTCK2_Fill()
+        {
+            string ma_dvcs = Request.Cookies["MA_DVCS"] != null ? Request.Cookies["MA_DVCS"].Value : string.Empty;
+            List<MauInChungTu> dmDlist = LoadDmDt("");
+            List<BKHoaDonGiaoHang> dmDlistTDV = LoadDmTDV();
+            ViewBag.DataItems = dmDlist;
+            ViewBag.DataTDV = dmDlistTDV;
+            return View();
+        }
         public ActionResult PhieuXacNhanTTTCK_In()
         {
             List<MauInChungTu> dmDlist = LoadDmDt("");
@@ -3028,7 +3023,99 @@ namespace web4.Controllers
             }
             return View(ds);
         }
+        public ActionResult PhieuXacNhanTTTCK2_In()
+        {
+            List<MauInChungTu> dmDlist = LoadDmDt("");
+            List<BKHoaDonGiaoHang> dmDlistTDV = LoadDmTDV();
+            string ma_dvcs = Request.Cookies["MA_DVCS"].Value;
+            var fromDate = Request.Cookies["From_date"].Value;
+            var toDate = Request.Cookies["To_Date"].Value;
+            var MaDt = Request.Cookies["Ma_Dt"] != null ? Request.Cookies["Ma_Dt"].Value : string.Empty;
+            var MaTDV = Request.Cookies["Ma_TDV"].Value;
+
+            DataSet ds = new DataSet();
+
+            ViewBag.DataTDV = dmDlistTDV;
+            ViewBag.DataItems = dmDlist;
+            connectSQL();
+            //var SoCT = Request.Cookies["So_Ct"] != null ? Request.Cookies["So_Ct"].Value : "";
+            //MauIn.So_Ct = Request.Cookies["SoCt"].Value;
+
+            //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+            string Pname = "[usp_XacNhanThanhToanCKTT_SAP]";
+
+            using (SqlCommand cmd = new SqlCommand(Pname, con))
+            {
+                cmd.CommandTimeout = 950;
+
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //MauIn.From_date = Request.Cookies["From_date"].Value;
+                //MauIn.To_date = Request.Cookies["To_Date"].Value;
+                con.Open();
+
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+                    cmd.Parameters.AddWithValue("@_Ma_Dt", MaDt);
+
+                    cmd.Parameters.AddWithValue("@_Ma_CbNv", MaTDV);
+                    cmd.Parameters.AddWithValue("@_Ma_DvCs", ma_dvcs);
+                    sda.Fill(ds);
+
+                }
+            }
+            return View(ds);
+        }
         public ActionResult PhieuXacNhanTTTCK()
+        {
+            List<MauInChungTu> dmDlist = LoadDmDt("");
+            List<BKHoaDonGiaoHang> dmDlistTDV = LoadDmTDV();
+            string ma_dvcs = Request.Cookies["MA_DVCS"].Value;
+            var fromDate = Request.Cookies["From_date"].Value;
+            var toDate = Request.Cookies["To_Date"].Value;
+            var MaDt = Request.Cookies["Ma_Dt"] != null ? Request.Cookies["Ma_Dt"].Value : string.Empty;
+            var MaTDV = Request.Cookies["Ma_TDV"].Value;
+
+            DataSet ds = new DataSet();
+
+            ViewBag.DataTDV = dmDlistTDV;
+            ViewBag.DataItems = dmDlist;
+            connectSQL();
+            //var SoCT = Request.Cookies["So_Ct"] != null ? Request.Cookies["So_Ct"].Value : "";
+            //MauIn.So_Ct = Request.Cookies["SoCt"].Value;
+
+            //string query = "exec usp_Vth_BC_BHCNTK_CN @_ngay_Ct1 = '" + Acc.From_date + "',@_Ngay_Ct2 ='"+ Acc.To_date+"',@_Ma_Dvcs='"+ Acc.Ma_DvCs_1+"'";
+            string Pname = "[usp_XacNhanThanhToanCKTT_SAP]";
+
+            using (SqlCommand cmd = new SqlCommand(Pname, con))
+            {
+                cmd.CommandTimeout = 950;
+
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //MauIn.From_date = Request.Cookies["From_date"].Value;
+                //MauIn.To_date = Request.Cookies["To_Date"].Value;
+                con.Open();
+
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    cmd.Parameters.AddWithValue("@_Tu_Ngay", fromDate);
+                    cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
+                    cmd.Parameters.AddWithValue("@_Ma_Dt", MaDt);
+
+                    cmd.Parameters.AddWithValue("@_Ma_CbNv", MaTDV);
+                    cmd.Parameters.AddWithValue("@_Ma_DvCs", ma_dvcs);
+                    sda.Fill(ds);
+
+                }
+            }
+            return View(ds);
+        }
+        public ActionResult PhieuXacNhanTTTCK2()
         {
             List<MauInChungTu> dmDlist = LoadDmDt("");
             List<BKHoaDonGiaoHang> dmDlistTDV = LoadDmTDV();

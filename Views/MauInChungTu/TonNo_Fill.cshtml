@@ -593,124 +593,260 @@
 
                 <br />
                 <div>
-                    <table id="export" border="1" border-collapse="collapse" style="width:700px">
-                        <thead style="display: table-header-group">
-                            <tr style="font-size: 13px; font-weight: bold; color: black;">
-                                <th style="padding:5px">SỐ</th>
-                                <th style="padding:5px">KHÁCH HÀNG</th>
-                                <th style="padding:5px">NGÀY HÓA ĐƠN</th>
-                                <th style="padding:5px">SỐ HÓA ĐƠN</th>
-                                <th style="padding:5px">NGÀY THANH TOÁN</th>
-                                <th style="padding:5px">GN THU</th>
-                                <th style="padding:5px">TDV THU</th>
-                                <th style="padding:5px">TIỀN TRƯỚC THUẾ</th>
-                                <th style="padding:5px">TIỀN THUẾ</th>
-                                <th style="padding:5px">TỔNG TIỀN</th>
-                            </tr>
-                        </thead>
-                        <tbody style="font-size:13px;color:black">
-                            @{
-                                int stt = 1;
-                                string currentDT = null;
-                                decimal totalCongNo = 0;
-                                decimal totalCongTT = 0;
-                                decimal totalcongST = 0;
-                                bool firstTenDt = true;
-
-                                foreach (DataRow row3 in Model.Tables[0].Rows)
-                                {
-                                    if (currentDT == null || currentDT != row3["Ma_Dt"].ToString())
-                                    {
-                                        // Nếu cột "Ten_Dt" thay đổi, thêm hàng mới
-                                        if (currentDT != null)
-                                        {
-                                            <tr style="padding:5px">
-                                                <td colspan="7" style="text-align:center;color:black;font-weight:bold;padding:5px">Tổng cộng:</td>
-                                                <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalCongTT.ToString("N0").Replace(",", ".")</td>
-                                                <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalcongST.ToString("N0").Replace(",", ".")</td>
-                                                <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalCongNo.ToString("N0").Replace(",", ".")</td>
-                                            </tr>
-                                            totalCongNo = 0;
-                                            totalcongST = 0;
-                                            totalCongTT = 0;
-                                        }
-                                        currentDT = row3["Ma_Dt"].ToString();
-                                        firstTenDt = true;
-                                    }
-
-                                    <tr>
-                                        <td>@stt </td>
-                                        @if (firstTenDt)
-                                        {
-                                            <td style="text-align:left;height:max-content">@row3["Ten_Dt"]</td>
-                                            firstTenDt = false;
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                        }
-                                        <td>@row3["Ngay_Ct1"]</td>
-                                        <td>@row3["So_Ct_Einv"]</td>
-                                        <td>@row3["Ngay_Den_Han1"]</td>
-                                        <td></td>
-                                        <td>@row3["Ghi_Chu"]</td>
-                                        <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Cong_No_TT"]).Replace(",", ".")</td>
-                                        <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Tien_Thue"]).Replace(",", ".")</td>
-                                        <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Cong_No"]).Replace(",", ".")</td>
-                                    </tr>
-
-                                    stt++;
-                                    var congnoST = string.Format("{0:#,###}", row3["Tien_Thue"]);
-                                    var congnoTT = string.Format("{0:#,###}", row3["Cong_No_TT"]);
-                                    var congnofirst = string.Format("{0:#,###}", row3["Cong_No"]);
-                                    string congNoString = congnofirst.Replace(".", ""); // Gỡ bỏ dấu phẩy
-                                    string congNoTT = congnoTT.Replace(".", "");
-                                    string congNoST = congnoST.Replace(".", "");
-                                    Debug.WriteLine("CongNo: " + congNoString);
-
-                                    decimal cong_NoST = Convert.ToDecimal(row3["Tien_Thue"]);
-                                    decimal cong_NoTT = Convert.ToDecimal(row3["Cong_No_TT"]);
-                                    decimal congNo = Convert.ToDecimal(row3["Cong_No"]);
-                                    totalCongNo += congNo;
-                                    totalcongST += cong_NoST;
-                                    totalCongTT += cong_NoTT;
-                                    //if (int.TryParse(congNoString, out congNo))
-                                    //{
-                                    //    totalCongNo += congNo;
-                                    //}
-
-                                    Debug.WriteLine("Total: " + totalCongNo);
-                                }
-
-                                //Thêm hàng cuối cùng
-                                if (currentDT != null)
-                                {
-                                    <tr style="padding:5px">
-                                        <td colspan="7" style="text-align:center;color:black;font-weight:bold">Tổng cộng:</td>
-                                        <td style="text-align:right;font-weight:bold;color:black">@totalCongTT.ToString("N0").Replace(",", ".")</td>
-                                        <td style="text-align:right;font-weight:bold;color:black">@totalcongST.ToString("N0").Replace(",", ".")</td>
-                                        <td style="text-align:right;font-weight:bold;color:black">@totalCongNo.ToString("N0").Replace(",", ".")</td>
-                                    </tr>
-                                }
-
-                                // Hiển thị tổng cộng công nợ ở cuối
-                                <tr>
-                                    <td colspan="7" style="color:black;font-weight:bold">TỔNG CÔNG NỢ:</td>
-                                    @foreach (DataRow row2 in Model.Tables[1].Rows)
-                                    {
-                                        <td style="text-align:right;font-weight:bold;color:black">
-                                            @string.Format("{0:n0}", row2["Tong_CN_TT"]).Replace(",", ".")
-
-                                        </td>
-                                        <td style="text-align:right;font-weight:bold;color:black">@string.Format("{0:n0}", row2["Tong_CN_ST"]).Replace(",", ".")</td>
-                                        <td style="text-align:right;font-weight:bold;color:black">@string.Format("{0:n0}", row2["Tong_CN"]).Replace(",", ".")</td>
-                                    }
+                    @if (Request.Cookies["MA_DVCS"].Value == "OPC_CT")
+                    {
+                        <table id="export" border="1" border-collapse="collapse" style="width:700px">
+                            <thead style="display: table-header-group">
+                                <tr style="font-size: 13px; font-weight: bold; color: black;">
+                                    <th style="padding:5px">SỐ</th>
+                                    <th style="padding:5px">KHÁCH HÀNG</th>
+                                    <th style="padding:5px">NGÀY HÓA ĐƠN</th>
+                                    <th style="padding:5px">SỐ HÓA ĐƠN</th>
+                                    <th style="padding:5px">NGÀY THANH TOÁN</th>
+                                    @*<th style="padding:5px">NGÀY THANH TOÁN CKTT</th>*@
+                                    <th style="padding:5px">GN THU</th>
+                                    <th style="padding:5px">TDV THU</th>
+                                    <th style="padding:5px">TIỀN TRƯỚC THUẾ</th>
+                                    <th style="padding:5px">TIỀN THUẾ</th>
+                                    <th style="padding:5px">TỔNG TIỀN</th>
                                 </tr>
+                            </thead>
+                            <tbody style="font-size:13px;color:black">
+                                @{
+                                    int stt = 1;
+                                    string currentDT = null;
+                                    decimal totalCongNo = 0;
+                                    decimal totalCongTT = 0;
+                                    decimal totalcongST = 0;
+                                    bool firstTenDt = true;
 
-                            }
-                        </tbody>
-                    </table>
+                                    foreach (DataRow row3 in Model.Tables[0].Rows)
+                                    {
+                                        if (currentDT == null || currentDT != row3["Ma_Dt"].ToString())
+                                        {
+                                            // Nếu cột "Ten_Dt" thay đổi, thêm hàng mới
+                                            if (currentDT != null)
+                                            {
+                                                <tr style="padding:5px">
+                                                    <td colspan="7" style="text-align:center;color:black;font-weight:bold;padding:5px">Tổng cộng:</td>
+                                                    <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalCongTT.ToString("N0").Replace(",", ".")</td>
+                                                    <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalcongST.ToString("N0").Replace(",", ".")</td>
+                                                    <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalCongNo.ToString("N0").Replace(",", ".")</td>
+                                                </tr>
+                                                totalCongNo = 0;
+                                                totalcongST = 0;
+                                                totalCongTT = 0;
+                                            }
+                                            currentDT = row3["Ma_Dt"].ToString();
+                                            firstTenDt = true;
+                                        }
 
+                                        <tr>
+                                            <td>@stt </td>
+                                            @if (firstTenDt)
+                                            {
+                                                <td style="text-align:left;height:max-content">@row3["Ten_Dt"]</td>
+                                                firstTenDt = false;
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                            <td>@row3["Ngay_Ct1"]</td>
+                                            <td>@row3["So_Ct_Einv"]</td>
+                                            <td>@row3["Ngay_Den_Han1"]</td>
+                                            @*<td>@row3["Ngay_Den_Han_CKTT1"]</td>*@
+                                            <td></td>
+                                            <td>@row3["Ghi_Chu"]</td>
+                                            <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Cong_No_TT"]).Replace(",", ".")</td>
+                                            <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Tien_Thue"]).Replace(",", ".")</td>
+                                            <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Cong_No"]).Replace(",", ".")</td>
+                                        </tr>
+
+                                        stt++;
+                                        var congnoST = string.Format("{0:#,###}", row3["Tien_Thue"]);
+                                        var congnoTT = string.Format("{0:#,###}", row3["Cong_No_TT"]);
+                                        var congnofirst = string.Format("{0:#,###}", row3["Cong_No"]);
+                                        string congNoString = congnofirst.Replace(".", ""); // Gỡ bỏ dấu phẩy
+                                        string congNoTT = congnoTT.Replace(".", "");
+                                        string congNoST = congnoST.Replace(".", "");
+                                        Debug.WriteLine("CongNo: " + congNoString);
+
+                                        decimal cong_NoST = Convert.ToDecimal(row3["Tien_Thue"]);
+                                        decimal cong_NoTT = Convert.ToDecimal(row3["Cong_No_TT"]);
+                                        decimal congNo = Convert.ToDecimal(row3["Cong_No"]);
+                                        totalCongNo += congNo;
+                                        totalcongST += cong_NoST;
+                                        totalCongTT += cong_NoTT;
+                                        //if (int.TryParse(congNoString, out congNo))
+                                        //{
+                                        //    totalCongNo += congNo;
+                                        //}
+
+                                        Debug.WriteLine("Total: " + totalCongNo);
+                                    }
+
+                                    //Thêm hàng cuối cùng
+                                    if (currentDT != null)
+                                    {
+                                        <tr style="padding:5px">
+                                            <td colspan="7" style="text-align:center;color:black;font-weight:bold">Tổng cộng:</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@totalCongTT.ToString("N0").Replace(",", ".")</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@totalcongST.ToString("N0").Replace(",", ".")</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@totalCongNo.ToString("N0").Replace(",", ".")</td>
+                                        </tr>
+                                    }
+
+                                    // Hiển thị tổng cộng công nợ ở cuối
+                                    <tr>
+                                        <td colspan="7" style="color:black;font-weight:bold">TỔNG CÔNG NỢ:</td>
+                                        @foreach (DataRow row2 in Model.Tables[1].Rows)
+                                        {
+                                            <td style="text-align:right;font-weight:bold;color:black">
+                                                @string.Format("{0:n0}", row2["Tong_CN_TT"]).Replace(",", ".")
+
+                                            </td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@string.Format("{0:n0}", row2["Tong_CN_ST"]).Replace(",", ".")</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@string.Format("{0:n0}", row2["Tong_CN"]).Replace(",", ".")</td>
+                                        }
+
+
+
+                                    </tr>
+
+
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <table id="export" border="1" border-collapse="collapse" style="width:700px">
+                            <thead style="display: table-header-group">
+                                <tr style="font-size: 13px; font-weight: bold; color: black;">
+                                    <th style="padding:5px">SỐ</th>
+                                    <th style="padding:5px">KHÁCH HÀNG</th>
+                                    <th style="padding:5px">NGÀY HÓA ĐƠN</th>
+                                    <th style="padding:5px">SỐ HÓA ĐƠN</th>
+                                    <th style="padding:5px">NGÀY THANH TOÁN</th>
+                                    <th style="padding:5px">NGÀY THANH TOÁN CKTT</th>
+                                    <th style="padding:5px">GN THU</th>
+                                    <th style="padding:5px">TDV THU</th>
+                                    <th style="padding:5px">TIỀN TRƯỚC THUẾ</th>
+                                    <th style="padding:5px">TIỀN THUẾ</th>
+                                    <th style="padding:5px">TỔNG TIỀN</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size:13px;color:black">
+                                @{
+                                    int stt = 1;
+                                    string currentDT = null;
+                                    decimal totalCongNo = 0;
+                                    decimal totalCongTT = 0;
+                                    decimal totalcongST = 0;
+                                    bool firstTenDt = true;
+
+                                    foreach (DataRow row3 in Model.Tables[0].Rows)
+                                    {
+                                        if (currentDT == null || currentDT != row3["Ma_Dt"].ToString())
+                                        {
+                                            // Nếu cột "Ten_Dt" thay đổi, thêm hàng mới
+                                            if (currentDT != null)
+                                            {
+                                                <tr style="padding:5px">
+                                                    <td colspan="8" style="text-align:center;color:black;font-weight:bold;padding:5px">Tổng cộng:</td>
+                                                    <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalCongTT.ToString("N0").Replace(",", ".")</td>
+                                                    <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalcongST.ToString("N0").Replace(",", ".")</td>
+                                                    <td style="text-align:right;color:black;font-weight:bold;padding:5px">@totalCongNo.ToString("N0").Replace(",", ".")</td>
+                                                </tr>
+                                                totalCongNo = 0;
+                                                totalcongST = 0;
+                                                totalCongTT = 0;
+                                            }
+                                            currentDT = row3["Ma_Dt"].ToString();
+                                            firstTenDt = true;
+                                        }
+
+                                        <tr>
+                                            <td>@stt </td>
+                                            @if (firstTenDt)
+                                            {
+                                                <td style="text-align:left;height:max-content">@row3["Ten_Dt"]</td>
+                                                firstTenDt = false;
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                            <td>@row3["Ngay_Ct1"]</td>
+                                            <td>@row3["So_Ct_Einv"]</td>
+                                            <td>@row3["Ngay_Den_Han1"]</td>
+                                            <td>@row3["Ngay_Den_Han_CKTT1"]</td>
+                                            <td></td>
+                                            <td>@row3["Ghi_Chu"]</td>
+                                            <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Cong_No_TT"]).Replace(",", ".")</td>
+                                            <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Tien_Thue"]).Replace(",", ".")</td>
+                                            <td style="text-align:right;padding-right:5px">@string.Format("{0:#,###}", row3["Cong_No"]).Replace(",", ".")</td>
+                                        </tr>
+
+                                        stt++;
+                                        var congnoST = string.Format("{0:#,###}", row3["Tien_Thue"]);
+                                        var congnoTT = string.Format("{0:#,###}", row3["Cong_No_TT"]);
+                                        var congnofirst = string.Format("{0:#,###}", row3["Cong_No"]);
+                                        string congNoString = congnofirst.Replace(".", ""); // Gỡ bỏ dấu phẩy
+                                        string congNoTT = congnoTT.Replace(".", "");
+                                        string congNoST = congnoST.Replace(".", "");
+                                        Debug.WriteLine("CongNo: " + congNoString);
+
+                                        decimal cong_NoST = Convert.ToDecimal(row3["Tien_Thue"]);
+                                        decimal cong_NoTT = Convert.ToDecimal(row3["Cong_No_TT"]);
+                                        decimal congNo = Convert.ToDecimal(row3["Cong_No"]);
+                                        totalCongNo += congNo;
+                                        totalcongST += cong_NoST;
+                                        totalCongTT += cong_NoTT;
+                                        //if (int.TryParse(congNoString, out congNo))
+                                        //{
+                                        //    totalCongNo += congNo;
+                                        //}
+
+                                        Debug.WriteLine("Total: " + totalCongNo);
+                                    }
+
+                                    //Thêm hàng cuối cùng
+                                    if (currentDT != null)
+                                    {
+                                        <tr style="padding:5px">
+                                            <td colspan="8" style="text-align:center;color:black;font-weight:bold">Tổng cộng:</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@totalCongTT.ToString("N0").Replace(",", ".")</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@totalcongST.ToString("N0").Replace(",", ".")</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@totalCongNo.ToString("N0").Replace(",", ".")</td>
+                                        </tr>
+                                    }
+
+                                    // Hiển thị tổng cộng công nợ ở cuối
+                                    <tr>
+                                        <td colspan="8" style="color:black;font-weight:bold">TỔNG CÔNG NỢ:</td>
+                                        @foreach (DataRow row2 in Model.Tables[1].Rows)
+                                        {
+                                            <td style="text-align:right;font-weight:bold;color:black">
+                                                @string.Format("{0:n0}", row2["Tong_CN_TT"]).Replace(",", ".")
+
+                                            </td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@string.Format("{0:n0}", row2["Tong_CN_ST"]).Replace(",", ".")</td>
+                                            <td style="text-align:right;font-weight:bold;color:black">@string.Format("{0:n0}", row2["Tong_CN"]).Replace(",", ".")</td>
+                                        }
+
+
+
+                                    </tr>
+
+
+
+                                }
+                            </tbody>
+                        </table>
+                    }
 
 
 

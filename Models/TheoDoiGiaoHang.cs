@@ -17,14 +17,18 @@ namespace web4.Models
         public string Ma_Dt { get; set; }
         public string Ten_Dt { get; set; }
         public string So_HD { get; set; }
-        public DateTime Ngay_HD { get; set; }
+        public string Ngay_HD { get; set; }
         public string NV_GiaoNhan { get; set; }
         public int Giao_HD { get; set; }
         public float Tien_HD { get; set; }
         public string Noi_Dung { get; set; }
         public string Stt { get; set; }
         public int Da_Giao_hang { get; set; }
-     
+        public string Ten_NVPhuKho { get; set; }
+        public string Ten_NVGH1 { get; set; }
+
+
+
 
     }
 }

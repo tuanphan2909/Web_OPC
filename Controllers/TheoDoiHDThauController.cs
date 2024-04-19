@@ -157,7 +157,7 @@ namespace web4.Controllers
             var toDate = Request.Cookies["To_Date"].Value;
 
             var Dvcs = Request.Cookies["MA_DVCS"].Value == "" ? Request.Cookies["Dvcs3"].Value : Request.Cookies["MA_DVCS"].Value;
-            var MaTDV = Request.Cookies["Ma_CbNv"] != null ? Request.Cookies["Ma_CbNv"].Value : string.Empty;
+            var MaTDV = Request.Cookies["Ma_TDV"] != null ? Request.Cookies["Ma_TDV"].Value : string.Empty;
             var MaDt = Request.Cookies["Ma_DT"] != null ? Request.Cookies["Ma_DT"].Value : string.Empty;
             ViewBag.DataTDV = dmDlistTDV;
             ViewBag.DataItems = dmDlist;

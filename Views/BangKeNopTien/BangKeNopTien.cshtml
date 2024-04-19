@@ -621,6 +621,10 @@
                     </div>
 
                 </form>
+                <button onclick="onPrint('@Url.Action("BangKeNopTien_In", "BangKeNopTien")'
+                                                      )">
+                    Print
+                </button>
             </li>
         </ul>
     </div>
@@ -668,6 +672,7 @@
                                 <th>Số External</th>
                                 <th>Ngày Phiếu Thu</th>
                                 <th>Tiền TT</th>
+                                <th>Tiền CKTT</th>
                                 <th>Loại Chứng Từ</th>
                                 <th>Số Chứng Từ</th>
                                 <th>Mã TDV</th>
@@ -693,6 +698,7 @@
                                     <td>@row2["So_External_Sap"]</td>
                                     <td>@row2["Ngay_PT"]</td>
                                     <td style="text-align:right">@String.Format("{0:#,###}", row2["Tien_TT"]).Replace(".", ",")</td>
+                                    <td style="text-align:right">@String.Format("{0:#,###}", row2["Tien_CKTT"]).Replace(".", ",")</td>
                                     <td>@row2["Loai_Ct"]</td>
                                     <td>@row2["So_Ct"]</td>
                                     <td>@row2["Ma_TDV"]</td>
@@ -715,10 +721,12 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr id="total-row-tong-cong" style="background-color: burlywood">
                                 <td colspan="10"><strong>Tổng cộng(Tất cả):</strong></td>
                                 <td class="total-tienTT" style="text-align:right"></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -1178,7 +1186,13 @@
         });
 
     </script>
-
+    <script>
+        function onPrint(actionUrl) {
+            var url = actionUrl;
+            var newWindow = window.open('', '_blank');
+            newWindow.location.href = url;
+        }
+    </script>
 </body>
 
 </html>

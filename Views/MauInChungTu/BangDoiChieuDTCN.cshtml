@@ -674,7 +674,7 @@
                         } và gửi về Công Ty Cố Phần Dược Phẩm OPC - @Dvcs trước ngày <span style="color:black;font-weight:bold">
                             @foreach (DataRow row3 in Model.Tables[7].Rows)
                             {
-                                @row3["Ngay_TT"]
+                                @row3["Ngay_TT"]   
                                 var NgayTT = row3["Ngay_TT"].ToString();
                                 HttpCookie NgayTTCookie = new HttpCookie("NgayTT");
                                 NgayTTCookie.Value = NgayTT;
@@ -773,7 +773,7 @@
 
         </form>
     </div>
-    <button onclick="exportExcel()">Xuất Excel</button>
+    <button onclick="exportExcel()"id="exportbutton">Xuất Excel</button>
     <script src="~/Scripts/table2excel.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>

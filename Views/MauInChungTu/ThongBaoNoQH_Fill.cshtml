@@ -422,11 +422,15 @@
                         <a>Đến Ngày</a><br /><br />
                         <input class="den_ngay" id="den_ngay" placeholder=" Đến Ngày" name="To_date" type="DATE" format="YYYY-MM-DD" value="@Request.QueryString["To_date"]" /><br /><br />
                         <script>$("#den_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script>
+                        <a>Ngày Ký</a><br /><br />
+                        <input class="den_ngay" id="Ngay_Ky" placeholder=" Đến Ngày" name="Ngay_ky" type="DATE" format="YYYY-MM-DD" value="@Request.QueryString["To_date"]" /><br /><br />
+                        <script>$("#den_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script>
                         <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục">
                         <datalist id="dropdownList">
                             @foreach (var item in ViewBag.DataItems)
                             {
-                <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt"data-maDt="@item.Ma_Dt" data-diachi="@item.Dia_Chi" data-dvcs="@item.Dvcs" data-dvcs1= "@item.Dvcs1">@item.Ten_Dt</option>}
+                                <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-maDt="@item.Ma_Dt" data-diachi="@item.Dia_Chi" data-dvcs="@item.Dvcs" data-dvcs1="@item.Dvcs1">@item.Ten_Dt</option>
+}
                         </datalist>
                         <input type="hidden" name="Ma_Dt" id="selectedOption">
 
@@ -628,7 +632,7 @@
                             var selectedDiaChi = selectedOption.getAttribute('data-diachi');
                             var selectedDvcs = selectedOption.getAttribute('data-Dvcs');
                             var selectedDvcs1 = selectedOption.getAttribute('data-dvcs1');
-                            document.cookie = `Ten_Dt=${encodeURIComponent(tenDt)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/;`;
+                            document.cookie = `Ten_Dt=${encodeURIComponent(tenDt)}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/;`;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
                             document.cookie = 'Dia_Chi=' + selectedDiaChi;
                             document.cookie = 'Dvcs=' + selectedDvcs;
                             document.cookie = 'Dvcs1=' + selectedDvcs1;
@@ -652,6 +656,7 @@
                 const currentDate = new Date();
                 const formattedToDate = formatDate(currentDate);
                 document.getElementById("den_ngay").value = formattedToDate;
+                document.getElementById("Ngay_Ky").value = formattedToDate;
             }
             // Format the date as "yyyy-mm-dd" for input type="date"
             function formatDate(date) {
@@ -665,7 +670,18 @@
             setFirstDayOfCurrentMonth();
             setCurrentDate();
         </script>
-
+        <script>
+            function runReport() {
+                // Get values from date inputs
+               
+                var ngayKy = document.getElementById("Ngay_Ky").value;
+                // Save values in cookies 
+               
+                document.cookie = "Ngay_Ky=" + ngayKy;
+                const spanElement = document.getElementById("spanText");
+                spanElement.style.display = "block";
+            }
+        </script>
 </body >
 
 </html >
