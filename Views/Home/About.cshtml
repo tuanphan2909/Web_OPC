@@ -249,7 +249,10 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                         {
                             <a href="#" onclick="runReport('@Url.Action("SoChiTietPhaiTra_Fill", "SoChiTietPhaiTra")'
                                                       )">3.2.1 Sổ Chi Tiết Tồn Nợ Phải Trả</a>}
-
+                        <a href="#" style="display:flex" onclick="runReport('@Url.Action("TongHopCongNoPhaiTra_Fill", "TongHopPhaiTra")'
+                                                      )">
+                            3.2.2 Tổng Hợp Công Nợ Phải Trả
+                        </a>
                     </div>
                 </div>
                 <button class="submenu-btn" onclick="toggleSubmenu('submenu1_4','arrow-subicon_4')">
@@ -279,6 +282,22 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                         <a href="#" style="display:flex" onclick="runReport('@Url.Action("BaoCaoTienVeThuong_Index", "BangKeNopTien")'
                                                       )">
                             4.5 BC Tiền Về(Thưởng)
+                        </a>
+                    }
+                    @if (Request.Cookies["UserName"].Value == "vpct-nhatanh")
+                    {
+                        
+                        <a href="#" style="display:flex" onclick="runReport('@Url.Action("BCanDoiSoPhatSinh_Fill", "CanDoiSoPhatSinh")'
+                                                      )">
+                            4.6 Cân Đối Số Phát Sinh
+                        </a>
+                    }
+                    else
+                    {
+                       
+                        <a href="#" style="display:flex" onclick="runReport('@Url.Action("CanDoiSoPhatSinh_Fill", "CanDoiSoPhatSinh")'
+                                                      )">
+                            4.5 Cân Đối Số Phát Sinh
                         </a>
                     }
                 </div>

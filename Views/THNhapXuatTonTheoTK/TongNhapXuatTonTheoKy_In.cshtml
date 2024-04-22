@@ -24,7 +24,7 @@
     string Dv = "";
     string tendv = "";
     string kyten = "";
-    if (Request.Cookies["MA_DVCS"].Value == "")
+    if (Request.Cookies["MA_DVCS"].Value == "" || Request.Cookies["MA_DVCS"].Value == "OPC_B1")
     {
         kyten = "Phụ Trách Đơn Vị";
     }
