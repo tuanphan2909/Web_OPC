@@ -328,6 +328,7 @@
     <Compile Include="Controllers\SoChiTietPhaiTraController.cs" />
     <Compile Include="Controllers\SoQuyTienMatController.cs" />
     <Compile Include="Controllers\SoTHPhaiThuController.cs" />
+    <Compile Include="Controllers\SPTrungBayController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TheKhoController.cs" />
     <Compile Include="Controllers\TheoDoiGiaoHangController.cs" />
@@ -346,6 +347,12 @@
     <Compile Include="Controllers\ViengThamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\B20SPT.cs">
+      <DependentUpon>SPTrungBay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\B20SPT_Detail.cs">
+      <DependentUpon>SPTrungBay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ImageModels.cs" />
     <Compile Include="Models\B30CTV.cs">
@@ -381,6 +388,22 @@
     </Compile>
     <Compile Include="Models\GetData.cs" />
     <Compile Include="Models\MauInChungTu.cs" />
+    <Compile Include="Models\SPTrungBay.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPTrungBay.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SPTrungBay.cs" />
+    <Compile Include="Models\SPTrungBay.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPTrungBay.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SPTrungBay1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPTrungBay.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StudentMarkDetails.cs" />
     <Compile Include="Models\TheoDoiGiaoHang.Context.cs">
       <AutoGen>True</AutoGen>
@@ -837,6 +860,16 @@
       <DependentUpon>Detail.edmx</DependentUpon>
       <LastGenOutput>Detail.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\SPTrungBay.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SPTrungBay.edmx</DependentUpon>
+      <LastGenOutput>SPTrungBay.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SPTrungBay.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SPTrungBay.edmx</DependentUpon>
+      <LastGenOutput>SPTrungBay1.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\TheoDoiGiaoHang.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TheoDoiGiaoHang.edmx</DependentUpon>
@@ -906,6 +939,13 @@
     </EntityDeploy>
     <Content Include="Models\TheoDoiGiaoHang.edmx.diagram">
       <DependentUpon>TheoDoiGiaoHang.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\SPTrungBay.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SPTrungBay.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SPTrungBay.edmx.diagram">
+      <DependentUpon>SPTrungBay.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\khoa.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -1295,6 +1335,9 @@
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_Fill.cshtml" />
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy.cshtml" />
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_In.cshtml" />
+    <Content Include="Views\SPTrungBay\InsertSPTrungBay.cshtml" />
+    <Content Include="Views\SPTrungBay\index.cshtml" />
+    <Content Include="Views\SPTrungBay\UpdateSPTrungBay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
