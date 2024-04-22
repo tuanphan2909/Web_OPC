@@ -488,16 +488,19 @@ string.Equals(ViewBag.UserName, "opcmar001", StringComparison.OrdinalIgnoreCase)
                                                       )">2.Danh Mục Hạn Mức CTV</a>
                 <a href="#" onclick="runReport('@Url.Action("Index", "TheoDoiGiaoHang")'
                                                       )">3.Theo Dõi Giao Hàng</a>
+
+                <a href="#" onclick="runReport('@Url.Action("Index", "SPTrungBay")'
+                                                      )">4.Sản Phẩm Trưng Bày</a>
                 @*<button class="submenu-btn" onclick="toggleSubmenu('submenu2_2')">Báo Cáo Quản Trị</button>
-                    <div id="submenu2_2" class="submenu-container">
-                        <a href="#">Submenu 1.2.1</a>
-                        <a href="#">Submenu 1.2.2</a>
-                    </div>
-                    <button class="submenu-btn" onclick="toggleSubmenu('submenu3_3')">Báo Cáo Nghiệp Vụ</button>
-                    <div id="submenu3_3" class="submenu-container">
-                        <a href="#">Submenu 1.3.1</a>
-                        <a href="#">Submenu 1.3.2</a>
-                    </div>*@
+        <div id="submenu2_2" class="submenu-container">
+            <a href="#">Submenu 1.2.1</a>
+            <a href="#">Submenu 1.2.2</a>
+        </div>
+        <button class="submenu-btn" onclick="toggleSubmenu('submenu3_3')">Báo Cáo Nghiệp Vụ</button>
+        <div id="submenu3_3" class="submenu-container">
+            <a href="#">Submenu 1.3.1</a>
+            <a href="#">Submenu 1.3.2</a>
+        </div>*@
             </div>
             <a onclick="ChangePassword()" href="/Home/DoiMatKhau"><div class="sidebar-title"><i class="fa-solid fa-lock"></i> <div>Đổi Mật Khẩu</div></div></a>
             <a onclick="logout()"><div class="sidebar-title"><i class="fa-solid fa-right-from-bracket"></i> <div>Đăng Xuất</div></div></a>

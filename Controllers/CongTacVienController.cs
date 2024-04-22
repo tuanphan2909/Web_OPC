@@ -120,6 +120,7 @@ namespace web4.Controllers
                                 Ma_vt = reader["Ma_Vt"].ToString(),
                                 Ten_Vt = reader["Ten_Vt"].ToString()
                                
+                               
 
                             };
                             dataItems.Add(dataItem);
