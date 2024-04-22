@@ -202,5 +202,23 @@ namespace web4.Properties {
                 return ((string)(this["NV_GiaoHang"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Option_1 {
+            get {
+                return ((bool)(this["Option_1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Option_2 {
+            get {
+                return ((bool)(this["Option_2"]));
+            }
+        }
     }
 }
