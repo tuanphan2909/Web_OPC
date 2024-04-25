@@ -2,18 +2,8 @@
 
 
 
-@{ ViewBag.Title = "QUẢN LÝ TRƯNG BÀY - CHI TIẾT";
-    var fromDate = Request.Cookies["From_date"].Value;
-    var toDate = Request.Cookies["To_date"].Value;
-    var fromDateValue = DateTime.ParseExact(fromDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-    var toDateValue = DateTime.ParseExact(toDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-    var formattedFromDate = fromDateValue.ToString("dd/MM/yyyy");
-    var formattedToDate = toDateValue.ToString("dd/MM/yyyy");
-
-}
+@{ ViewBag.Title = "TỔNG HỢP CÔNG NỢ PHẢI TRẢ"; }
 @using System.Data;
-@using System.Globalization;
 <!DOCTYPE html>
 <html lang="en">
 
@@ -544,69 +534,6 @@
             .tab.selected-tab .closeTab {
                 pointer-events: auto;
             }
-
-        .first-row-gray {
-            background-color: #ccc;
-            font-weight: bold;
-            color: black;
-        }
-
-        .modal {
-            display: none; /* Ẩn modal mặc định */
-            position: fixed;
-            z-index: 1;
-            padding-top: 100px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 80%;
-            max-height: 80%;
-        }
-
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-            .close:hover,
-            .close:focus {
-                color: #bbb;
-                text-decoration: none;
-                cursor: pointer;
-            }
-
-        .image-container {
-            padding: 10px;
-        }
-
-        .image-row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .fancybox {
-            display: inline-block;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-
-        .fancybox img {
-            max-width: 100px;
-            max-height: 100px;
-        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -618,7 +545,7 @@
 
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>QUẢN LÝ TRƯNG BÀY - CHI TIẾT</title>
+    <title>TỔNG HỢP CÔNG NỢ PHẢI TRẢ</title>
     <meta content="" name="description">
     <meta content="Author" name="MJ Maraz">
     <link href="~/assets/images/favicon.png" rel="icon">
@@ -626,27 +553,12 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- ========================================================= -->
-    <script type="text/javascript" src="~/Scripts/lightbox-min.js"></script>
+
 
     <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/css/datatables.min.css">
     <link rel="stylesheet" href="~/assets/css/style.css">
     <link rel="stylesheet" href="~/Styles/loader.css">
-    <link rel="stylesheet" href="~/Styles/lightbox-min.css">
-    <!-- Link thư viện Fancybox CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
-
-    <!-- Link thư viện jQuery -->                                                               
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- Link thư viện Fancybox JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-
-
-    <!-- jQuery -->
-    <!-- Lightbox JavaScript -->
-
-
-
 </head>
 <!-- =============== Design & Develop By = MJ MARAZ   ====================== -->
 
@@ -659,33 +571,72 @@
         </div>
         <ul class="nav-links" style="justify-content: center; display:flex;margin-left:10px">
             <li>
-                <form id="dateForm" action="QuanLyTrungBay" method="post" onsubmit="handleFormSubmit(event)">
-                    @*<div id="locBC">
-                            <span id="spanText" class="text-loading">[Usp_BaoCaoTrungBay]</span>
-                            <a>Từ Ngày</a><br /><br />
-                            <input class="tu_ngay" placeholder="Từ Ngày" id="tu_ngay" name="From_date" type="date" format="YYYY-MM-DD" value="@Request.Cookies["From_date"].Value" />
-                            <script>$("#tu_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script><br /><br />
-                            <a>Đến Ngày</a><br /><br />
-                            <input class="den_ngay" id="den_ngay" placeholder=" Đến Ngày" name="To_date" type="DATE" format="YYYY-MM-DD" value="@Request.Cookies["To_date"].Value" /><br /><br />
-                            <script>$("#den_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script>
-                        </div>*@
+                <form id="dateForm" action="TongHopCongNoPhaiTra" method="post" onsubmit="handleFormSubmit(event)">
+                    <div id="locBC">
+                        <span id="spanText" class="text-loading">[usp_SoTongHopCongNoPhaiTra_SAP]</span>
+                        <a>Từ Ngày</a><br /><br />
+                        <input class="tu_ngay" placeholder="Từ Ngày" id="tu_ngay" name="From_date" type="date" format="YYYY-MM-DD" value="@Request.QueryString["From_date"]" />
+                        <script>$("#tu_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script><br /><br />
+                        <a>Đến Ngày</a><br /><br />
+                        <input class="den_ngay" id="den_ngay" placeholder=" Đến Ngày" name="To_date" type="DATE" format="YYYY-MM-DD" value="@Request.QueryString["To_date"]" /><br /><br />
+                        <script>$("#den_ngay").datetimepicker({ timepicker: false, format: 'Y-m-d' });</script>
+                    </div>
+                    <h6>Chọn Tài Khoản</h6>
+                    <div class="select-btn" style="width:100px;margin-top:10px">
+                        <select name="Nhom" id="nhomtheoselect" onchange="saveSelectedValueToCookie()" style="width:200px">
+                            <option value="" style="background-color: #020024;color:white">Chọn giá trị</option>
+                       
+                            <option value="242" data-tenTK="CHI PHÍ TRẢ TRƯỚC">242 - CHI PHÍ TRẢ TRƯỚC</option>
+                            <option value="334" data-tenTK="PHẢI TRẢ NGƯỜI LAO ĐỘNG">334 - PHẢI TRẢ NGƯỜI LAO ĐỘNG</option>
+                            <option value="1313" data-tenTK="KHÁCH HÀNG TRẢ TRƯỚC">1313 - KHÁCH HÀNG TRẢ TRƯỚC</option>
+                            <option value="2421" data-tenTK="CHI PHÍ TRẢ TRƯỚC NGẮN HẠN">2421 - CHI PHÍ TRẢ TRƯỚC NGẮN HẠN</option>
+                            <option value="2422" data-tenTK="CHI PHÍ TRẢ TRƯỚC DÀI HẠN">2422 - CHI PHÍ TRẢ TRƯỚC DÀI HẠN</option>
+                            <option value="2423" data-tenTK="CHI PHÍ TRẢ MUA HÀNG">2423 - CHI PHÍ TRẢ MUA HÀNG</option>
+                            <option value="331" data-tenTK="PHẢI TRẢ NGƯỜI BÁN">331 - PHẢI TRẢ NGƯỜI BÁN</option>
+                            <option value="3311" data-tenTK="PHẢI TRẢ NGƯỜI BÁN">3311 - PHẢI TRẢ NGƯỜI BÁN</option>
+                            <option value="3312" data-tenTK="PHẢI TRẢ NGƯỜI BÁN TSCĐ & HĐĐT">3312 - PHẢI TRẢ NGƯỜI BÁN TSCĐ & HĐĐT</option>
+                            <option value="3313" data-tenTK="TRẢ TRƯỚC NHÀ CUNG CẤP">3313 - TRẢ TRƯỚC NHÀ CUNG CẤP</option>
+                            <option value="3318" data-tenTK="PHẢI TRẢ NGƯỜI BÁN (CHỜ HÓA ĐƠN)">3318 - PHẢI TRẢ NGƯỜI BÁN (CHỜ HÓA ĐƠN)</option>
+                            <option value="3368" data-tenTK="PHẢI TRẢ NỘI BỘ">3368 - PHẢI TRẢ NỘI BỘ</option>
+                            <option value="3388" data-tenTK="PHẢI TRẢ, PHẢI NỘP KHÁC">3388 - PHẢI TRẢ, PHẢI NỘP KHÁC</option>
 
-                    @*<div>
-                            <button class="submit" type="submit" id="runReportButton" onclick="runReport();saveNgay()">
-                                Chạy Báo Cáo
-                            </button>
+                        </select>
+                    </div>
+                    <h6>Chọn Đối Tượng:</h6>
+
+                    <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm đối tượng">
+                    <datalist id="dropdownList">
+                        @foreach (var item in ViewBag.DataItems)
+                        {
+                            <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-maDt="@item.Ma_Dt" data-dvcs="@item.Dvcs" data-dvcs1="@item.Dvcs1">@item.Ten_Dt</option>
+                        }
+                    </datalist>
+                    <input type="hidden" name="Ma_Dt" id="selectedOption"><br />
+
+
+
+
+                    @*<div class="select-btn" style="width:100px;margin-top:10px">
+                            <select id="dropdownMaTDV" class="select2" style="width: 200px" name="Ma_TDV" onchange="saveSelectedTDVValueToCookie()">
+                                <option value="">Chọn mã TDV</option>
+                                @if (ViewBag.DataTDV != null)
+                                {
+                                    foreach (var item in ViewBag.DataTDV)
+                                    {
+                                        <option value="@item.Ma_CbNv" data-hoten="@item.Ma_CbNv">@item.Ma_CbNv @item.hoten</option>
+                                    }
+                                }
+                            </select>
 
                         </div>*@
+                    <div>
+                        <button class="submit" type="submit" id="runReportButton" onclick="runReport();saveNgay()">
+                            Chạy Báo Cáo
+                        </button>
+
+                    </div>
 
                 </form>
-                <div style="display:flex">
-                    @*<button id="exportbutton"style="border-radius: 10px; margin-bottom: 10px;margin-top:10px; background-color: #aec9e0; color: #3483bd ">Xuất Excel</button>*@
-                    <!--<button style="border-radius: 10px; margin-bottom: 10px;margin-top:10px; background-color: #aec9e0; color: #3483bd " onclick="exportToExcel()">-->
-                    @*<a onclick="return ExcellentExport.excel(this, 'example', 'Sheet 1');" download="SoQuyTienMat.xls" style="color: #3483bd">Xuất Excel </a>*@
-                    <!--Xuất Excel
-                    </button>-->
-
-                </div>
             </li>
         </ul>
     </div>
@@ -708,8 +659,7 @@
                 <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
             </a>
         }
-        <h4 style="color: #3483bd">QUẢN LÝ TRƯNG BÀY - CHI TIẾT</h4>
-        <h4 style="color: #3483bd">Từ @formattedFromDate đến @formattedToDate </h4>
+        <h4 style="color: #3483bd">TỔNG HỢP CÔNG NỢ PHẢI TRẢ</h4>
     </header>
     <!-- =======  Data-Table  = Start  ========================== -->
 
@@ -718,95 +668,29 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="data_table" style="margin-left:-100px">
+                <div class="data_table">
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th>Mã Đối Tượng</th>
-                                <th>Tên Đối Tượng</th>
-                                <th>Địa Chỉ</th>
-                                <th>Ngày</th>
-                                <th>Check In</th>
-                                <th>Check Out</th>
-                                <th>Số Phút Viếng Thăm</th>
-                                <th>Nội Dung</th>
-                                <th>Hình Ảnh</th>
+                                <th>Mã ĐT</th>
+                                <th>Tên ĐT</th>
+                                <th>Tài Khoản</th>
+                                <th>Số Dư Đầu </th>
+                                <th>Phát Sinh Nợ</th>
+                                <th>Phát Sinh Có</th>
+                                <th>Số Dư Cuối</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @{
-                                DateTime previousDate = DateTime.MinValue;
-                                string currentGroup = ""; // Biến này lưu trữ giá trị của nhóm ngày hiện tại
-                                foreach (DataRow row in Model.DataSet.Tables[0].Rows)
-                                {
-                                    string ngayStr = row["Ngay"].ToString().Replace("/", "");
-                                    DateTime currentDate;
-                                    if (DateTime.TryParseExact(ngayStr, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out currentDate))
-                                    {
-                                        if (currentDate != previousDate)
-                                        {
-                                            <tr>
-                                                <td>@row["Ma_Dt"]</td>
-                                                <td style="text-align:left">@row["Ten_Dt"]</td>
-                                                <td>@row["Dia_CHi"]</td>
-                                                <td>@row["Ngay"]</td>
-                                                <td>@row["Check_in"]</td>
-                                                <td>@row["Check_out"]</td>
-                                                <td>@row["So_Phut_Vieng_Tham"]</td>
-                                                <td style="text-align:left">@row["Noi_dung"]</td>
-                                                <td class="image-container">
-                                                    <div class="image-row">
-                                                        @{
-                                                            // Kiểm tra xem nhóm ngày có thay đổi hay không
-                                                            if (currentGroup != ngayStr)
-                                                            {
-                                                                // Nếu nhóm ngày thay đổi, gán giá trị mới cho currentGroup
-                                                                currentGroup = ngayStr;
-                                                            }
-
-                                                            // Duyệt qua các ảnh trong cùng một nhóm ngày và gán cùng một giá trị data-fancybox
-                                                            foreach (DataRow rowImage in Model.DataSet.Tables[0].Rows)
-                                                            {
-                                                                if (currentDate == DateTime.ParseExact(rowImage["Ngay"].ToString().Replace("/", ""), "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None))
-                                                                {
-                                                                    if (!string.IsNullOrEmpty(rowImage["Hinh_Anh"].ToString()))
-                                                                    {
-                                                                        string base64String = rowImage["Hinh_Anh"].ToString();
-                                                                        string imageSrc = "data:image/png;base64," + base64String;
-                                                                        <a href="@imageSrc" class="fancybox" data-fancybox="group-@(currentGroup)" data-width="500">
-                                                                            <img src="@imageSrc" alt="Image" />
-                                                                        </a>
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            previousDate = currentDate;
-                                        }
-                                    }
-                                }
-                            }
                         </tbody>
-
-
                     </table>
-
-
                 </div>
             </div>
         </div>
     </div>
-    <div id="imageModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
-
     <!-- =======  Data-Table  = End  ===================== -->
     <!-- ============ Java Script Files  ================== -->
-
-
 
 
     <script src="~/assets/js/bootstrap.bundle.min.js"></script>
@@ -815,114 +699,177 @@
     <script src="~/assets/js/pdfmake.min.js"></script>
     <script src="~/assets/js/vfs_fonts.js"></script>
     <script src="~/assets/js/custom.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
+    @*<script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var dropdownMaTDV = document.getElementById("dropdownMaTDV");
+
+                if (dropdownMaTDV) {
+                    dropdownMaTDV.addEventListener("change", function () {
+                        var selectedOption = dropdownMaTDV.options[dropdownMaTDV.selectedIndex];
+
+                        if (selectedOption) {
+                            var maTDV = selectedOption.value;
+                            document.cookie = 'Ma_TDV=' + maTDV;
+                        } else {
+                            var selected = "";
+                            document.cookie = 'Ma_TDV=' + selected;
+                        }
+                    });
+                }
+            });
+        </script>*@
     <script>
-        $(document).ready(function () {
-            $('[data-fancybox^="group-"]').each(function () {
-                var groupName = $(this).data('fancybox');
-                $(this).fancybox({
-                    groupAttr: "data-fancybox",
-                    infobar: false,
-                    loop: true,
-                    maxWidth: 800,
-                    maxHeight: 600,
-                    buttons: [
-                        "slideShow",
-                        "fullScreen",
-                        "thumbs",
-                        "close",
-                        "rotateLeft",
-                        "rotateRight",
-                        "zoom",
-                        "download"
-                    ],
-                    caption: function (instance, item) {
-                        return $(this).find('img').attr('alt');
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectedInfoFromCookie = getCookie1('Ma_TK');
+            if (selectedInfoFromCookie) {
+                var selectElement = document.getElementById('nhomtheoselect');
+
+                // Đặt giá trị mặc định cho select dựa trên giá trị cookie
+                selectElement.value = selectedInfoFromCookie;
+
+                // Gọi hàm để lưu giá trị mới vào cookie nếu cần thiết
+                saveSelectedValueToCookie();
+            }
+        });
+
+        function saveSelectedValueToCookie() {
+            var selectedValue = $("#nhomtheoselect").val();
+            document.cookie = 'Ma_TK=' + selectedValue;
+
+            // Gọi hàm để nhóm dữ liệu dựa trên giá trị đã chọn
+        }
+
+
+    </script>
+    <script>
+        document.getElementById("dropdownInput").addEventListener("input", function () {
+            var inputValue = this.value;
+            var options = document.querySelectorAll("#dropdownList option");
+
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].getAttribute("value") === inputValue) {
+                    document.getElementById("selectedOption").value = inputValue;
+
+                    break;
+                }
+            }
+        });
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var runReportButton = document.getElementById("runReportButton");
+
+            if (runReportButton) {
+                runReportButton.addEventListener("click", function () {
+                    var dropdownInput = document.getElementById("dropdownInput");
+                    var selectedOption = document.querySelector("#dropdownList option[value='" + dropdownInput.value + "']");
+
+                    if (selectedOption) {
+                        var tenDt = selectedOption.getAttribute('data-maDt');
+                        document.cookie = 'Ma_Dt=' + tenDt;
+                    } else {
+                        var selected = "";
+                        document.cookie = 'Ma_Dt=' + selected;
                     }
+                });
+            }
+        });
+
+
+    </script>
+
+    <script>
+        // Set the "Từ Ngày" input to the first day of the current month
+        function setFirstDayOfCurrentMonth() {
+            const currentDate = new Date();
+            const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const formattedDate = formatDate(firstDayOfMonth);
+
+            document.getElementById("tu_ngay").value = formattedDate;
+        }
+        function setCurrentDate() {
+            const currentDate = new Date();
+            const formattedToDate = formatDate(currentDate);
+            document.getElementById("den_ngay").value = formattedToDate;
+        }
+        // Format the date as "yyyy-mm-dd" for input type="date"
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, "0");
+            const day = date.getDate().toString().padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        }
+
+        // Call the function to set the "Từ Ngày" input on page load
+        setFirstDayOfCurrentMonth();
+        setCurrentDate();
+    </script>
+    <script>
+        function runReport() {
+
+            const uncheckedCheckboxIndexes = [];
+            const checkboxes = document.querySelectorAll('input[name="myCheckbox"]');
+
+            checkboxes.forEach((checkbox, index) => {
+                if (!checkbox.checked) {
+                    uncheckedCheckboxIndexes.push(index);
+                }
+            });
+
+            // Lưu trạng thái vào Local Storage
+            localStorage.setItem('uncheckedCheckboxIndexes', JSON.stringify(uncheckedCheckboxIndexes));
+            // Hiển thị thẻ span có id là "spanText"
+            const spanElement = document.getElementById("spanText");
+            spanElement.style.display = "block";
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('input[name="myCheckbox"]');
+            const table = document.getElementById('example');
+
+            checkboxes.forEach((checkbox, index) => {
+                checkbox.addEventListener('change', function () {
+                    const columnIndex = index;
+                    const rows = table.querySelectorAll('tr');
+
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td, th');
+                        cells[columnIndex].style.display = this.checked ? '' : 'none';
+                    });
                 });
             });
         });
     </script>
-
-
-
     <script>
-        function toggleImageList(date) {
-            var imageList = document.getElementById('imageList_' + date.replace(/\//g, ''));
-            if (imageList.style.display === 'none') {
-                imageList.style.display = 'block';
-            } else {
-                imageList.style.display = 'none';
-            }
+        function saveNgay() {
+            var from_date = document.getElementById("tu_ngay").value;
+            var to_date = document.getElementById("den_ngay").value;
+            document.cookie = "From_date=" + from_date;
+            document.cookie = "To_date=" + to_date;
         }
-    </script>
-    @*<script>
-
-                var modal = document.getElementById("imageModal");
-                var modalImage = document.getElementById("modalImage");
-                var closeButton = document.getElementsByClassName("close")[0];
-
-                function openModal(imageSrc) {
-                    modal.style.display = "block";
-                modalImage.src = imageSrc;
-            }
-
-                closeButton.onclick = function() {
-                    modal.style.display = "none";
-            }
-
-                window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-
-        </script>*@
-    @*<script>
-            // Lấy modal và hình ảnh
-            var modal = document.getElementById("imageModal");
-            var modalImg = document.getElementById("modalImage");
-
-            // Lấy tất cả các hình ảnh trong bảng
-            var images = document.querySelectorAll(".modalImage");
-
-            // Thêm sự kiện click cho mỗi hình ảnh
-            images.forEach(function (image) {
-                image.onclick = function () {
-                    modal.style.display = "block";
-                    modalImg.src = this.querySelector('img').src;
-                }
-            });
-
-            // Lấy thẻ span đóng
-            var span = document.getElementsByClassName("close")[0];
-
-            // Khi người dùng click vào nút đóng, đóng modal
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-
-            // Khi người dùng click bất kỳ đâu bên ngoài modal, đóng modal
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-
-        </script>*@
-    @*<script>
-            // Hàm hiển thị hình ảnh phóng to
-            function zoomImage(imageSrc) {
-                // Đặt src của hình ảnh phóng to
-                document.getElementById("zoomedImage").src = imageSrc;
-                // Hiển thị container chứa hình ảnh phóng to
-                document.getElementById("zoomedImageContainer").style.display = "block";
-
-            }
-        </script>*@
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            showLoader();
+            // Show the loader when the form is submitted
 
 
-    <script>
+            // Lấy các giá trị ngày đã chọn từ trường nhập liệu
+            const fromDate = document.getElementById('tu_ngay').value;
+            const toDate = document.getElementById('den_ngay').value;
 
+            // Tạo URL mới với các tham số truy vấn
+            const form = event.target;
+            const actionUrl = `${form.action}?From_date=${fromDate}&To_date=${toDate}`;
+
+            // Chuyển hướng tới URL mới với các giá trị ngày đã chọn làm các tham số truy vấn
+            window.location.href = actionUrl;
+        }
         function displaySelectedDate() {
             // Lấy các giá trị ngày đã chọn từ trường nhập liệu
             const fromDate = document.getElementById('tu_ngay').value;
@@ -969,12 +916,40 @@
         window.addEventListener("load", () => {
             // Hide the loader after the page is loaded
             hideLoader();
-
+            const fromDate = urlParams.get('From_date');
+            const toDate = urlParams.get('To_date');
+            if (fromDate && toDate) {
+                displaySelectedDate();
+            }
         });
     </script>
 
+    <script>
+        // Hàm lưu trạng thái checkbox vào Local Storage
+        function saveCheckboxState() {
+            const checkboxes = document.querySelectorAll('input[name="myCheckbox"]');
+            const checkboxState = {};
 
+            checkboxes.forEach((checkbox, index) => {
+                checkboxState[index] = checkbox.checked;
+            });
 
+            localStorage.setItem('checkboxState', JSON.stringify(checkboxState));
+        }
+
+        // Lưu trạng thái khi người dùng bỏ chọn checkbox
+        // Lắng nghe sự kiện thay đổi của các checkbox
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('input[name="myCheckbox"]');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    localStorage.setItem(checkbox.value, checkbox.checked);
+                });
+            });
+        });
+
+    </script>
 
 </body>
 

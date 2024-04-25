@@ -4,12 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Sản Phẩm Trưng Bày</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/Application-Form.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        #dropdownInput, #selectedOption, #Ten_SP, #Ma_SP, #Tien_TB {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 5px;
@@ -21,7 +19,6 @@
             width: 18%; /* Adjust width as needed */
         }
 
-        #selectedOption, #Ten_SP {
             width: 80%; /* Adjust width as needed */
         }
 
@@ -225,14 +222,12 @@
                             <th>Mã SP Thưởng</th>
                             <th>Tên SP Thưởng </th>
 
-                            <th>Đơn Giá</th>
                             <th>Số Lượng </th>
                             <th>Xóa</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr hidden>
                             <td>
                                 <input type="text" name="Ma_vt" id="Ma_vt" list="dropdownListVT" placeholder="Tìm kiếm danh mục">
                                 <datalist id="dropdownListVT">
@@ -243,7 +238,6 @@
                                 </datalist>
                             </td>
                             <td> <input name="Ten_Vt" id="Ten_Vt" readonly></td>
-                            <td> <input name="Dvt" id="Dvt" class="Dvt-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')"></td>
                             <td><input type="text" name="So_luong" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
                             @*<td><button class="deleteRowBtn">Xóa</button></td>*@
                         </tr>
@@ -260,8 +254,6 @@
                     </tr>
 
                 </table>
-                <label id="warning" style="color: red;"></label>
-                <button type="button" id="addRowBtn" hidden>Thêm dòng</button>
                 <button class="submit" type="submit" id="SaveCtV">Lưu</button>
             </form>
 
@@ -321,7 +313,6 @@
             for (var i = 0; i < options.length; i++) {
                 if (options[i].getAttribute("value") === inputValue) {
                     document.getElementById("Ten_Vt").value = options[i].getAttribute("data-ten");
-
                     break;
                 }
             }
@@ -384,10 +375,8 @@
 
         $('#addRowBtn').click(function () {
             var newRow = '<tr>' +
-                '<td><input type="text" name="Ma_vt" style="width: 170px"  class="ma-vt-input" list="dropdownListVT"/></td>' +
                 '<td><input type="text" name="Ten_Vt" class="ten-vt-input" readonly /></td>' +
                 '<td><input type="text" name="Dvt" class="Dvt-input" readonly /></td>' +
-                '<td><input type="text" name="So_luong"  class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
                 '<td><button class="deleteRowBtn">Xóa</button></td>' +
                 '</tr>';
 
@@ -440,32 +429,29 @@
                 }
             });
         }
+        //Collect Multiple Order List For Pass To Controller
         $("#SaveCtV").click(function (e) {
             e.preventDefault();
 
             var orderArr = [];
             orderArr.length = 0;
+            var soct;
+            soct = $(this).find('input[name="So_Ct"]').val();
 
             // Lặp qua mỗi dòng trong tbody của bảng
-            $("#example tbody tr").each(function () {
+           $("#example tbody tr").each(function () {
                 // Kiểm tra nếu dòng hiện tại không có thuộc tính 'hidden'
                 if (!$(this).is(':hidden')) {
-                    var maVt = $(this).find('input[name="Ma_vt"]').val();
-                    var tenVt = $(this).find('input[name="Ten_Vt"]').val();
-                    var Dvt = $(this).find('input[name="Dvt"]').val();
-                    var hanMuc = $(this).find('input[name="So_luong"]').val();
-                    var option1 = $(this).find('input[name="example-1"]').val();
-                    var option2 = $(this).find('input[name="example-2"]').val();
-                    orderArr.push({
-                        Ma_vt: maVt,
-                        Ten_Vt: tenVt,
-                        Dvt: Dvt,
-                        So_luong: hanMuc,
-                        option_1: option1,
-                        option_2: option2,
-                    });
-                }
-            });
+        var maVt = $(this).find('input[name="Ma_vt"]').val();
+               var tenVt = $(this).find('input[name="Ten_Vt"]').val();
+
+               var Dvt = $(this).find('input[name="Dvt"]').val();
+        var hanMuc = $(this).find('input[name="So_luong"]').val();
+        orderArr.push({
+            Ma_vt: maVt,
+            Ten_Vt: tenVt,
+            Dvt: Dvt,
+        });
             // Kiểm tra trạng thái của checkbox và gán giá trị tương ứng
             var option1Value = $("#example-1").is(':checked') ? 1 : 0;
             var option2Value = $("#example-2").is(':checked') ? 1 : 0;
@@ -474,9 +460,13 @@
             document.cookie = "option_1=" + option1Value;
             document.cookie = "option_2=" + option2Value;
 
+           });
+            //var tenVt = $(this).find('input[name="Ten_Vt"]').val();
+            //var hanMuc = $(this).find('input[name="Han_Muc"]').val();
             var data = JSON.stringify({
                 Ngay_Ct: $("#Ngay_Ct").val(),
-                So_Ct: $("#So_Ct").val(),
+                 So_Ct: $("#So_Ct").val(),
+                Dvcs: $("#Dvcs").val(),
                 Ma_Dt: $("#dropdownInput").val(),
                 Ten_Dt: $("#selectedOption").val(),
                 Ngay_Bat_Dau: $("#Ngay_Bat_Dau").val(),
