@@ -558,7 +558,7 @@
             vertical-align: bottom;
         }
         /* Customize the label (the container) */
-        .container {
+        .container1 {
             display: block;
             position: relative;
             padding-left: 35px;
@@ -572,7 +572,7 @@
         }
 
             /* Hide the browser's default checkbox */
-            .container input {
+            .container1 input {
                 position: absolute;
                 opacity: 0;
                 cursor: pointer;
@@ -590,30 +590,30 @@
             background-color: #eee;
         }
 
-        /* On mouse-over, add a grey background color */
-        .container:hover input ~ .checkmark {
+      
+        .container1:hover input ~ .checkmark {
             background-color: #ccc;
         }
 
-        /* When the checkbox is checked, add a blue background */
-        .container input:checked ~ .checkmark {
+       
+        .container1 input:checked ~ .checkmark {
             background-color: #2196F3;
         }
 
-        /* Create the checkmark/indicator (hidden when not checked) */
+        
         .checkmark:after {
             content: "";
             position: absolute;
             display: none;
         }
 
-        /* Show the checkmark when checked */
-        .container input:checked ~ .checkmark:after {
+       
+        .container1 input:checked ~ .checkmark:after {
             display: block;
         }
 
-        /* Style the checkmark/indicator */
-        .container .checkmark:after {
+      
+        .container1 .checkmark:after {
             left: 9px;
             top: 5px;
             width: 5px;
@@ -695,22 +695,10 @@
 
 
     <header class="header_part" style="background-color: #aec9e0; color: #3483bd ">
-        @if (Request.Cookies["UserName"].Value == "Admin-cnct" || Request.Cookies["UserName"].Value == "Admin-cntg" || Request.Cookies["UserName"].Value == "Admin-cnmd" || Request.Cookies["UserName"].Value == "Admin-cnh1" || Request.Cookies["UserName"].Value == "Admin-cnvt"
-                      || Request.Cookies["UserName"].Value == "Admin-cnnt" || Request.Cookies["UserName"].Value == "Admin - cndn" || Request.Cookies["UserName"].Value == "Admin - cnna" || Request.Cookies["UserName"].Value == "Admin - cnhn")
-        {
-
-
-
-            <a href="/Home/AboutCN" style="cursor:pointer">
+      
+            <a  style="cursor:pointer">
                 <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
             </a>
-        }
-        else
-        {
-            <a href="/Home/About" style="cursor:pointer">
-                <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
-            </a>
-        }
         <h4 style="color: #3483bd">QUẢN LÝ TRƯNG BÀY</h4>
         <h4 style="color: #3483bd">Từ @formattedFromDate đến @formattedToDate </h4>
     </header>
@@ -720,7 +708,7 @@
 
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" >
                 <div class="data_table">
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
@@ -751,11 +739,11 @@
                             @foreach (DataRow row in Model.Tables[0].Rows)
                             {
                             <tr>
-                                <td><label class="container">
-    
-    <input type="checkbox" class="rowCheckbox"data-ma-kh="@row["Ma_KH"]">
-    <span class="checkmark"></span>
-</label></td>
+                                <td><label class="container1">  
+                                <input type="checkbox" class="rowCheckbox"data-ma-kh="@row["Ma_KH"]"style="background-color:red">
+                                <span class="checkmark"></span>
+                            </label></td>
+  
                                 <td>@row["Ma_KH"]</td>
                                 <td style="text-align:left">@row["Ten_KH"]</td>
                                 <td>@row["So_HD"]</td>

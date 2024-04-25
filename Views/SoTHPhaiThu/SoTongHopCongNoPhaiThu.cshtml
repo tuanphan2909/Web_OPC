@@ -632,7 +632,31 @@
                     <div class="select-btn" style="width:100px;margin-top:10px">
                         <select name="Nhom" id="nhomtheoselect" onchange="saveSelectedValueToCookie()" style="width:200px">
                             <option value="" style="background-color: #020024;color:white">Chọn giá trị</option>
+                            <option value="111" data-tenTK="TIỀN MẶT VIỆT NAM">111 - TIỀN MẶT VIỆT NAM</option>
+                            <option value="1111" data-tenTK="TIỀN MẶT VIỆT NAM">1111 - TIỀN MẶT VIỆT NAM</option>
+                            <option value="1113" data-tenTK="VÀNG">1113 - VÀNG</option>
+                            <option value="112" data-tenTK="TIỀN GỬI NGÂN HÀNG">112 - TIỀN GỬI NGÂN HÀNG</option>
+                            <option value="1121" data-tenTK="TIỀN GỬI NGÂN HÀNG VNĐ">1121 - TIỀN GỬI NGÂN HÀNG VNĐ</option>
+                            <option value="1122" data-tenTK="TIỀN GỬI NGÂN HÀNG NGOẠI TỆ">1122 - TIỀN GỬI NGÂN HÀNG NGOẠI TỆ</option>
+                            <option value="113" data-tenTK="TIỀN ĐANG CHUYỂN">113 - TIỀN ĐANG CHUYỂN</option>
+                            <option value="1131" data-tenTK="TIỀN ĐANG CHUYỂN (VND)">1131 - TIỀN ĐANG CHUYỂN (VND)</option>
+                            <option value="1132" data-tenTK="TIỀN ĐANG CHUYỂN (ngoại tệ)">1132 - TIỀN ĐANG CHUYỂN (ngoại tệ)</option>
+                            <option value="121" data-tenTK="CHỨNG KHOÁN KINH DOANH">121 - CHỨNG KHOÁN KINH DOANH</option>
+                            <option value="1218" data-tenTK="CHỨNG KHOÁN & CCTC KHÁC">1218 - CHỨNG KHOÁN & CCTC KHÁC</option>
+                            <option value="128" data-tenTK="ĐẦU TƯ NGẮN HẠN KHÁC">128 - ĐẦU TƯ NGẮN HẠN KHÁC</option>
+                            <option value="1281" data-tenTK="TIỀN GỬI CÓ KỲ HẠN">1281 - TIỀN GỬI CÓ KỲ HẠN</option>
+                            <option value="12811" data-tenTK="TIỀN GỬI CÓ KỲ HẠN (1 ĐẾN 3 THÁNG)">12811 - TIỀN GỬI CÓ KỲ HẠN (1 ĐẾN 3 THÁNG)</option>
+                            <option value="12812" data-tenTK="TIỀN GỬI CÓ KỲ HẠN (4 ĐẾN 12 THÁNG)">12812 - TIỀN GỬI CÓ KỲ HẠN (4 ĐẾN 12 THÁNG)</option>
+                            <option value="12813" data-tenTK="TIỀN GỬI CÓ KỲ HẠN (TRÊN 12 THÁNG)">12813 - TIỀN GỬI CÓ KỲ HẠN (TRÊN 12 THÁNG)</option>
+                            <option value="1282" data-tenTK="TRÁI PHIẾU">1282 - TRÁI PHIẾU</option>
+                            <option value="12821" data-tenTK="TRÁI PHIẾU (NGẮN HẠN)">12821 - TRÁI PHIẾU (NGẮN HẠN)</option>
+                            <option value="12822" data-tenTK="TRÁI PHIẾU (DÀI HẠN)">12822 - TRÁI PHIẾU (DÀI HẠN)</option>
+                            <option value="1283" data-tenTK="CHO VAY">1283 - CHO VAY</option>
+                            <option value="12831" data-tenTK="CHO VAY NGẮN HẠN">12831 - CHO VAY NGẮN HẠN</option>
+                            <option value="12832" data-tenTK="CHO VAY DÀI HẠN">12832 - CHO VAY DÀI HẠN</option>
+                            <option value="131" data-tenTK="PHẢI THU KHÁCH HÀNG">131 - PHẢI THU KHÁCH HÀNG</option>
                             <option value="1311" data-tenTK="Phải Thu Khách Hàng(Ngắn Hạn)">1311 - Phải Thu Khách Hàng(Ngắn Hạn)</option>
+                            <option value="1312" data-tenTK="PHẢI THU KHÁCH HÀNG (DÀI HẠN)">1312 - PHẢI THU KHÁCH HÀNG (DÀI HẠN)</option>
                             <option value="1313" data-tenTK="Khách Hàng Trả Trước">1313 - Khách Hàng Trả Trước</option>
                             <option value="1368" data-tenTK="Phải Thu Nội Bộ">1368 - Phải Thu Nội Bộ</option>
                             <option value="13881" data-tenTK="Phải Thu Khác(Ngắn Hạn)">13881 - Phải Thu Khác(Ngắn Hạn)</option>
@@ -730,7 +754,22 @@
                             }
                        
                         </tbody>
-                       
+                        <tfoot style="background-color:burlywood">
+                            @foreach (DataRow row2 in Model.Tables[1].Rows)
+                            {
+                                <tr style="font-weight:bold">
+                                  <td colspan="2"style="text-align:center">Tổng(Total):</td>
+                                    <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["So_Du_Dau"]))</td>
+                                    <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["PS_No"]))</td>
+                                    <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["PS_Co"]))</td>
+                                    <td style="text-align: right;"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Du_Cuoi"]))</td>
+
+
+
+                                </tr>
+                            }
+
+                        </tfoot>
                     </table>
 
                 </div>

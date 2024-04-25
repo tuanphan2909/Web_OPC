@@ -318,6 +318,7 @@
     <Compile Include="Controllers\BaoCaoChiPhiKhuyenMaiController.cs" />
     <Compile Include="Controllers\BaoCaoDoanhThuGVController.cs" />
     <Compile Include="Controllers\BaoCaoKetQuaKinhDoanhController.cs" />
+    <Compile Include="Controllers\BaoCaoLaiLoController.cs" />
     <Compile Include="Controllers\BaoCaoMARController.cs" />
     <Compile Include="Controllers\CanDoiSoPhatSinhController.cs" />
     <Compile Include="Controllers\CongNoChiTietController.cs" />
@@ -1346,6 +1347,10 @@
     <Content Include="Views\CanDoiSoPhatSinh\CanDoiSoPhatSinh_Fill.cshtml" />
     <Content Include="Views\CanDoiSoPhatSinh\CanDoiSoPhatSinh.cshtml" />
     <Content Include="Views\CanDoiSoPhatSinh\CanDoiSoPhatSinh_In.cshtml" />
+    <Content Include="Views\BaoCaoLaiLo\BaoCaoLaiLo_Fill.cshtml" />
+    <Content Include="Views\BaoCaoLaiLo\BaoCaoLaiLo.cshtml" />
+    <Content Include="Views\BaoCaoLaiLo\BaoCaoLaiLo_In.cshtml" />
+    <Content Include="Views\Home\Login_TDV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

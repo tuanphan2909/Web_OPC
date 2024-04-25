@@ -1,6 +1,7 @@
 ﻿﻿﻿﻿﻿﻿﻿@{ ViewBag.Title = "Trang Chủ | OPCPHARMA";
     @model System.Data.DataSet
     string username;
+    int rowCount = 0;
     username = Request.Cookies["UserName"].Value;
 }
 @using System.Data;
@@ -193,12 +194,17 @@
                             <tr>
                                 @foreach (DataRow row3 in Model.Tables[7].Rows)
                                 {
+                                    if (rowCount >= 10)
+                                    {
+                                        break; // thoát khỏi vòng lặp sau khi hiển thị 10 dòng
+                                    }
                                 <tr class="table2-data hidden-row @((row3.Table.Rows.IndexOf(row3) % 2 == 0) ? "even" : "odd")">
                                     <td style="text-align: center; font-size: 14px">@row3["Ma_Vt"]</td>
                                     <td style="text-align: left; font-size: 14px">@row3["Ten_Vt"]</td>
                                     <td style="text-align: right; font-size: 14px">@String.Format("{0:n0}", Convert.ToDecimal(row3["Doanh_Thu"]))</td>
                                 </tr>
-                            }
+                                    rowCount++;
+                                }
 
                             </tbody>
                         </table>

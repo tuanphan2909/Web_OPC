@@ -31,17 +31,49 @@ namespace web4.Controllers
         {
             return View();
         }
-      
+        public ActionResult Login_TDV()
+        {
+            return View();
+        }
         public void connectSQL()
         {
             con.ConnectionString = "Data source=" + "118.69.109.109" + ";database=" + "SAP_OPC" + ";uid=sa;password=Hai@thong";
         }
+     
         public ActionResult DoiMatKhau()
         {
             return View();
         }
         [HttpPost]
+        public ActionResult Verify_TDV(Account Acc)
+        {
+            connectSQL();
+            con.Open();
+           
+            string view = "";
+            string controllerName = "";
+            sqlc.Connection = con;
+            sqlc.CommandText = "select * from view_user where Tendangnhap ='" + Acc.Name + "'And matkhau='" + Acc.Password + "'and ma_DvCs='" + Acc.Ma_DvCs + "'";
+            dt = sqlc.ExecuteReader();
+            if (dt.Read())
+            {
+                Response.Cookies["UserName"].Value = Acc.Name.ToString();
+                Response.Cookies["MA_DVCS"].Value = Acc.Ma_DvCs.ToString();
 
+                con.Close();
+                ViewBag.UserName = Acc.Name.ToString();
+            
+                    view = "QuanLyTrungBay_Fill";
+                controllerName = "ViengTham";
+               
+                return RedirectToAction(view, controllerName);
+            }
+            else
+            {
+                ViewBag.Message = "Sai Mật Khẩu";
+                return View("Login_TDV");
+            }
+        }
         public ActionResult Verify(Account Acc)
         {
             connectSQL();

@@ -483,16 +483,15 @@
         }
 
         tr td:nth-child(6) {
-            background-color: lawngreen;
+            background-color: cornflowerblue;
             color: black; /* Màu nền bạn muốn đặt */
         }
         tr td:nth-child(7) {
             background-color: lawngreen;
             color: black; /* Màu nền bạn muốn đặt */
         }
-
         tr td:nth-child(8) {
-            background-color: lightpink;
+            background-color: lawngreen;
             color: black; /* Màu nền bạn muốn đặt */
         }
 
@@ -500,8 +499,9 @@
             background-color: lightpink;
             color: black; /* Màu nền bạn muốn đặt */
         }
+
         tr td:nth-child(10) {
-            background-color: orange;
+            background-color: lightpink;
             color: black; /* Màu nền bạn muốn đặt */
         }
         tr td:nth-child(11) {
@@ -509,7 +509,7 @@
             color: black; /* Màu nền bạn muốn đặt */
         }
         tr td:nth-child(12) {
-            background-color: gold;
+            background-color: orange;
             color: black; /* Màu nền bạn muốn đặt */
         }
         tr td:nth-child(13) {
@@ -517,6 +517,10 @@
             color: black; /* Màu nền bạn muốn đặt */
         }
         tr td:nth-child(14) {
+            background-color: gold;
+            color: black; /* Màu nền bạn muốn đặt */
+        }
+        tr td:nth-child(15) {
             background-color: aquamarine;
             color: black; /* Màu nền bạn muốn đặt */
         }
@@ -524,11 +528,11 @@
             background-color: aquamarine;
             color: black; /* Màu nền bạn muốn đặt */
         }
-        tr td:nth-child(15) {
+        tr td:nth-child(17) {
             background-color: aquamarine;
             color: black; /* Màu nền bạn muốn đặt */
         }
-        tr td:nth-child(17) {
+        tr td:nth-child(18) {
             background-color: aquamarine;
             color: black; /* Màu nền bạn muốn đặt */
         }
@@ -725,6 +729,7 @@
                                 @*<th>Doanh Thu SP Phát Triển ETC</th>*@
                                 <th style="background-color:cornflowerblue">Doanh Thu OTC OPC</th>
                                 <th style="background-color:cornflowerblue">Doanh Thu ETC OPC</th>
+                                <th style="background-color:cornflowerblue">Doanh Thu Gia Công</th>
                                 <th style="background-color: lawngreen">Doanh Thu OTC Cồn</th>
                                 <th style="background-color:lawngreen">Doanh Thu ETC Cồn</th>
                                 <th style="background-color: lightpink ">Doanh Thu OTC Sủi</th>
@@ -751,6 +756,7 @@
                                     @* <td class="num">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_SPPT_ETC_OPC"]))</td>*@
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OTC_OPC"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ETC_OPC"])).Replace(".", ",")</td>
+                                    <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Gia_Cong"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OTC_Con"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ETC_Con"])).Replace(".", ",")</td>
                                     <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OTC_Sui"])).Replace(".", ",")</td>
@@ -776,6 +782,7 @@
                                 <td class="total-dtpt-otc" style="text-align:right"></td>
                                 <td class="total-dtotc-opc" style="text-align:right"></td>
                                 <td class="total-dtetc-opc" style="text-align:right"></td>
+                                <td class="total-dtgia-cong" style="text-align:right"></td>
                                 <td class="total-dtotc-con" style="text-align:right"></td>
                                 <td class="total-dtetc-con" style="text-align:right"></td>
                                 <td class="total-dtotc-sui" style="text-align:right"></td>
