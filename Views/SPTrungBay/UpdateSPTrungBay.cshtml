@@ -7,6 +7,7 @@
     <title>Form cộng tác viên</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/Application-Form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         #dropdownInput, #selectedOption, #Ten_SP, #Ma_SP, #Tien_TB {
             border: 1px solid #ccc;
@@ -149,6 +150,32 @@
                 background-color: #c68035;
                 color: rgba(0, 0, 0, 0.275);
             }
+        .upload-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+            .upload-section button {
+                background: none;
+                border: 2px solid #ccc;
+                border-radius: 5px;
+                padding: 10px 15px;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            .upload-section div {
+                margin-top: 10px;
+            }
+
+        #preview1 img, #preview2 img, #preview3 img {
+            display: inline-block;
+            vertical-align: top;
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
     </style>
 
 
@@ -160,120 +187,154 @@
         <div class="container">
 
             <form action="SaveCtV" method="post">
-                    
-                    @foreach (DataRow row2 in Model.Tables[0].Rows)
+
+                @foreach (DataRow row2 in Model.Tables[0].Rows)
+                {
+                var hinh1 = row2["Hinh_1"] != DBNull.Value ? Convert.ToBase64String((byte[])row2["Hinh_1"]) : "";
+                var hinh2 = row2["Hinh_2"] != DBNull.Value ? Convert.ToBase64String((byte[])row2["Hinh_2"]) : "";
+                var hinh3 = row2["Hinh_3"] != DBNull.Value ? Convert.ToBase64String((byte[])row2["Hinh_3"]) : "";
+                DateTime ngayCt = (DateTime)row2["Ngay_Ct"];
+                string formattedNgayCt = ngayCt.ToString("yyyy-MM-dd");
+                DateTime ngayBD = (DateTime)row2["Ngay_Bat_Dau"];
+                string Ngay_Bat_Dau = ngayBD.ToString("yyyy-MM-dd");
+                DateTime Ngay_KT = (DateTime)row2["Ngay_Ket_Thuc"];
+                string Ngay_Ket_Thuc = Ngay_KT.ToString("yyyy-MM-dd");
+                <div class="form-group mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <p><strong>1. Ngày</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ct" id="Ngay_Ct" value="@formattedNgayCt">
+                        </div>
+                        <div class="col">
+                            <p><strong>2. SỐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct" value="@row2["So_CT"]" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <p><strong>3. Đối Tượng&nbsp;</strong></p>
+                </div>
+                <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục" name="Ma_Dt" value="@row2["Ma_Dt"]">
+                <datalist id="dropdownList">
+                    @foreach (var item in ViewBag.DataItems)
                     {
-
-                    DateTime ngayCt = (DateTime)row2["Ngay_Ct"];
-                    string formattedNgayCt = ngayCt.ToString("yyyy-MM-dd");
-                    DateTime ngayBD = (DateTime)row2["Ngay_Bat_Dau"];
-                    string Ngay_Bat_Dau = ngayBD.ToString("yyyy-MM-dd");
-                    DateTime Ngay_KT = (DateTime)row2["Ngay_Ket_Thuc"];
-                    string Ngay_Ket_Thuc = Ngay_KT.ToString("yyyy-MM-dd");
-                    <div class="form-group mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <p><strong>1. Ngày</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ct" id="Ngay_Ct" value="@formattedNgayCt">
-                            </div>
-                            <div class="col">
-                                <p><strong>2. SỐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct" value="@row2["So_CT"]" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-3">
-                        <p><strong>3. Đối Tượng&nbsp;</strong></p>
-                    </div>
-                    <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục" name="Ma_Dt" value="@row2["Ma_Dt"]">
-                    <datalist id="dropdownList">
-                        @foreach (var item in ViewBag.DataItems)
-                        {
-                        <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-dvcs="@item.Dvcs">@item.Ten_Dt</option>
-                        }
-                    </datalist>
-                    <input name="Ten_Dt" id="selectedOption" value="@row2["Ten_Dt"]" readonly>
-                    <input name="Stt" id="Stt" value="@row2["STT"]" readonly hidden>
-                    <div class="form-group mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <p><strong>4. Ngày Bắt Đầu</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Bat_Dau" id="Ngay_Bat_Dau" value="@Ngay_Bat_Dau">
-                            </div>
-                            <div class="col">
-                                <p><strong>5. Ngày Kết Thúc</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ket_Thuc" id="Ngay_Ket_Thuc" value="@Ngay_Ket_Thuc">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group mb-3">
-                        <p><strong>6. Sản Phẩm Trưng bày&nbsp;</strong></p>
-                    </div>
-
-                    <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm vật tư" name="Ma_SP" value="@row2["MA_SP"]">
-                    <datalist id="dropdownListSP">
-                        @foreach (var item in ViewBag.DataItems2)
-                        {
-                        <option value="@item.Ma_vt" data-ten="@item.Ten_Vt">@item.Ten_Vt</option>
-                        }
-                    </datalist>
-                    <input name="Ten_SP" id="Ten_SP" value="@row2["Ten_SP"]" readonly>
-                    <div class="form-group mb-3">
-                        <p><strong>7. Mức Tiền&nbsp;</strong></p>
-                    </div>
-                    <input type="text" id="Tien_TB" list="" placeholder="" name="Tien_TB" value="@row2["Tien_TB"]">
-                    <div class="checkbox-wrapper-1">
-                        <input id="example-1" onclick="handleCheckbox(this)" class="substituted" type="checkbox" aria-hidden="true" value="@row2["Option_1"]" />
-                        <label for="example-1">Option 1</label>
-
-                        <input id="example-2" class="substituted" type="checkbox" aria-hidden="true" value="@row2["Option_2"]" />
-                        <label for="example-2">Option 2</label>
-                    </div>
-
+                    <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-dvcs="@item.Dvcs">@item.Ten_Dt</option>
                     }
-                    <table id="example" class="table table-striped table-bordered">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>Mã SP Thưởng</th>
-                                <th>Tên SP Thưởng </th>
+                </datalist>
+                <input name="Ten_Dt" id="selectedOption" value="@row2["Ten_Dt"]" readonly>
+                <input name="Stt" id="Stt" value="@row2["STT"]" readonly hidden>
+                <div class="form-group mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <p><strong>4. Ngày Bắt Đầu</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Bat_Dau" id="Ngay_Bat_Dau" value="@Ngay_Bat_Dau">
+                        </div>
+                        <div class="col">
+                            <p><strong>5. Ngày Kết Thúc</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ket_Thuc" id="Ngay_Ket_Thuc" value="@Ngay_Ket_Thuc">
+                        </div>
+                    </div>
+                </div>
 
-                                <th>Đơn Giá</th>
-                                <th>Số Lượng </th>
-                                <th>Xóa</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (DataRow row2 in Model.Tables[1].Rows)
-                            {
-                            <tr>
-                                <td>
-                                    <input type="text" name="Ma_vt" id="Ma_vt" list="dropdownListVT" placeholder="Tìm kiếm danh mục" value="@row2["Ma_Vt"]">
-                                    <datalist id="dropdownListVT">
-                                        @foreach (var item in ViewBag.DataItems2)
-                                        {
-                                        <option value="@item.Ma_vt" data-ten="@item.Ten_Vt" data-Dvt="@item.Dvt">@item.Ten_Vt</option>
-                                        }
-                                    </datalist>
-                                </td>
-                                <td> <input name="Ten_Vt" id="Ten_Vt" readonly value="@row2["Ten_Vt"]"></td>
-                                <td> <input name="Dvt" id="Dvt" readonly value="@row2["Dvt"]"></td>
-                                <td><input type="text" name="So_luong" value="@row2["So_luong"]" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
-                              
-                                @*<td><button class="deleteRowBtn">Xóa</button></td>*@
-                            </tr>
-                            }
-                        </tbody>
+                <div class="form-group mb-3">
+                    <p><strong>6. Sản Phẩm Trưng bày&nbsp;</strong></p>
+                </div>
 
+                <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm vật tư" name="Ma_SP" value="@row2["MA_SP"]">
+                <datalist id="dropdownListSP">
+                    @foreach (var item in ViewBag.DataItems2)
+                    {
+                    <option value="@item.Ma_vt" data-ten="@item.Ten_Vt">@item.Ten_Vt</option>
+                    }
+                </datalist>
+                <input name="Ten_SP" id="Ten_SP" value="@row2["Ten_SP"]" readonly>
+                <div class="form-group mb-3">
+                    <p><strong>7. Mức Tiền&nbsp;</strong></p>
+                </div>
+                <input type="text" id="Tien_TB" list="" placeholder="" name="Tien_TB" value="@row2["Tien_TB"]">
+                <div class="checkbox-wrapper-1">
+                    <input id="example-1" onclick="handleCheckbox(this)" class="substituted" type="checkbox" aria-hidden="true" value="@row2["Option_1"]" />
+                    <label for="example-1">Option 1</label>
+
+                    <input id="example-2" class="substituted" type="checkbox" aria-hidden="true" value="@row2["Option_2"]" />
+                    <label for="example-2">Option 2</label>
+                </div>
+                <div class="form-group mb-3 upload-section">
+                    <!-- First Image Upload -->
+                    <input type="file" id="imageUpload1" accept="image/*" multiple hidden>
+                    <button type="button" onclick="document.getElementById('imageUpload1').click();"><i class="fa fa-camera"></i></button>
+                    <div id="preview1">
+                        @if (!String.IsNullOrEmpty(hinh1))
+                        {
+                        <img src="data:image/png;base64,@hinh1" alt="Image 1" style="width: 100px; height: auto;" data-clickable="true" />
+                        }
+                    </div>
+
+                    <!-- Second Image Upload -->
+                    <input type="file" id="imageUpload2" accept="image/*" multiple hidden>
+                    <button type="button" onclick="document.getElementById('imageUpload2').click();"><i class="fa fa-camera"></i></button>
+                    <div id="preview2">
+                        @if (!String.IsNullOrEmpty(hinh2))
+                        {
+                        <img src="data:image/png;base64,@hinh2" alt="Image 2" style="width: 100px; height: auto;" data-clickable="true" />
+                        }
+
+                    </div>
+
+                    <!-- Third Image Upload -->
+                    <input type="file" id="imageUpload3" accept="image/*" multiple hidden>
+                    <button type="button" onclick="document.getElementById('imageUpload3').click();"><i class="fa fa-camera"></i></button>
+                    <div id="preview3">
+                        @if (!String.IsNullOrEmpty(hinh3))
+                        {
+                        <img src="data:image/png;base64,@hinh3" alt="Image 3" style="width: 100px; height: auto;" data-clickable="true" />
+                        }
+                    </div>
+                </div>
+                }
+                <table id="example" class="table table-striped table-bordered">
+                    <thead class="table-dark">
                         <tr>
-                            <td colspan="2" style="text-align: right;"><strong>Tổng:</strong></td>
-                            <td id="totalAmount" colspan="2">0</td>
-                            <td> <!-- Cột dành cho nút Xóa nếu cần --></td>
-                        </tr>
-                    </table>
-                    <label id="warning" style="color: red;"></label>
-                    <button type="button" id="addRowBtn" hidden>Thêm dòng</button>
-                    <button class="submit" type="submit" id="SaveCtV">Lưu</button>
+                            <th>Mã SP Thưởng</th>
+                            <th>Tên SP Thưởng </th>
 
-                </form>
+                            <th>Đơn Giá</th>
+                            <th>Số Lượng </th>
+                            <th>Xóa</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow row2 in Model.Tables[1].Rows)
+                        {
+                        <tr>
+                            <td>
+                                <input type="text" name="Ma_vt" id="Ma_vt" list="dropdownListVT" placeholder="Tìm kiếm danh mục" value="@row2["Ma_Vt"]">
+                                <datalist id="dropdownListVT">
+                                    @foreach (var item in ViewBag.DataItems2)
+                                    {
+                                    <option value="@item.Ma_vt" data-ten="@item.Ten_Vt" data-Dvt="@item.Dvt">@item.Ten_Vt</option>
+                                    }
+                                </datalist>
+                            </td>
+                            <td> <input name="Ten_Vt" id="Ten_Vt" readonly value="@row2["Ten_Vt"]"></td>
+                            <td> <input name="Dvt" id="Dvt" readonly value="@row2["Dvt"]"></td>
+                            <td><input type="text" name="So_luong" value="@row2["So_luong"]" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
+
+                            @*
+                            <td><button class="deleteRowBtn">Xóa</button></td>*@
+                        </tr>
+                        }
+                    </tbody>
+
+                    <tr>
+                        <td colspan="2" style="text-align: right;"><strong>Tổng:</strong></td>
+                        <td id="totalAmount" colspan="2">0</td>
+                        <td> <!-- Cột dành cho nút Xóa nếu cần --></td>
+                    </tr>
+                </table>
+                <label id="warning" style="color: red;"></label>
+                <button type="button" id="addRowBtn" hidden>Thêm dòng</button>
+                <button class="submit" type="submit" id="SaveCtV">Lưu</button>
+
+            </form>
 
         </div>
     </section>
@@ -453,7 +514,12 @@
         //Collect Multiple Order List For Pass To Controller
         $("#SaveCtV").click(function (e) {
             e.preventDefault();
-
+            var warningText = $('#warning').text();
+            if (warningText !== '') {
+                alert('Cannot save: ' + warningText);
+                console.log('Save aborted due to warning.');
+                return; // Stop execution
+            }
             var orderArr = [];
             orderArr.length = 0;
             var soct;
@@ -479,6 +545,32 @@
             var option1Value = $("#example-1").is(':checked') ? 1 : 0;
             var option2Value = $("#example-2").is(':checked') ? 1 : 0;
 
+            function getBase64Image(imgElement) {
+                var canvas = document.createElement("canvas");
+                canvas.width = imgElement.naturalWidth; // or 'width' if you want a special/scaled size
+                canvas.height = imgElement.naturalHeight; // or 'height' if you want a special/scaled size
+
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(imgElement, 0, 0);
+
+                return canvas.toDataURL("image/png"); // or 'image/jpeg'
+            }
+
+            function collectImageData() {
+                var imageData = {};
+                ['preview1', 'preview2', 'preview3'].forEach(function (previewId, index) {
+                    var preview = document.getElementById(previewId);
+                    var images = preview.getElementsByTagName('img');
+                    if (images.length > 0) {
+                        imageData['Hinh_' + (index + 1)] = getBase64Image(images[0]);
+                    } else {
+                        imageData['Hinh_' + (index + 1)] = null; // or keep it undefined or empty string
+                    }
+                });
+                return imageData;
+            }
+
+            var imageData = collectImageData();
             // Lưu trữ giá trị vào cookies
             document.cookie = "option_1=" + option1Value;
             document.cookie = "option_2=" + option2Value;
@@ -496,6 +588,7 @@
                 Stt: $("#Stt").val(),
                 option_1: option1Value,
                 option_2: option2Value,
+                ...imageData,
                 details: orderArr
             });
 
@@ -616,6 +709,40 @@
     </script>
 
 
+    <script>
+        function handleFileUpload(inputId, previewId) {
+            var input = document.getElementById(inputId);
+            var preview = document.getElementById(previewId);
+
+            input.addEventListener('change', function () {
+                var files = this.files;
+                preview.innerHTML = ''; // Clear existing images
+
+                if (files.length > 3) {
+                    alert('Bạn chỉ có thể tải lên tối đa 3 hình ảnh.');
+                    return;
+                }
+
+                Array.from(files).forEach(file => {
+                    var imgElement = document.createElement('img');
+                    imgElement.style.width = '100px'; // Set the width of the image
+                    imgElement.style.height = '100px'; // Set the height of the image
+                    imgElement.style.marginRight = '10px'; // Add some space between images
+                    imgElement.src = URL.createObjectURL(file);
+                    preview.appendChild(imgElement);
+                });
+            });
+        }
+
+        // Initialize handlers for each upload
+        document.addEventListener('DOMContentLoaded', function () {
+            handleFileUpload('imageUpload1', 'preview1');
+            handleFileUpload('imageUpload2', 'preview2');
+            handleFileUpload('imageUpload3', 'preview3');
+        });
+
+
+    </script>
 
 
 </body>
