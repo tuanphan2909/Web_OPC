@@ -25,5 +25,7 @@ namespace web4.Models
         public int So_luong { get; set; }
         public string STT { get; set; }
         public string Dvcs { get; set; }
+        public Boolean option_1 { get; set; }
+        public Boolean option_2 { get; set; }
     }
 }

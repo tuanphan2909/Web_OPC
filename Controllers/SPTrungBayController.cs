@@ -145,6 +145,10 @@ namespace web4.Controllers
         {
             
             var Ma_dvcs = Request.Cookies["ma_dvcs"].Value;
+
+            var Option_1 = Request.Cookies["Option_1"].Value;
+            var Option_2 = Request.Cookies["Option_2"].Value;
+
             string result = "Error!";
             connectSQL();
             if (SPTB != null && SPTB.Details != null)
@@ -154,8 +158,9 @@ namespace web4.Controllers
                     var detailsTable = new DataTable();
                     detailsTable.Columns.Add("Ma_vt", typeof(int));
                     detailsTable.Columns.Add("Ten_Vt", typeof(string));
-                    detailsTable.Columns.Add("Dvt", typeof(string));
+                    detailsTable.Columns.Add("Dvt", typeof(int));
                     detailsTable.Columns.Add("So_luong", typeof(int));
+
 
                     foreach (var detail in SPTB.Details)
                     {
@@ -180,6 +185,8 @@ namespace web4.Controllers
                             command.Parameters.AddWithValue("@_Ma_SP", SPTB.Ma_SP);
                             command.Parameters.AddWithValue("@_Ma_Dvcs", Ma_dvcs);
                             command.Parameters.AddWithValue("@_Ten_SP", SPTB.Ten_SP);
+                            command.Parameters.AddWithValue("@_Option_1", Option_1);
+                            command.Parameters.AddWithValue("@_Option_2", Option_2);
 
                             // Pass details as a TVP parameter
                             var detailsParam = command.Parameters.AddWithValue("@_Details", detailsTable);
@@ -273,6 +280,8 @@ namespace web4.Controllers
 
 
             TDGH.Dvcs = Request.Cookies["MA_DVCS"] != null ? Request.Cookies["MA_DVCS"].Value : "";
+            var Option_1 = Request.Cookies["Option_1"].Value;
+            var Option_2 = Request.Cookies["Option_2"].Value;
          
             string result = "Error!";
             connectSQL();
@@ -308,7 +317,8 @@ namespace web4.Controllers
                             command.Parameters.AddWithValue("@_Ten_SP", TDGH.Ten_SP);
                             command.Parameters.AddWithValue("@_Tien_TB", TDGH.Tien_TB);
                             command.Parameters.AddWithValue("@_Stt", TDGH.STT);
-
+                            command.Parameters.AddWithValue("@_Option_1", Option_1);
+                            command.Parameters.AddWithValue("@_Option_2", Option_2);
 
                             // Pass details as a TVP parameter
                             var detailsParam = command.Parameters.AddWithValue("@_Details", detailsTable);
