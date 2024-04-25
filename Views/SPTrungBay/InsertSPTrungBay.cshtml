@@ -61,7 +61,7 @@
         }
     </style>
 
-    
+
 
     <style>
         .checkbox-wrapper-1 *,
@@ -161,109 +161,111 @@
         <div class="container">
 
             <form action="SaveCtV" method="post">
-                @*<form>*@
-                <div class="form-group mb-3">
-                    <div class="row">
-                        <div class="col">
-                            <p><strong>1. Ngày</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ct" id="Ngay_Ct">
-                        </div>
-                        <div class="col">
-                            <p><strong>2. SỐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct">
+                @*<form>
+                    *@
+                    <div class="form-group mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>1. Ngày</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ct" id="Ngay_Ct">
+                            </div>
+                            <div class="col">
+                                <p><strong>2. SỐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group mb-3">
-                    <p><strong>3. Đối Tượng&nbsp;</strong></p>
-                </div>
-                <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục" name="Ma_Dt">
-                <datalist id="dropdownList">
-                    @foreach (var item in ViewBag.DataItems)
-                    {
+                    <div class="form-group mb-3">
+                        <p><strong>3. Đối Tượng&nbsp;</strong></p>
+                    </div>
+                    <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục" name="Ma_Dt">
+                    <datalist id="dropdownList">
+                        @foreach (var item in ViewBag.DataItems)
+                        {
                         <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-dvcs="@item.Dvcs">@item.Ten_Dt</option>
-                    }
-                </datalist>
-                <input name="Ten_Dt" id="selectedOption" readonly>
-                <div class="form-group mb-3">
-                    <div class="row">
-                        <div class="col">
-                            <p><strong>4. Ngày Bắt Đầu</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Bat_Dau" id="Ngay_Bat_Dau">
-                        </div>
-                        <div class="col">
-                            <p><strong>5. Ngày Kết Thúc</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ket_Thuc" id="Ngay_Ket_Thuc">
+                        }
+                    </datalist>
+                    <input name="Ten_Dt" id="selectedOption" readonly>
+                    <div class="form-group mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>4. Ngày Bắt Đầu</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Bat_Dau" id="Ngay_Bat_Dau">
+                            </div>
+                            <div class="col">
+                                <p><strong>5. Ngày Kết Thúc</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ket_Thuc" id="Ngay_Ket_Thuc">
+                            </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="form-group mb-3">
-                    <p><strong>6. Sản Phẩm Trưng bày&nbsp;</strong></p>
-                </div>
+                    <div class="form-group mb-3">
+                        <p><strong>6. Sản Phẩm Trưng bày&nbsp;</strong></p>
+                    </div>
 
-                <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm vật tư" name="Ma_SP">
-                <datalist id="dropdownListSP">
-                    @foreach (var item in ViewBag.DataItems2)
-                    {
+                    <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm vật tư" name="Ma_SP">
+                    <datalist id="dropdownListSP">
+                        @foreach (var item in ViewBag.DataItems2)
+                        {
                         <option value="@item.Ma_vt" data-ten="@item.Ten_Vt">@item.Ten_Vt</option>
-                    }
-                </datalist>
-                <input name="Ten_SP" id="Ten_SP" readonly>
-                <div class="form-group mb-3">
-                    <p><strong>7. Mức Tiền&nbsp;</strong></p>
-                </div>
-                <input type="text" id="Tien_TB" list="" placeholder="" name="Tien_TB">
-                <div class="checkbox-wrapper-1">
-                    <input id="example-1" onclick="handleCheckbox(this)" class="substituted" type="checkbox" aria-hidden="true" />
-                    <label for="example-1">Option 1</label>
+                        }
+                    </datalist>
+                    <input name="Ten_SP" id="Ten_SP" readonly>
+                    <div class="form-group mb-3">
+                        <p><strong>7. Mức Tiền&nbsp;</strong></p>
+                    </div>
+                    <input type="text" id="Tien_TB" list="" placeholder="" name="Tien_TB">
+                    <div class="checkbox-wrapper-1">
+                        <input id="example-1" onclick="handleCheckbox(this)" class="substituted" type="checkbox" aria-hidden="true" />
+                        <label for="example-1">Option 1</label>
 
-                    <input id="example-2" class="substituted" type="checkbox" aria-hidden="true" />
-                    <label for="example-2">Option 2</label>
-                </div>
+                        <input id="example-2" class="substituted" type="checkbox" aria-hidden="true" />
+                        <label for="example-2">Option 2</label>
+                    </div>
 
-                <table id="example" class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Mã SP Thưởng</th>
-                            <th>Tên SP Thưởng </th>
+                    <table id="example" class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Mã SP Thưởng</th>
+                                <th>Tên SP Thưởng </th>
 
-                            <th>Đơn Giá</th>
-                            <th>Số Lượng </th>
-                            <th>Xóa</th>
+                                <th>Đơn Giá</th>
+                                <th>Số Lượng </th>
+                                <th>Xóa</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr hidden>
-                            <td>
-                                <input type="text" name="Ma_vt" id="Ma_vt" list="dropdownListVT" placeholder="Tìm kiếm danh mục">
-                                <datalist id="dropdownListVT">
-                                    @foreach (var item in ViewBag.DataItems2)
-                                    {
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr hidden>
+                                <td>
+                                    <input type="text" name="Ma_vt" id="Ma_vt" list="dropdownListVT" placeholder="Tìm kiếm danh mục">
+                                    <datalist id="dropdownListVT">
+                                        @foreach (var item in ViewBag.DataItems2)
+                                        {
                                         <option value="@item.Ma_vt" data-ten="@item.Ten_Vt" data-Dvt="@item.Dvt">@item.Ten_Vt</option>
-                                    }
-                                </datalist>
-                            </td>
-                            <td> <input name="Ten_Vt" id="Ten_Vt" readonly></td>
-                            <td> <input name="Dvt" id="Dvt" class="Dvt-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')"></td>
-                            <td><input type="text" name="So_luong" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
-                            @*<td><button class="deleteRowBtn">Xóa</button></td>*@
+                                        }
+                                    </datalist>
+                                </td>
+                                <td> <input name="Ten_Vt" id="Ten_Vt" readonly></td>
+                                <td> <input name="Dvt" id="Dvt" class="Dvt-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')"></td>
+                                <td><input type="text" name="So_luong" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
+                               
+                                @*<td><button class="deleteRowBtn">Xóa</button></td>*@
+                            </tr>
+                            <!-- Các hàng trước đó của bảng -->
+
+
+                        </tbody>
+
+
+                        <tr>
+                            <td colspan="2" style="text-align: right;"><strong>Tổng:</strong></td>
+                            <td id="totalAmount" colspan="2">0</td>
+                            <td> <!-- Cột dành cho nút Xóa nếu cần --></td>
                         </tr>
-                        <!-- Các hàng trước đó của bảng -->
 
-
-                    </tbody>
-
-
-                    <tr>
-                        <td colspan="2" style="text-align: right;"><strong>Tổng:</strong></td>
-                        <td id="totalAmount" colspan="2">0</td>
-                        <td> <!-- Cột dành cho nút Xóa nếu cần --></td>
-                    </tr>
-
-                </table>
-                <label id="warning" style="color: red;"></label>
-                <button type="button" id="addRowBtn" hidden>Thêm dòng</button>
-                <button class="submit" type="submit" id="SaveCtV">Lưu</button>
-            </form>
+                    </table>
+                    <label id="warning" style="color: red;"></label>
+                    <button type="button" id="addRowBtn" hidden>Thêm dòng</button>
+                    <button class="submit" type="submit" id="SaveCtV">Lưu</button>
+                </form>
 
         </div>
     </section>
@@ -271,7 +273,8 @@
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/Application-Form-1.js"></script>
     <script src="/assets/js/Application-Form.js"></script>
-    @*</ng-><script src="/assets/js/script.js"></script>*@
+    @*</ng->
+    <script src="/assets/js/script.js"></script>*@
 
     <script>
         document.getElementById("dropdownInput").addEventListener("input", function () {
@@ -369,57 +372,57 @@
 
     </script>
     <script>
-    $(document).ready(function () {
-        // Function to repopulate dropdownListVT
-        function populateDropdownListVT() {
-            var dropdownListVT = $('#dropdownListVT');
-            dropdownListVT.empty();
+        $(document).ready(function () {
+            // Function to repopulate dropdownListVT
+            function populateDropdownListVT() {
+                var dropdownListVT = $('#dropdownListVT');
+                dropdownListVT.empty();
 
-            var dataItems2 = @Html.Raw(Json.Encode(ViewBag.DataItems2));
-            dataItems2.forEach(function (item) {
-                var option = $('<option>').val(item.Ma_vt).attr('data-ten', item.Ten_Vt).attr('data-Dvt',item.Dvt).text(item.Ten_Vt);
-                dropdownListVT.append(option);
-            });
-        }
-
-        $('#addRowBtn').click(function () {
-            var newRow = '<tr>' +
-                '<td><input type="text" name="Ma_vt" style="width: 170px"  class="ma-vt-input" list="dropdownListVT"/></td>' +
-                '<td><input type="text" name="Ten_Vt" class="ten-vt-input" readonly /></td>' +
-                '<td><input type="text" name="Dvt" class="Dvt-input" readonly /></td>' +
-                '<td><input type="text" name="So_luong"  class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
-                '<td><button class="deleteRowBtn">Xóa</button></td>' +
-                '</tr>';
-
-            $('#example tbody').append(newRow);
-
-            // Call the function to recreate the dropdownListVT
-            populateDropdownListVT();
-        });
-
-        $(document).on('input', '.ma-vt-input', function () {
-            var inputValue = $(this).val();
-            var tenVtInput = $(this).closest('tr').find('.ten-vt-input');
-            var DvtInput = $(this).closest('tr').find('.Dvt-input');
-            // Find the corresponding option in dropdownListVT
-            var option = $('#dropdownListVT option[value="' + inputValue + '"]');
-
-            if (option.length > 0) {
-                // Update the Ten_vt input with the data-ten attribute of the selected option
-                tenVtInput.val(option.attr('data-ten'));
-                DvtInput.val(option.attr('data-Dvt'));
-            } else {
-                tenVtInput.val('');
+                var dataItems2 = @Html.Raw(Json.Encode(ViewBag.DataItems2));
+                dataItems2.forEach(function (item) {
+                    var option = $('<option>').val(item.Ma_vt).attr('data-ten', item.Ten_Vt).attr('data-Dvt', item.Dvt).text(item.Ten_Vt);
+                    dropdownListVT.append(option);
+                });
             }
-        });
 
-        $(document).on('click', '.deleteRowBtn', function () {
-            $(this).closest('tr').remove();
+            $('#addRowBtn').click(function () {
+                var newRow = '<tr>' +
+                    '<td><input type="text" name="Ma_vt" style="width: 170px"  class="ma-vt-input" list="dropdownListVT"/></td>' +
+                    '<td><input type="text" name="Ten_Vt" class="ten-vt-input" readonly /></td>' +
+                    '<td><input type="text" name="Dvt" class="Dvt-input" readonly /></td>' +
+                    '<td><input type="text" name="So_luong"  class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
+                    '<td><button class="deleteRowBtn">Xóa</button></td>' +
+                    '</tr>';
 
-            // Call the function to recreate the dropdownListVT after deleting a row
-            populateDropdownListVT();
+                $('#example tbody').append(newRow);
+
+                // Call the function to recreate the dropdownListVT
+                populateDropdownListVT();
+            });
+
+            $(document).on('input', '.ma-vt-input', function () {
+                var inputValue = $(this).val();
+                var tenVtInput = $(this).closest('tr').find('.ten-vt-input');
+                var DvtInput = $(this).closest('tr').find('.Dvt-input');
+                // Find the corresponding option in dropdownListVT
+                var option = $('#dropdownListVT option[value="' + inputValue + '"]');
+
+                if (option.length > 0) {
+                    // Update the Ten_vt input with the data-ten attribute of the selected option
+                    tenVtInput.val(option.attr('data-ten'));
+                    DvtInput.val(option.attr('data-Dvt'));
+                } else {
+                    tenVtInput.val('');
+                }
+            });
+
+            $(document).on('click', '.deleteRowBtn', function () {
+                $(this).closest('tr').remove();
+
+                // Call the function to recreate the dropdownListVT after deleting a row
+                populateDropdownListVT();
+            });
         });
-    });
 
         function SaveCtV(data) {
             return $.ajax({

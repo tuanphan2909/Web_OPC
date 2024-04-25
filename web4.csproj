@@ -319,6 +319,7 @@
     <Compile Include="Controllers\BaoCaoDoanhThuGVController.cs" />
     <Compile Include="Controllers\BaoCaoKetQuaKinhDoanhController.cs" />
     <Compile Include="Controllers\BaoCaoMARController.cs" />
+    <Compile Include="Controllers\CanDoiSoPhatSinhController.cs" />
     <Compile Include="Controllers\CongNoChiTietController.cs" />
     <Compile Include="Controllers\CongTacVienController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
@@ -343,6 +344,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MauInChungTuController.cs" />
     <Compile Include="Controllers\THNhapXuatTonTheoTKController.cs" />
+    <Compile Include="Controllers\TongHopPhaiTraController.cs" />
     <Compile Include="Controllers\Top10VatTuController.cs" />
     <Compile Include="Controllers\ViengThamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1335,9 +1337,6 @@
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_Fill.cshtml" />
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy.cshtml" />
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_In.cshtml" />
-    <Content Include="Views\SPTrungBay\InsertSPTrungBay.cshtml" />
-    <Content Include="Views\SPTrungBay\index.cshtml" />
-    <Content Include="Views\SPTrungBay\UpdateSPTrungBay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -505,8 +505,8 @@
                             <tr>
                                 <th rowspan="1"></th>
                                 <th rowspan="1"></th>
-                                <th colspan="9">Thực Hiện OTC</th>
-                                <th colspan="6">Thực Hiện ETC</th>
+                                <th colspan="10">Thực Hiện OTC</th>
+                                <th colspan="7">Thực Hiện ETC</th>
                                 <th colspan="6">Khoán</th>
                                 @*<th colspan="6">Khoán ETC</th>*@
                                 <th rowspan="1"></th>
@@ -525,6 +525,7 @@
                                 <th>Tw25 OTC</th>
                                 <th>Phiến OTC</th>
                                 <th>Combo OTC</th>
+                                <th>Doanh Thu Gia Công OTC</th>
                                 <th>Tổng Thực Hiện</th>
                                 <!--ETC-->
 
@@ -533,6 +534,7 @@
                                 <th>Sủi ETC</th>
                                 <th>Tw25 ETC</th>
                                 <th>Phiến ETC</th>
+                                <th>Doanh Thu Gia Công ETC</th>
                                 <th>Tổng Thực Hiện</th>
                                 <!--Khoán OTC-->
                                 <th>Khoán OPC</th>
@@ -572,6 +574,7 @@
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ComBo_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Gia_Cong_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Thuc_Hien_OTC"])).Replace(".", ",")</td>
                                 <!--doanh thu ETC-->
 
@@ -580,6 +583,7 @@
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_ETC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_ETC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Gia_Cong_ETC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Thuc_Hien_ETC"])).Replace(".", ",")</td>
                                 <!--Khoán  OTC-->
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_OTC"])).Replace(".", ",")</td>
@@ -619,12 +623,14 @@
                                 <td class="num" style="text-align:right"><span id="tw25-otc-otc"></span></td>
                                 <td class="num" style="text-align:right"><span id="phien-otc-otc"></span></td>
                                 <td class="num" style="text-align:right"><span id="combo-otc-otc"></span></td>
+                                <td class="num" style="text-align:right"><span id="giacong-otc"></span></td>
                                 <td class="num" style="text-align:right"><span id="tongthuchien-otc"></span></td>
                                 <td class="num" style="text-align:right"><span id="opc-conlai-etc"></span></td>
                                 <td class="num" style="text-align:right"><span id="con-etc-etc"></span></td>
                                 <td class="num" style="text-align:right"><span id="sui-etc"></span></td>
                                 <td class="num" style="text-align:right"><span id="tw25-etc"></span></td>
                                 <td class="num" style="text-align:right"><span id="phien-etc-etc"></span></td>
+                                <td class="num" style="text-align:right"><span id="giacong-etc"></span></td>
                                 <td class="num" style="text-align:right"><span id="tongthuchien-etc"></span></td>
                                 <td class="num" style="text-align:right"><span id="khoan-opc-otc"></span></td>
                                 <td class="num" style="text-align:right"><span id="khoan-sui-otc"></span></td>
@@ -725,7 +731,7 @@
             var dataTable = $('#example').DataTable();
 
             function calculateTotal() {
-                var totalColumns = new Array(26).fill(0);
+                var totalColumns = new Array(28).fill(0);
 
                 dataTable.rows({ search: 'applied' }).every(function () {
                     var rowData = this.data();
@@ -749,22 +755,24 @@
                 var tw25OtcOtcTotal = totalColumns[7];
                 var phienOtcOtcTotal = totalColumns[8];
                 var comboOtcOtcTotal = totalColumns[9];
-                var tongThucHienOtcTotal = totalColumns[10];
-                var opcConLaiEtcTotal = totalColumns[11];
-                var conEtcEtcTotal = totalColumns[12];
-                var suiEtcTotal = totalColumns[13];
-                var tw25EtcTotal = totalColumns[14];
-                var phienEtcEtcTotal = totalColumns[15];
-                var tongThucHienEtcTotal = totalColumns[16];
-                var khoanOpcOtcTotal = totalColumns[17];
-                var khoanSuiOtcTotal = totalColumns[18];
-                var khoanConOtcTotal = totalColumns[19];
-                var khoan25OtcTotal = totalColumns[20];
-                var khoanPhienOtcTotal = totalColumns[21];
-                var tongKhoanOtcTotal = totalColumns[22];
-                var doanhThuTMTotal = totalColumns[23];
-                var doanhThuKhacTotal = totalColumns[24];
-                var tongDoanhThuTotal = totalColumns[25];
+                var giaCongOtcTotal = totalColumns[10];
+                var tongThucHienOtcTotal = totalColumns[11];
+                var opcConLaiEtcTotal = totalColumns[12];
+                var conEtcEtcTotal = totalColumns[13];
+                var suiEtcTotal = totalColumns[14];
+                var tw25EtcTotal = totalColumns[15];
+                var phienEtcEtcTotal = totalColumns[16];
+                var giaCongEtcTotal = totalColumns[17];
+                var tongThucHienEtcTotal = totalColumns[18];
+                var khoanOpcOtcTotal = totalColumns[19];
+                var khoanSuiOtcTotal = totalColumns[20];
+                var khoanConOtcTotal = totalColumns[21];
+                var khoan25OtcTotal = totalColumns[22];
+                var khoanPhienOtcTotal = totalColumns[23];
+                var tongKhoanOtcTotal = totalColumns[24];
+                var doanhThuTMTotal = totalColumns[25];
+                var doanhThuKhacTotal = totalColumns[26];
+                var tongDoanhThuTotal = totalColumns[27];
 
                 // Hiển thị giá trị tổng từng cột lên view
                 $('#spcl-otc-otc').text(formatNumber(spclOtcOtcTotal));
@@ -791,6 +799,8 @@
                 $('#doanhthutm').text(formatNumber(doanhThuTMTotal));
                 $('#doanhthukhac').text(formatNumber(doanhThuKhacTotal));
                 $('#tongdoanhthu').text(formatNumber(tongDoanhThuTotal));
+                $('#giacong-otc').text(formatNumber(giaCongOtcTotal));
+                $('#giacong-etc').text(formatNumber(giaCongEtcTotal));
                 var grandTotal = totalColumns.reduce(function (total, value) {
                     return total + value;
                 }, 0);

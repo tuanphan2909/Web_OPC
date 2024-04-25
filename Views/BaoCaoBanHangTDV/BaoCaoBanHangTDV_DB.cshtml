@@ -779,7 +779,8 @@
                                 object sumKhoanPhienObj = row2["Sum_Khoan_PHIEN"];
 
                                 decimal sumKhoanPhien = sumKhoanPhienObj != DBNull.Value ? Convert.ToDecimal(sumKhoanPhienObj) : 0;  // Tránh chia cho 0
-                                decimal Phien = Convert.ToDecimal(row2["Sum_Phien"]) != 0 ? Convert.ToDecimal(row2["Sum_Phien"]) : 0;
+                                decimal Phien = row2["Sum_Phien"] != DBNull.Value ? Convert.ToDecimal(row2["Sum_Phien"]) : 0;
+
                                 if (Phien != 0 && sumKhoanPhien != 0)
                                 {
                                     tylePhien = Math.Round(Phien / sumKhoanPhien * 100, 2);

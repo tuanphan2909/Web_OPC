@@ -160,7 +160,7 @@ namespace web4.Controllers
                     detailsTable.Columns.Add("Ten_Vt", typeof(string));
                     detailsTable.Columns.Add("Dvt", typeof(int));
                     detailsTable.Columns.Add("So_luong", typeof(int));
-                 
+
 
                     foreach (var detail in SPTB.Details)
                     {
@@ -282,7 +282,7 @@ namespace web4.Controllers
             TDGH.Dvcs = Request.Cookies["MA_DVCS"] != null ? Request.Cookies["MA_DVCS"].Value : "";
             var Option_1 = Request.Cookies["Option_1"].Value;
             var Option_2 = Request.Cookies["Option_2"].Value;
-
+         
             string result = "Error!";
             connectSQL();
             if (TDGH != null && TDGH.Details != null)
