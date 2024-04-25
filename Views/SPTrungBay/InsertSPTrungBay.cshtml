@@ -450,25 +450,19 @@
             orderArr.length = 0;
 
             // Lặp qua mỗi dòng trong tbody của bảng
-            $("#example tbody tr").each(function () {
+           $("#example tbody tr").each(function () {
                 // Kiểm tra nếu dòng hiện tại không có thuộc tính 'hidden'
                 if (!$(this).is(':hidden')) {
-                    var maVt = $(this).find('input[name="Ma_vt"]').val();
-                    var tenVt = $(this).find('input[name="Ten_Vt"]').val();
-                    var Dvt = $(this).find('input[name="Dvt"]').val();
-                    var hanMuc = $(this).find('input[name="So_luong"]').val();
-                    var option1 = $(this).find('input[name="example-1"]').val();
-                    var option2 = $(this).find('input[name="example-2"]').val();
-                    orderArr.push({
-                        Ma_vt: maVt,
-                        Ten_Vt: tenVt,
-                        Dvt: Dvt,
-                        So_luong: hanMuc,
-                        option_1: option1,
-                        option_2: option2,
-                    });
-                }
-            });
+        var maVt = $(this).find('input[name="Ma_vt"]').val();
+               var tenVt = $(this).find('input[name="Ten_Vt"]').val();
+
+               var Dvt = $(this).find('input[name="Dvt"]').val();
+        var hanMuc = $(this).find('input[name="So_luong"]').val();
+        orderArr.push({
+            Ma_vt: maVt,
+            Ten_Vt: tenVt,
+            Dvt: Dvt,
+        });
             // Kiểm tra trạng thái của checkbox và gán giá trị tương ứng
             var option1Value = $("#example-1").is(':checked') ? 1 : 0;
             var option2Value = $("#example-2").is(':checked') ? 1 : 0;
@@ -477,6 +471,9 @@
             document.cookie = "option_1=" + option1Value;
             document.cookie = "option_2=" + option2Value;
 
+           });
+            //var tenVt = $(this).find('input[name="Ten_Vt"]').val();
+            //var hanMuc = $(this).find('input[name="Han_Muc"]').val();
             var data = JSON.stringify({
                 Ngay_Ct: $("#Ngay_Ct").val(),
                 So_Ct: $("#So_Ct").val(),
