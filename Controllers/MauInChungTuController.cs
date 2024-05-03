@@ -2228,9 +2228,53 @@ namespace web4.Controllers
 
             }
         }
+        public List<BKHoaDonGiaoHang> LoadDmVt()
+        {
 
+            connectSQL();
+
+            List<BKHoaDonGiaoHang> dataItems = new List<BKHoaDonGiaoHang>();
+
+            using (SqlConnection connection = new SqlConnection(con.ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("[usp_PriceList_SAP]", connection))
+                {
+                    command.CommandTimeout = 950;
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataAdapter sda = new SqlDataAdapter(command))
+                    {
+                        DataSet ds = new DataSet();
+                        sda.Fill(ds);
+
+                        // Kiểm tra xem DataSet có bảng dữ liệu hay không
+                        if (ds.Tables.Count > 0)
+                        {
+                            DataTable dt = ds.Tables[0];
+
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                BKHoaDonGiaoHang dataItem = new BKHoaDonGiaoHang
+                                {
+                                    Ma_Vt = row["Ma_Vt"].ToString(),
+                                    Ten_Vt = row["Ten_Vt"].ToString(),
+                                    Gia = row["Gia"].ToString()
+                                };
+
+                                dataItems.Add(dataItem);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return dataItems;
+        }
         public ActionResult PhieuNhapKho_Fill()
         {
+            List<BKHoaDonGiaoHang> dmDlistVT = LoadDmVt();
+            ViewBag.DataVT = dmDlistVT;
             return View();
         }
         public ActionResult PhieuNhapKho_Index(string Ma_Dvcs)
@@ -2244,7 +2288,7 @@ namespace web4.Controllers
             var toDate = Request.Cookies["To_Date"].Value;
             var Dvcs = Request.Cookies["Dvcs3"].Value;
             var LoaiCt = Request.Cookies["LoaiCt"].Value;
-            //var MaKho = Request.Cookies["Ma_Kho"].Value;
+            var MaKho = Request.Cookies["Ma_Dv"].Value;
             using (SqlCommand cmd = new SqlCommand(Pname, con))
             {
                 cmd.CommandTimeout = 950;
@@ -2258,7 +2302,7 @@ namespace web4.Controllers
                     cmd.Parameters.AddWithValue("@_Den_Ngay", toDate);
                     cmd.Parameters.AddWithValue("@_Loai_Ct", LoaiCt);
                     cmd.Parameters.AddWithValue("@_ma_dvcs", Dvcs);
-                    //cmd.Parameters.AddWithValue("@_Ma_Kho", MaKho);
+                    cmd.Parameters.AddWithValue("@_Ma_Kho", MaKho);
                     sda.Fill(ds);
 
                 }

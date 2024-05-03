@@ -318,6 +318,7 @@
     <Compile Include="Controllers\BaoCaoChiPhiKhuyenMaiController.cs" />
     <Compile Include="Controllers\BaoCaoDoanhThuGVController.cs" />
     <Compile Include="Controllers\BaoCaoKetQuaKinhDoanhController.cs" />
+    <Compile Include="Controllers\BaoCaoLaiLoController.cs" />
     <Compile Include="Controllers\BaoCaoMARController.cs" />
     <Compile Include="Controllers\CanDoiSoPhatSinhController.cs" />
     <Compile Include="Controllers\CongNoChiTietController.cs" />
@@ -1337,6 +1338,19 @@
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_Fill.cshtml" />
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy.cshtml" />
     <Content Include="Views\THNhapXuatTonTheoTK\TongNhapXuatTonTheoKy_In.cshtml" />
+    <Content Include="Views\SPTrungBay\InsertSPTrungBay.cshtml" />
+    <Content Include="Views\SPTrungBay\index.cshtml" />
+    <Content Include="Views\SPTrungBay\UpdateSPTrungBay.cshtml" />
+    <Content Include="Views\TongHopPhaiTra\TongHopCongNoPhaiTra_Fill.cshtml" />
+    <Content Include="Views\TongHopPhaiTra\TongHopCongNoPhaiTra.cshtml" />
+    <Content Include="Views\TongHopPhaiTra\TongHopCongNoPhaiTra_In.cshtml" />
+    <Content Include="Views\CanDoiSoPhatSinh\CanDoiSoPhatSinh_Fill.cshtml" />
+    <Content Include="Views\CanDoiSoPhatSinh\CanDoiSoPhatSinh.cshtml" />
+    <Content Include="Views\CanDoiSoPhatSinh\CanDoiSoPhatSinh_In.cshtml" />
+    <Content Include="Views\BaoCaoLaiLo\BaoCaoLaiLo_Fill.cshtml" />
+    <Content Include="Views\BaoCaoLaiLo\BaoCaoLaiLo.cshtml" />
+    <Content Include="Views\BaoCaoLaiLo\BaoCaoLaiLo_In.cshtml" />
+    <Content Include="Views\Home\Login_TDV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

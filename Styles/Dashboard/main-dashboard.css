@@ -169,14 +169,70 @@ nav button .sidebar-title div, nav .submenu-container.submenu-btn {
 .dropdown-container, .submenu-container {
     display: none;
    
-    padding-left: 20px;
+   /* padding-left: 20px;*/
     border-radius:5px;
 }
-
+#submenu1_1{
+    border: 3px solid yellow;
+}
+#submenu1_2 {
+    border: 3px solid lawngreen;
+}
+#submenu1_3 {
+    border: 3px solid orangered;
+}
+#submenu1_4 {
+    border: 3px solid mediumpurple;
+}
+#submenu1_5 {
+    border: 3px solid deepskyblue;
+}
+#submenu1_6 {
+    border: 3px solid lightgray;
+}
+#submenu1_7 {
+    border: 3px solid deeppink;
+}
 .submenu-container {
     background-color: #3f5161;
-   
+  
 }
+.submenu-container .color1{
+    width:8px;
+    height:50px;
+    background-color:yellow;
+    margin-left:0;
+}
+    .submenu-container .color2 {
+        width: 8px;
+        height: 50px;
+        background-color: lawngreen;
+    }
+    .submenu-container .color3 {
+        width: 8px;
+        height: 50px;
+        background-color: orangered;
+    }
+    .submenu-container .color4 {
+        width: 8px;
+        height: 50px;
+        background-color: mediumpurple;
+    }
+    .submenu-container .color5 {
+        width: 8px;
+        height: 50px;
+        background-color: deepskyblue;
+    }
+    .submenu-container .color6 {
+        width: 8px;
+        height: 50px;
+        background-color: lightgray;
+    }
+    .submenu-container .color7 {
+        width: 8px;
+        height: 50px;
+        background-color: deeppink;
+    }
 .submenu-btn:hover{
     border-left-color:cyan;
 }
@@ -661,3 +717,139 @@ tfoot {
     .line-chart{
         margin:10px;   
     }
+    .madvcs {
+   color:white;
+   font-size:15px;
+  cursor:pointer;
+
+}
+    .madvcs :hover{
+        text-decoration:underline;
+    }
+/* Style the modal */
+.modal {
+    display: none; /* Ẩn modal ban đầu */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* màu nền và mức độ trong suốt */
+    backdrop-filter: blur(5px); /* Tạo hiệu ứng làm mờ nền */
+}
+
+/* Style the modal content */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: none;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    border-radius: 8px; /* Bo góc */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+}
+
+    .modal-content .body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+/* Style the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Hiệu ứng chuyển đổi màu */
+}
+
+    .close:hover,
+    .close:focus {
+        color: #333;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* Style the company name */
+.body > div:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Style the select button */
+.select-btn {
+    margin-bottom: 20px;
+}
+
+    .select-btn select {
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+/* Style the accept button */
+.accept-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .accept-btn:hover {
+        background-color: #0056b3;
+    }
+
+/* Style the button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Style the accept button */
+.accept-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+    .accept-btn:hover {
+        background-color: #0056b3;
+    }
+
+/* Style the cancel button */
+.cancel-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .cancel-btn:hover {
+        background-color: #c82333;
+    }
+.select-btn2 {
+    position: relative;
+   
+}

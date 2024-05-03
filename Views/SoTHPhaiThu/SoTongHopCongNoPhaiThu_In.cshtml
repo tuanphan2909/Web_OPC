@@ -668,7 +668,22 @@
                         }
 
                     </tbody>
-                   
+                    <tfoot >
+                        @foreach (DataRow row2 in Model.Tables[1].Rows)
+                        {
+                            <tr style="font-weight:bold">
+                                <td  colspan="2"style="text-align:center">Tổng(Total):</td>
+                                <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["So_Du_Dau"]))</td>
+                                <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["PS_No"]))</td>
+                                <td style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["PS_Co"]))</td>
+                                <td style="text-align: right;"> @String.Format("{0:n0}", Convert.ToDecimal(row2["So_Du_Cuoi"]))</td>
+
+
+
+                            </tr>
+                        }
+
+                    </tfoot>
                 </table>
 
             </div>
