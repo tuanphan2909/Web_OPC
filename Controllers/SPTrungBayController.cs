@@ -155,6 +155,10 @@ namespace web4.Controllers
             {
                 try
                 {
+                    byte[] img1 = !string.IsNullOrEmpty(SPTB.Hinh_1) ? Convert.FromBase64String(SPTB.Hinh_1.Split(',')[1]) : null;
+                    byte[] img2 = !string.IsNullOrEmpty(SPTB.Hinh_2) ? Convert.FromBase64String(SPTB.Hinh_2.Split(',')[1]) : null;
+                    byte[] img3 = !string.IsNullOrEmpty(SPTB.Hinh_3) ? Convert.FromBase64String(SPTB.Hinh_3.Split(',')[1]) : null;
+
                     var detailsTable = new DataTable();
                     detailsTable.Columns.Add("Ma_vt", typeof(int));
                     detailsTable.Columns.Add("Ten_Vt", typeof(string));
@@ -187,6 +191,9 @@ namespace web4.Controllers
                             command.Parameters.AddWithValue("@_Ten_SP", SPTB.Ten_SP);
                             command.Parameters.AddWithValue("@_Option_1", Option_1);
                             command.Parameters.AddWithValue("@_Option_2", Option_2);
+                            command.Parameters.AddWithValue("@_Hinh_1", (object)img1 ?? DBNull.Value);
+                            command.Parameters.AddWithValue("@_Hinh_2", (object)img2 ?? DBNull.Value);
+                            command.Parameters.AddWithValue("@_Hinh_3", (object)img3 ?? DBNull.Value);
 
                             // Pass details as a TVP parameter
                             var detailsParam = command.Parameters.AddWithValue("@_Details", detailsTable);
@@ -289,6 +296,10 @@ namespace web4.Controllers
             {
                 try
                 {
+                    byte[] img1 = !string.IsNullOrEmpty(TDGH.Hinh_1) ? Convert.FromBase64String(TDGH.Hinh_1.Split(',')[1]) : null;
+                    byte[] img2 = !string.IsNullOrEmpty(TDGH.Hinh_2) ? Convert.FromBase64String(TDGH.Hinh_2.Split(',')[1]) : null;
+                    byte[] img3 = !string.IsNullOrEmpty(TDGH.Hinh_3) ? Convert.FromBase64String(TDGH.Hinh_3.Split(',')[1]) : null;
+
                     var detailsTable = new DataTable();
                     detailsTable.Columns.Add("Ma_Vt", typeof(int));
                     detailsTable.Columns.Add("Ten_Vt", typeof(string));
@@ -319,6 +330,9 @@ namespace web4.Controllers
                             command.Parameters.AddWithValue("@_Stt", TDGH.STT);
                             command.Parameters.AddWithValue("@_Option_1", Option_1);
                             command.Parameters.AddWithValue("@_Option_2", Option_2);
+                            command.Parameters.AddWithValue("@_Hinh_1", (object)img1 ?? DBNull.Value);
+                            command.Parameters.AddWithValue("@_Hinh_2", (object)img2 ?? DBNull.Value);
+                            command.Parameters.AddWithValue("@_Hinh_3", (object)img3 ?? DBNull.Value);
 
                             // Pass details as a TVP parameter
                             var detailsParam = command.Parameters.AddWithValue("@_Details", detailsTable);

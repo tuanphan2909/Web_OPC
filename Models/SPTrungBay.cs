@@ -27,5 +27,11 @@ namespace web4.Models
         public string Dvcs { get; set; }
         public Boolean option_1 { get; set; }
         public Boolean option_2 { get; set; }
+        public string Hinh_1 { get; set; }
+        public string Hinh_2 { get; set; }
+
+        public string Hinh_3 { get; set; }
+
+
     }
 }

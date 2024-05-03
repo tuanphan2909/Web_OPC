@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/Application-Form.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         #dropdownInput, #selectedOption, #Ten_SP, #Ma_SP, #Tien_TB {
             border: 1px solid #ccc;
@@ -77,7 +79,6 @@
             display: inline;
             -webkit-appearance: none;
             -moz-appearance: none;
-            appearance: none;
         }
 
             .checkbox-wrapper-1 [type=checkbox].substituted + label:before {
@@ -151,6 +152,34 @@
                 background-color: #c68035;
                 color: rgba(0, 0, 0, 0.275);
             }
+
+
+        .upload-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+            .upload-section button {
+                background: none;
+                border: 2px solid #ccc;
+                border-radius: 5px;
+                padding: 10px 15px;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            .upload-section div {
+                margin-top: 10px;
+            }
+
+        #preview1 img, #preview2 img, #preview3 img {
+            display: inline-block;
+            vertical-align: top;
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
     </style>
 
 </head>
@@ -169,18 +198,18 @@
                             <p><strong>1. Ngày</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ct" id="Ngay_Ct">
                         </div>
                         <div class="col">
-                            <p><strong>2. SỐ HĐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct">
+                            <p><strong>2. SỐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct">
                         </div>
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <p><strong>3. Khách Hàng&nbsp;</strong></p>
+                    <p><strong>3. Đối Tượng&nbsp;</strong></p>
                 </div>
-                <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm khách hàng" name="Ma_Dt">
+                <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục" name="Ma_Dt">
                 <datalist id="dropdownList">
                     @foreach (var item in ViewBag.DataItems)
                     {
-                        <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-dvcs="@item.Dvcs">@item.Ten_Dt</option>
+                    <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-dvcs="@item.Dvcs">@item.Ten_Dt</option>
                     }
                 </datalist>
                 <input name="Ten_Dt" id="selectedOption" readonly>
@@ -200,18 +229,39 @@
                     <p><strong>6. Sản Phẩm Trưng bày&nbsp;</strong></p>
                 </div>
 
-                <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm sản phẩm" name="Ma_SP">
+                <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm vật tư" name="Ma_SP" value="1006506">
                 <datalist id="dropdownListSP">
                     @foreach (var item in ViewBag.DataItems2)
                     {
-                        <option value="@item.Ma_vt" data-ten="@item.Ten_Vt">@item.Ten_Vt</option>
+                    <option value="@item.Ma_vt" data-ten="@item.Ten_Vt">@item.Ten_Vt</option>
                     }
                 </datalist>
-                <input name="Ten_SP" id="Ten_SP" readonly>
+                <input name="Ten_SP" id="Ten_SP" readonly value="HOASTEX-S (Hộp 01 chai x 90ml)">
                 <div class="form-group mb-3">
-                    <p><strong>7. Mức Trả Thưởng&nbsp;</strong></p>
+                    <p><strong>7. Mức Tiền&nbsp;</strong></p>
                 </div>
                 <input type="text" id="Tien_TB" list="" placeholder="" name="Tien_TB">
+
+                <div class="form-group mb-3 upload-section">
+                    <!-- First Image Upload -->
+                    <input type="file" id="imageUpload1" accept="image/*" multiple hidden>
+                    <button type="button" onclick="document.getElementById('imageUpload1').click();"><i class="fa fa-camera"></i></button>
+                    <div id="preview1"></div>
+
+                    <!-- Second Image Upload -->
+                    <input type="file" id="imageUpload2" accept="image/*" multiple hidden>
+                    <button type="button" onclick="document.getElementById('imageUpload2').click();"><i class="fa fa-camera"></i></button>
+                    <div id="preview2"></div>
+
+                    <!-- Third Image Upload -->
+                    <input type="file" id="imageUpload3" accept="image/*" multiple hidden>
+                    <button type="button" onclick="document.getElementById('imageUpload3').click();"><i class="fa fa-camera"></i></button>
+                    <div id="preview3"></div>
+                </div>
+
+
+
+
                 <div class="checkbox-wrapper-1">
                     <input id="example-1" class="substituted" type="checkbox" aria-hidden="true" />
                     <label for="example-1">Option 1</label>
@@ -226,7 +276,7 @@
                             <th>Mã SP Thưởng</th>
                             <th>Tên SP Thưởng </th>
 
-                            <th>Đơn Giá (-VAT)</th>
+                            <th>Đơn Giá</th>
                             <th>Số Lượng </th>
                             <th>Xóa</th>
 
@@ -239,15 +289,16 @@
                                 <datalist id="dropdownListVT">
                                     @foreach (var item in ViewBag.DataItems2)
                                     {
-                                        <option value="@item.Ma_vt" data-ten="@item.Ten_Vt" data-Dvt="@item.Dvt">@item.Ten_Vt</option>
+                                    <option value="@item.Ma_vt" data-ten="@item.Ten_Vt" data-Dvt="@item.Dvt">@item.Ten_Vt</option>
                                     }
                                 </datalist>
                             </td>
                             <td> <input name="Ten_Vt" id="Ten_Vt" readonly></td>
-                            <td> <input name="Dvt" id="Dvt" class="Dvt-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')"></td>
-                            <td><input type="text" name="So_luong" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
+                            <td> <input name="Dvt" id="Dvt" class="Dvt-input" oninput="this.value = this.value.replace(/[^0-9.]/g,'')"></td>
+                            <td><input type="text" name="So_luong" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g,'')"></td>
 
-                            @*<td><button class="deleteRowBtn">Xóa</button></td>*@
+                            @*
+                            <td><button class="deleteRowBtn">Xóa</button></td>*@
                         </tr>
                         <!-- Các hàng trước đó của bảng -->
 
@@ -273,8 +324,7 @@
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/Application-Form-1.js"></script>
     <script src="/assets/js/Application-Form.js"></script>
-    @*</ng->
-        <script src="/assets/js/script.js"></script>*@
+    <script src="/assets/js/script.js"></script>
 
     <script>
         document.getElementById("dropdownInput").addEventListener("input", function () {
@@ -378,7 +428,7 @@
                 var dropdownListVT = $('#dropdownListVT');
                 dropdownListVT.empty();
 
-                var dataItems2 = @Html.Raw(Json.Encode(ViewBag.DataItems2));
+                var dataItems2 = JSON.parse('@Html.Raw(Json.Encode(ViewBag.DataItems2))');
                 dataItems2.forEach(function (item) {
                     var option = $('<option>').val(item.Ma_vt).attr('data-ten', item.Ten_Vt).attr('data-Dvt', item.Dvt).text(item.Ten_Vt);
                     dropdownListVT.append(option);
@@ -390,7 +440,7 @@
                     '<td><input type="text" name="Ma_vt" style="width: 170px"  class="ma-vt-input" list="dropdownListVT"/></td>' +
                     '<td><input type="text" name="Ten_Vt" class="ten-vt-input" readonly /></td>' +
                     '<td><input type="text" name="Dvt" class="Dvt-input" readonly /></td>' +
-                    '<td><input type="text" name="So_luong"  class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
+                    '<td><input type="text" name="So_luong" style="width: 55px; height: 20px;" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
                     '<td><button class="deleteRowBtn">Xóa</button></td>' +
                     '</tr>';
 
@@ -424,6 +474,8 @@
             });
         });
 
+
+
         function SaveCtV(data) {
             return $.ajax({
                 contentType: 'application/json; charset=utf-8',
@@ -445,6 +497,12 @@
         }
         $("#SaveCtV").click(function (e) {
             e.preventDefault();
+            var warningText = $('#warning').text();
+            if (warningText !== '') {
+                alert('Cannot save: ' + warningText);
+                console.log('Save aborted due to warning.');
+                return; // Stop execution
+            }
 
             var orderArr = [];
             orderArr.length = 0;
@@ -476,6 +534,32 @@
             document.cookie = "option_2=" + option2Value;
 
 
+            function getBase64Image(imgElement) {
+                var canvas = document.createElement("canvas");
+                canvas.width = imgElement.naturalWidth; // or 'width' if you want a special/scaled size
+                canvas.height = imgElement.naturalHeight; // or 'height' if you want a special/scaled size
+
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(imgElement, 0, 0);
+
+                return canvas.toDataURL("image/png"); // or 'image/jpeg'
+            }
+
+            function collectImageData() {
+                var imageData = {};
+                ['preview1', 'preview2', 'preview3'].forEach(function (previewId, index) {
+                    var preview = document.getElementById(previewId);
+                    var images = preview.getElementsByTagName('img');
+                    if (images.length > 0) {
+                        imageData['Hinh_' + (index + 1)] = getBase64Image(images[0]);
+                    } else {
+                        imageData['Hinh_' + (index + 1)] = null; // or keep it undefined or empty string
+                    }
+                });
+                return imageData;
+            }
+
+            var imageData = collectImageData();
             //var tenVt = $(this).find('input[name="Ten_Vt"]').val();
             //var hanMuc = $(this).find('input[name="Han_Muc"]').val();
             var data = JSON.stringify({
@@ -490,6 +574,7 @@
                 Ten_SP: $("#Ten_SP").val(),
                 option_1: option1Value,
                 option_2: option2Value,
+                ...imageData,
                 details: orderArr
             });
 
@@ -530,7 +615,7 @@
                     '<td><input type="text" name="Ten_Vt" class="ten-vt-input" value="HoAstex-S" readonly /></td>' +
                     '<td><input type="text" name="Dvt" class="Dvt-input" value="41429" readonly /></td>' +
 
-                    '<td><input type="text" name="So_luong" value="0" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
+                    '<td><input type="text" name="So_luong" style="width: 55px; height: 20px;" value="0" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
                     '<td><button class="deleteRowBtn">Xóa</button></td>' +
                     '</tr>';
 
@@ -544,7 +629,7 @@
                         '<td><input type="text" name="Ma_vt" style="width: 170px" class="ma-vt-input" value="' + rowData.Ma_vt + '" readonly /></td>' +
                         '<td><input type="text" name="Ten_Vt" class="ten-vt-input" value="' + rowData.Ten_Vt + '" readonly /></td>' +
                         '<td><input type="text" name="Dvt" class="Dvt-input" value="' + rowData.Dvt + '" readonly /></td>' +
-                        '<td><input type="text" name="So_luong" value ="0" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
+                        '<td><input type="text" name="So_luong" style="width: 55px; height: 20px;" value ="0" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>' +
                         '<td><button class="deleteRowBtn">Xóa</button></td>' +
                         '</tr>';
 
@@ -569,11 +654,10 @@
             var today = new Date();
             var dateStr = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
             document.getElementById("Ngay_Ct").value = dateStr;
-            document.getElementById("Ngay_Bat_Dau").value = dateStr;
-            document.getElementById("Ngay_Ket_Thuc").value = dateStr;
+            document.getElementById("Ngay_Bat_Dau").value = "2024-06-01";
+            document.getElementById("Ngay_Ket_Thuc").value = "2024-08-31";
         });
     </script>
-
 
 
     <script>
@@ -584,7 +668,7 @@
 
             function calculateTotal() {
                 var total = 0;
-                var isQuantityOver4 = false; // Thêm biến kiểm tra số lượng lớn hơn 4
+                var isQuantityOver4 = false;
 
                 $("#example tbody tr").each(function () {
                     var Dvt = parseFloat($(this).find('input[name="Dvt"]').val());
@@ -593,35 +677,70 @@
                     if (!isNaN(Dvt) && !isNaN(So_luong)) {
                         total += Dvt * So_luong;
                         if (So_luong > 4) {
-                            isQuantityOver4 = true; // Cập nhật cờ nếu có số lượng lớn hơn 4
+                            isQuantityOver4 = true;
                         }
                     }
                 });
 
-                $('#totalAmount').text(numberWithCommas(total.toFixed(2))); // Cập nhật tổng đã format
+                $('#totalAmount').text(numberWithCommas(total.toFixed(2)));
 
-                // Cập nhật cảnh báo vượt quá số tiền cho phép
                 if (total > 155000 && $('#example-2').is(':checked')) {
                     $('#warning').text('Đã Vượt Quá Số Tiền Cho Phép');
-                } else if (isQuantityOver4 && $('#example-1').is(':checked')) { // Thêm điều kiện kiểm tra số lượng khi option 1 được chọn
+                } else if (isQuantityOver4 && $('#example-1').is(':checked')) {
                     $('#warning').text('Số lượng không được vượt quá 4');
                 } else {
-                    $('#warning').text(''); // Xóa cảnh báo
+                    $('#warning').text('');
                 }
             }
 
-            // Gắn sự kiện tính toán tổng cho sự thay đổi ở Đơn giá hoặc Số lượng
             $(document).on('input', 'input[name="Dvt"], input[name="So_luong"]', function () {
                 calculateTotal();
             });
 
-            // Gắn sự kiện tính toán tổng cho sự thay đổi ở các checkbox
             $('.substituted').on('change', function () {
                 calculateTotal();
             });
+
+
         });
     </script>
 
+
+   
+    <script>
+        function handleFileUpload(inputId, previewId) {
+            var input = document.getElementById(inputId);
+            var preview = document.getElementById(previewId);
+
+            input.addEventListener('change', function () {
+                var files = this.files;
+                preview.innerHTML = ''; // Clear existing images
+
+                if (files.length > 3) {
+                    alert('Bạn chỉ có thể tải lên tối đa 3 hình ảnh.');
+                    return;
+                }
+
+                Array.from(files).forEach(file => {
+                    var imgElement = document.createElement('img');
+                    imgElement.style.width = '100px'; // Set the width of the image
+                    imgElement.style.height = '100px'; // Set the height of the image
+                    imgElement.style.marginRight = '10px'; // Add some space between images
+                    imgElement.src = URL.createObjectURL(file);
+                    preview.appendChild(imgElement);
+                });
+            });
+        }
+
+        // Initialize handlers for each upload
+        document.addEventListener('DOMContentLoaded', function () {
+            handleFileUpload('imageUpload1', 'preview1');
+            handleFileUpload('imageUpload2', 'preview2');
+            handleFileUpload('imageUpload3', 'preview3');
+        });
+
+
+    </script>
 
 
 

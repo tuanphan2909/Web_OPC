@@ -20,6 +20,11 @@
             margin-left: auto; /* Auto margin left to push it to the right */
             display: flex; /* Use flexbox to control layout */
         }
+        .close {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
     </style>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -46,95 +51,104 @@
 
 <body style="background-color: #e0e8ee ">
     @*<div class="tab-control" style="position:fixed;bottom:50px">
-            <ul class="tabs" style="background-color: #1d1b31">
-                <li class="tab selected"><a href="/Home/About" style="padding-right:5px">Home</a></li>
+        <ul class="tabs" style="background-color: #1d1b31">
+            <li class="tab selected"><a href="/Home/About" style="padding-right:5px">Home</a></li>
 
-            </ul>
-        </div>*@
+        </ul>
+    </div>*@
 
 
     <header class="header_part" style="background-color: #aec9e0; color: #3483bd ">
+        @if (Request.Cookies["UserName"].Value == "admin-cnct" || Request.Cookies["UserName"].Value == "admin-cntg" || Request.Cookies["UserName"].Value == "admin-cnmd" || Request.Cookies["UserName"].Value == "admin-cnh1" || Request.Cookies["UserName"].Value == "admin-cnvt"
+        || Request.Cookies["UserName"].Value == "admin-cnnt" || Request.Cookies["UserName"].Value == "admin - cndn" || Request.Cookies["UserName"].Value == "admin - cnna" || Request.Cookies["UserName"].Value == "admin - cnhn")
+        {
 
-        <a style="cursor:pointer">
+
+
+        <a href="/Home/About1" style="cursor:pointer">
             <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
         </a>
-
-        <h4 style="color:#3483bd;font-family:'Times New Roman'">Danh Sách Sản Phẩm Trưng Bày</h4>
+        }
+        else
+        {
+        <a href="/Home/About" style="cursor:pointer">
+            <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
+        </a>
+        }
+        <h4 style="color:#3483bd">Danh Sách Theo Dõi Giao Hàng</h4>
     </header>
     <!-- =======  Data-Table  = Start  ========================== -->
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <button type="button" id="addNewBtn" class="add-new-button">Thêm mới</button>
-
+                <div id="imageModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="modalImg">
+                </div>
                 <div class="data_table">
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th>Ngày HĐ</th>
-                                <th>Số HĐ</th>
-                                <th>Mã KH</th>
-                                <th>Tên KH</th>
+                                <th>Ngày Hợp Đồng</th>
+                                <th>Số Hợp Đồng</th>
+                                <th>Mã Đt</th>
+                                <th>Tên Đt</th>
                                 <th>Ngày Bắt Đầu</th>
                                 <th>Ngày Kết Thúc</th>
                                 <th>Tên SP Trưng bày</th>
                                 <th>Mức Trả Thưởng</th>
                                 <th>Option 1</th>
                                 <th>Option 2</th>
-                                <th>Mã Chi Nhánh</th>
+                                <th>Hình 1</th>
+                                <th>Hình 2</th>
+                                <th>Hình 3</th>
+                                <th>Mã Đvcs</th>
                                 <th></th>
                                 <th hidden>STT</th>
                                 <th></th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            @{ 
-                          
-                                foreach (DataRow row2 in Model.Tables[0].Rows)
-                                {
-
-                                    var currentSoCt = row2["Ma_Dt"].ToString();
-                                  
-                                                        <tr data-soct="@currentSoCt">
-                                                            <td style="text-align:right">@row2["Ngay_Ct"]</td>
-                                                            <td style="text-align:right">@row2["So_CT"]</td>
-                                                            <td style="text-align:right" class="NV_GN">@row2["Ma_Dt"]</td>
-                                                            <td>@row2["Ten_Dt"]</td>
-                                                            <td>@row2["Ngay_Bat_Dau"]</td>
-                                                            <td>@row2["Ngay_Ket_Thuc"]</td>
-                                                            <td>@row2["Ten_SP"]</td>
-                                                            <td>@row2["Tien_TB"]</td>
-                                                            <td>@row2["Option_1"]</td>
-                                                            <td>@row2["Option_2"]</td>
-
-                                                            <td>@row2["Dvcs"]</td>
-                                                            <td><a href="#" class="editBtn">Chỉnh Sửa</a></td>
-
-                                                            <td hidden class="ctvid">@row2["Stt"]</td>
-                                                            <td><a href="#" onclick="scrollToBottom()">Xem Chi Tiết</a></td>
-                                                        </tr>
-                                      
-                                }
-                                }
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-                <div class="data_table" style="margin-top:50px">
-                    <table id="example2" class="table table-striped table-bordered">
-                        <thead class="table-dark">
+                            @foreach (DataRow row2 in Model.Tables[0].Rows)
+                            {
+                            var hinh1 = row2["Hinh_1"] != DBNull.Value ? Convert.ToBase64String((byte[])row2["Hinh_1"]) : "";
+                            var hinh2 = row2["Hinh_2"] != DBNull.Value ? Convert.ToBase64String((byte[])row2["Hinh_2"]) : "";
+                            var hinh3 = row2["Hinh_3"] != DBNull.Value ? Convert.ToBase64String((byte[])row2["Hinh_3"]) : "";
                             <tr>
-                                <th>Mã ĐT</th>
-                                <th>Ngày HĐ</th>
-                                <th>Số HĐ</th>
-                                <th>Tên KH</th>
-
-                                <th>Tên SP Trưng bày</th>
-                                <th>Số Lượng</th>
-                                <th>Đơn Giá</th>
-
+                                <td style="text-align:right">@row2["Ngay_Ct"]</td>
+                                <td style="text-align:right">@row2["So_CT"]</td>
+                                <td style="text-align:right" class="NV_GN">@row2["Ma_Dt"]</td>
+                                <td>@row2["Ten_Dt"]</td>
+                                <td>@row2["Ngay_Bat_Dau"]</td>
+                                <td>@row2["Ngay_Ket_Thuc"]</td>
+                                <td>@row2["Ten_SP"]</td>
+                                <td>@row2["Tien_TB"]</td>
+                                <td>@row2["Option_1"]</td>
+                                <td>@row2["Option_2"]</td>
+                                <td>
+                                    @if (!String.IsNullOrEmpty(hinh1))
+                                    {
+                                    <img src="data:image/png;base64,@hinh1" alt="Image 1" style="width: 100px; height: auto;" data-clickable="true" />
+                                    }
+                                </td>
+                                <td>
+                                    @if (!String.IsNullOrEmpty(hinh2))
+                                    {
+                                    <img src="data:image/png;base64,@hinh2" alt="Image 2" style="width: 100px; height: auto;" data-clickable="true" />
+                                    }
+                                </td>
+                                <td>
+                                    @if (!String.IsNullOrEmpty(hinh3))
+                                    {
+                                    <img src="data:image/png;base64,@hinh3" alt="Image 3" style="width: 100px; height: auto;" data-clickable="true" />
+                                    }
+                                </td>
+                                <td>@row2["Dvcs"]</td>
+                                <td><a href="#" class="editBtn">Chỉnh Sửa</a></td>
+                                <td><a href="#" class="Coppy">Xem</a></td>
+                                <td hidden class="ctvid">@row2["Stt"]</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,9 +166,8 @@
 
                             </tr>
                             }
-
-
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -209,47 +222,22 @@
         //});
     </script>
     <script>
-        function scrollToBottom() {
-            var footer = document.getElementById("footer"); 
-            if (footer) {
-                footer.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-            }
-        }
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var table1Rows = document.querySelectorAll("#example tbody tr");
-            var table2Rows = document.querySelectorAll("#example2 tbody tr");
-     
-
-                
-            table2Rows.forEach(function (row2) {
-                row2.style.display = "none";
+        $(document).ready(function () {
+            // Đặt sự kiện click cho từng hình ảnh
+            $("img[data-clickable='true']").click(function () {
+                var imgSrc = $(this).attr('src');
+                // Hiển thị hình ảnh lớn trong modal
+                $('#modalImg').attr('src', imgSrc);
+                $('#imageModal').css('display', 'block');
             });
 
-            table1Rows.forEach(function (row) {
-                row.querySelector("td:last-child a").addEventListener("click", function () {
-                    var soCt = row.getAttribute("data-soct");
-                    console.log("Sự kiện click đã được kích hoạt");
-                    console.log("so chung tu", soCt);
-                   
-                    table2Rows.forEach(function (row2) {
-                        row2.style.display = "none";
-                    });
-                    if (soCt !== "") {
-                       
-                        table2Rows.forEach(function (row2) {
-                            var maDt = row2.querySelector("td:first-child").textContent;
-                            if (maDt === soCt) {
-                                row2.style.display = "table-row";
-                            }
-                        });
-                    }
-                });
+            // Đóng modal khi click vào nút đóng
+            $(".close").click(function () {
+                $('#imageModal').css('display', 'none');
             });
         });
-
     </script>
+
 </body>
 
 </html>
