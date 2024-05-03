@@ -161,111 +161,111 @@
         <div class="container">
 
             <form action="SaveCtV" method="post">
-                @*<form>
-                    *@
-                    <div class="form-group mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <p><strong>1. Ngày</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ct" id="Ngay_Ct">
-                            </div>
-                            <div class="col">
-                                <p><strong>2. SỐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct">
-                            </div>
+
+
+                <div class="form-group mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <p><strong>1. Ngày</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ct" id="Ngay_Ct">
+                        </div>
+                        <div class="col">
+                            <p><strong>2. SỐ HĐ</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="text" required="" name="So_Ct" id="So_Ct">
                         </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <p><strong>3. Đối Tượng&nbsp;</strong></p>
-                    </div>
-                    <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm danh mục" name="Ma_Dt">
-                    <datalist id="dropdownList">
-                        @foreach (var item in ViewBag.DataItems)
-                        {
+                </div>
+                <div class="form-group mb-3">
+                    <p><strong>3. Khách Hàng&nbsp;</strong></p>
+                </div>
+                <input type="text" id="dropdownInput" list="dropdownList" placeholder="Tìm kiếm khách hàng" name="Ma_Dt">
+                <datalist id="dropdownList">
+                    @foreach (var item in ViewBag.DataItems)
+                    {
                         <option value="@item.Ma_Dt" data-ten="@item.Ten_Dt" data-dvcs="@item.Dvcs">@item.Ten_Dt</option>
-                        }
-                    </datalist>
-                    <input name="Ten_Dt" id="selectedOption" readonly>
-                    <div class="form-group mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <p><strong>4. Ngày Bắt Đầu</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Bat_Dau" id="Ngay_Bat_Dau">
-                            </div>
-                            <div class="col">
-                                <p><strong>5. Ngày Kết Thúc</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ket_Thuc" id="Ngay_Ket_Thuc">
-                            </div>
+                    }
+                </datalist>
+                <input name="Ten_Dt" id="selectedOption" readonly>
+                <div class="form-group mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <p><strong>4. Ngày Bắt Đầu</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Bat_Dau" id="Ngay_Bat_Dau">
+                        </div>
+                        <div class="col">
+                            <p><strong>5. Ngày Kết Thúc</strong>&nbsp;<span class="text-danger">*</span></p><input class="form-control" type="date" required="" name="Ngay_Ket_Thuc" id="Ngay_Ket_Thuc">
                         </div>
                     </div>
+                </div>
 
 
-                    <div class="form-group mb-3">
-                        <p><strong>6. Sản Phẩm Trưng bày&nbsp;</strong></p>
-                    </div>
+                <div class="form-group mb-3">
+                    <p><strong>6. Sản Phẩm Trưng bày&nbsp;</strong></p>
+                </div>
 
-                    <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm vật tư" name="Ma_SP">
-                    <datalist id="dropdownListSP">
-                        @foreach (var item in ViewBag.DataItems2)
-                        {
+                <input type="text" id="Ma_SP" list="dropdownListSP" placeholder="Tìm kiếm sản phẩm" name="Ma_SP">
+                <datalist id="dropdownListSP">
+                    @foreach (var item in ViewBag.DataItems2)
+                    {
                         <option value="@item.Ma_vt" data-ten="@item.Ten_Vt">@item.Ten_Vt</option>
-                        }
-                    </datalist>
-                    <input name="Ten_SP" id="Ten_SP" readonly>
-                    <div class="form-group mb-3">
-                        <p><strong>7. Mức Tiền&nbsp;</strong></p>
-                    </div>
-                    <input type="text" id="Tien_TB" list="" placeholder="" name="Tien_TB">
-                    <div class="checkbox-wrapper-1">
-                        <input id="example-1" onclick="handleCheckbox(this)" class="substituted" type="checkbox" aria-hidden="true" />
-                        <label for="example-1">Option 1</label>
+                    }
+                </datalist>
+                <input name="Ten_SP" id="Ten_SP" readonly>
+                <div class="form-group mb-3">
+                    <p><strong>7. Mức Trả Thưởng&nbsp;</strong></p>
+                </div>
+                <input type="text" id="Tien_TB" list="" placeholder="" name="Tien_TB">
+                <div class="checkbox-wrapper-1">
+                    <input id="example-1" class="substituted" type="checkbox" aria-hidden="true" />
+                    <label for="example-1">Option 1</label>
 
-                        <input id="example-2" class="substituted" type="checkbox" aria-hidden="true" />
-                        <label for="example-2">Option 2</label>
-                    </div>
+                    <input id="example-2" class="substituted" type="checkbox" aria-hidden="true" />
+                    <label for="example-2">Option 2</label>
+                </div>
 
-                    <table id="example" class="table table-striped table-bordered">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>Mã SP Thưởng</th>
-                                <th>Tên SP Thưởng </th>
-
-                                <th>Đơn Giá</th>
-                                <th>Số Lượng </th>
-                                <th>Xóa</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr hidden>
-                                <td>
-                                    <input type="text" name="Ma_vt" id="Ma_vt" list="dropdownListVT" placeholder="Tìm kiếm danh mục">
-                                    <datalist id="dropdownListVT">
-                                        @foreach (var item in ViewBag.DataItems2)
-                                        {
-                                        <option value="@item.Ma_vt" data-ten="@item.Ten_Vt" data-Dvt="@item.Dvt">@item.Ten_Vt</option>
-                                        }
-                                    </datalist>
-                                </td>
-                                <td> <input name="Ten_Vt" id="Ten_Vt" readonly></td>
-                                <td> <input name="Dvt" id="Dvt" class="Dvt-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')"></td>
-                                <td><input type="text" name="So_luong" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
-                               
-                                @*<td><button class="deleteRowBtn">Xóa</button></td>*@
-                            </tr>
-                            <!-- Các hàng trước đó của bảng -->
-
-
-                        </tbody>
-
-
+                <table id="example" class="table table-striped table-bordered">
+                    <thead class="table-dark">
                         <tr>
-                            <td colspan="2" style="text-align: right;"><strong>Tổng:</strong></td>
-                            <td id="totalAmount" colspan="2">0</td>
-                            <td> <!-- Cột dành cho nút Xóa nếu cần --></td>
-                        </tr>
+                            <th>Mã SP Thưởng</th>
+                            <th>Tên SP Thưởng </th>
 
-                    </table>
-                    <label id="warning" style="color: red;"></label>
-                    <button type="button" id="addRowBtn" hidden>Thêm dòng</button>
-                    <button class="submit" type="submit" id="SaveCtV">Lưu</button>
-                </form>
+                            <th>Đơn Giá (-VAT)</th>
+                            <th>Số Lượng </th>
+                            <th>Xóa</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr hidden>
+                            <td>
+                                <input type="text" name="Ma_vt" id="Ma_vt" list="dropdownListVT" placeholder="Tìm kiếm danh mục">
+                                <datalist id="dropdownListVT">
+                                    @foreach (var item in ViewBag.DataItems2)
+                                    {
+                                        <option value="@item.Ma_vt" data-ten="@item.Ten_Vt" data-Dvt="@item.Dvt">@item.Ten_Vt</option>
+                                    }
+                                </datalist>
+                            </td>
+                            <td> <input name="Ten_Vt" id="Ten_Vt" readonly></td>
+                            <td> <input name="Dvt" id="Dvt" class="Dvt-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')"></td>
+                            <td><input type="text" name="So_luong" class="han-muc-input" oninput="this.value = this.value.replace(/[^0-9.]/g, \'\')" /></td>
+
+                            @*<td><button class="deleteRowBtn">Xóa</button></td>*@
+                        </tr>
+                        <!-- Các hàng trước đó của bảng -->
+
+
+                    </tbody>
+
+
+                    <tr>
+                        <td colspan="2" style="text-align: right;"><strong>Tổng:</strong></td>
+                        <td id="totalAmount" colspan="2">0</td>
+                        <td> <!-- Cột dành cho nút Xóa nếu cần --></td>
+                    </tr>
+
+                </table>
+                <label id="warning" style="color: red;"></label>
+                <button type="button" id="addRowBtn" hidden>Thêm dòng</button>
+                <button class="submit" type="submit" id="SaveCtV">Lưu</button>
+            </form>
 
         </div>
     </section>
@@ -274,7 +274,7 @@
     <script src="/assets/js/Application-Form-1.js"></script>
     <script src="/assets/js/Application-Form.js"></script>
     @*</ng->
-    <script src="/assets/js/script.js"></script>*@
+        <script src="/assets/js/script.js"></script>*@
 
     <script>
         document.getElementById("dropdownInput").addEventListener("input", function () {
@@ -450,19 +450,23 @@
             orderArr.length = 0;
 
             // Lặp qua mỗi dòng trong tbody của bảng
-           $("#example tbody tr").each(function () {
+            $("#example tbody tr").each(function () {
                 // Kiểm tra nếu dòng hiện tại không có thuộc tính 'hidden'
                 if (!$(this).is(':hidden')) {
-        var maVt = $(this).find('input[name="Ma_vt"]').val();
-               var tenVt = $(this).find('input[name="Ten_Vt"]').val();
+                    var maVt = $(this).find('input[name="Ma_vt"]').val();
+                    var tenVt = $(this).find('input[name="Ten_Vt"]').val();
 
-               var Dvt = $(this).find('input[name="Dvt"]').val();
-        var hanMuc = $(this).find('input[name="So_luong"]').val();
-        orderArr.push({
-            Ma_vt: maVt,
-            Ten_Vt: tenVt,
-            Dvt: Dvt,
-        });
+                    var Dvt = $(this).find('input[name="Dvt"]').val();
+                    var hanMuc = $(this).find('input[name="So_luong"]').val();
+                    orderArr.push({
+                        Ma_vt: maVt,
+                        Ten_Vt: tenVt,
+                        Dvt: Dvt,
+                        So_luong: hanMuc
+                    });
+                }
+            });
+
             // Kiểm tra trạng thái của checkbox và gán giá trị tương ứng
             var option1Value = $("#example-1").is(':checked') ? 1 : 0;
             var option2Value = $("#example-2").is(':checked') ? 1 : 0;
@@ -471,7 +475,7 @@
             document.cookie = "option_1=" + option1Value;
             document.cookie = "option_2=" + option2Value;
 
-           });
+
             //var tenVt = $(this).find('input[name="Ten_Vt"]').val();
             //var hanMuc = $(this).find('input[name="Han_Muc"]').val();
             var data = JSON.stringify({

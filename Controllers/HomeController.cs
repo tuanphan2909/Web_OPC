@@ -53,18 +53,42 @@ namespace web4.Controllers
             string view = "";
             string controllerName = "";
             sqlc.Connection = con;
-            sqlc.CommandText = "select * from view_user where Tendangnhap ='" + Acc.Name + "'And matkhau='" + Acc.Password + "'and ma_DvCs='" + Acc.Ma_DvCs + "'";
+            sqlc.CommandText = "select * from view_user where Tendangnhap ='" + Acc.Name + "'And matkhau='" + Acc.Password + "'and ma_DvCs='" + Acc.Ma_DvCs + "'";  
             dt = sqlc.ExecuteReader();
             if (dt.Read())
             {
+                switch (Acc.Ma_DvCs.ToString())
+                {
+                    case "A01":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_B1"; break;
+                    case "A02":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_TP"; break;
+                    case "A03":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_CT"; break;
+                    case "A04":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_TG"; break;
+                    case "A05":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_MD"; break;
+                    case "A06":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_VT"; break;
+                    case "A07":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_NT"; break;
+                    case "A08":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_DN"; break;
+                    case "A09":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_NA"; break;
+                    case "A10":
+                        Response.Cookies["MA_DVCS"].Value = "OPC_HN"; break;
+
+                }
                 Response.Cookies["UserName"].Value = Acc.Name.ToString();
-                Response.Cookies["MA_DVCS"].Value = Acc.Ma_DvCs.ToString();
+               
 
                 con.Close();
                 ViewBag.UserName = Acc.Name.ToString();
             
-                    view = "QuanLyTrungBay_Fill";
-                controllerName = "ViengTham";
+                    view = "Index";
+                controllerName = "SPTrungBay";
                
                 return RedirectToAction(view, controllerName);
             }

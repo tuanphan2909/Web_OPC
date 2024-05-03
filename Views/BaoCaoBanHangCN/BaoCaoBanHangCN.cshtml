@@ -23,7 +23,7 @@
             height: 50vh;
             zoom: 90%;
             text-align: center;
-        }
+        }   
 
         .container canvas {
             justify-content: center;
@@ -501,8 +501,8 @@
                         <thead class="table-dark">
                             <tr>
                                 <th rowspan="1"></th>
-                                <th colspan="19">Thực Hiện OTC</th>
-                                <th colspan="19">Thực Hiện ETC</th>
+                                <th colspan="20">Thực Hiện OTC</th>
+                                <th colspan="20">Thực Hiện ETC</th>
 
                                 @*<th colspan="6">Khoán ETC</th>*@
 
@@ -516,41 +516,43 @@
                             <tr>
                                 <!--DT OTC-->
                                 <th>Tên Đơn Vị</th>
-                                <th>Doanh Thu OPC</th>
-                                <th>Khoán OPC</th>
-                                <th>Tỷ Lệ OPC</th>
-                                <th>Doanh Thu Sủi</th>
-                                <th>Khoán Sủi</th>
-                                <th>Tỷ Lệ Sủi</th>
-                                <th>Doanh Thu Cồn</th>
-                                <th>Khoán Cồn</th>
-                                <th>Tỷ Lệ Cồn</th>
-                                <th>Doanh Thu 25</th>
-                                <th>Khoán 25</th>
-                                <th>Tỷ Lệ 25</th>
-                                <th>Doanh Thu Phiến</th>
-                                <th>Khoán Phiến</th>
-                                <th>Tỷ Lệ Phiến</th>
+                                <th style="background-color:dodgerblue">Doanh Thu OPC</th>
+                                <th style="background-color:dodgerblue">Khoán OPC</th>
+                                <th style="background-color:dodgerblue">Tỷ Lệ OPC</th>
+                                <th style="background-color:coral">Doanh Thu Sủi</th>
+                                <th style="background-color:coral">Khoán Sủi</th>
+                                <th style="background-color:coral">Tỷ Lệ Sủi</th>
+                                <th style="background-color:yellow">Doanh Thu Cồn</th>
+                                <th style="background-color:yellow">Khoán Cồn</th>
+                                <th style="background-color:yellow">Tỷ Lệ Cồn</th>
+                                <th style="background-color:lightgreen">Doanh Thu 25</th>
+                                <th style="background-color:lightgreen">Khoán 25</th>
+                                <th style="background-color:lightgreen">Tỷ Lệ 25</th>
+                                <th style="background-color:lightpink">Doanh Thu Phiến</th>
+                                <th style="background-color:lightpink">Khoán Phiến</th>
+                                <th style="background-color:lightpink">Tỷ Lệ Phiến</th>
+                                <th>Doanh Thu Thương Mại</th>
                                 <th>Doanh Thu Combo</th>
                                 <th>Tổng Thực Hiện</th>
                                 <th>Tổng Khoán</th>
                                 <th>Tỷ Lệ</th>
                                 <!--ETC-->
-                                <th>Doanh Thu OPC</th>
-                                <th>Khoán OPC</th>
-                                <th>Tỷ Lệ OPC</th>
-                                <th>Doanh Thu Sủi</th>
-                                <th>Khoán Sủi</th>
-                                <th>Tỷ Lệ Sủi</th>
-                                <th>Doanh Thu Cồn</th>
-                                <th>Khoán Cồn</th>
-                                <th>Tỷ Lệ Cồn</th>
-                                <th>Doanh Thu 25</th>
-                                <th>Khoán 25</th>
-                                <th>Tỷ Lệ 25</th>
-                                <th>Doanh Thu Phiến</th>
-                                <th>Khoán Phiến</th>
-                                <th>Tỷ Lệ Phiến</th>
+                                <th style="background-color:dodgerblue">Doanh Thu OPC</th>
+                                <th style="background-color:dodgerblue">Khoán OPC</th>
+                                <th style="background-color:dodgerblue">Tỷ Lệ OPC</th>
+                                <th style="background-color:coral">Doanh Thu Sủi</th>
+                                <th style="background-color:coral">Khoán Sủi</th>
+                                <th style="background-color:coral">Tỷ Lệ Sủi</th>
+                                <th style="background-color:yellow">Doanh Thu Cồn</th>
+                                <th style="background-color:yellow">Khoán Cồn</th>
+                                <th style="background-color:yellow">Tỷ Lệ Cồn</th>
+                                <th style="background-color:lightgreen">Doanh Thu 25</th>
+                                <th style="background-color:lightgreen">Khoán 25</th>
+                                <th style="background-color:lightgreen">Tỷ Lệ 25</th>
+                                <th style="background-color:lightpink">Doanh Thu Phiến</th>
+                                <th style="background-color:lightpink">Khoán Phiến</th>
+                                <th style="background-color:lightpink">Tỷ Lệ Phiến</th>
+                                <th>Doanh Thu Thương Mại</th>
                                 <th>Doanh Thu Combo</th>
                                 <th>Tổng Thực Hiện</th>
                                 <th>Tổng Khoán</th>
@@ -572,41 +574,43 @@
                             <tr>
                                 <!--doanh thu OTC-->
                                 <td>@row2["ten_DvCs"]</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_OPC_OTC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_Sui_OTC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_Con_OTC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_TW25_OTC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_Phien_OTC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ComBo_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue">@row2["TyLe_OPC_OTC"]%</td>
+                                <td class="num" style="text-align: right; background-color: coral">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: coral">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: coral">@row2["TyLe_Sui_OTC"]%</td>
+                                <td class="num" style="text-align: right; background-color: yellow">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: yellow">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: yellow">@row2["TyLe_Con_OTC"]%</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen">@row2["TyLe_TW25_OTC"]%</td>
+                                <td class="num" style="text-align: right; background-color: lightpink">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightpink">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightpink">@row2["TyLe_Phien_OTC"]%</td>
+                                <td class="num" style="text-align:right;">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TM_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align:right;">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ComBo_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Doanh_Thu_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Khoan_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@row2["TyLe_OTC"]%</td>
                                 <!--doanh thu ETC-->
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_OPC_ETC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_Sui_ETC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_Con_ETC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_TW25_ETC"]%</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right">@row2["TyLe_Phien_ETC"]%</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue">@row2["TyLe_OPC_ETC"]%</td>
+                                <td class="num" style="text-align: right; background-color: coral">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: coral">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: coral">@row2["TyLe_Sui_ETC"]%</td>
+                                <td class="num" style="text-align: right; background-color: yellow">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: yellow">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: yellow">@row2["TyLe_Con_ETC"]%</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen">@row2["TyLe_TW25_ETC"]%</td>
+                                <td class="num" style="text-align: right; background-color: lightpink">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightpink">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightpink">@row2["TyLe_Phien_ETC"]%</td>
+                                <td class="num" style="text-align:right;">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TM_ETC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_ComBo_ETC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Doanh_Thu_ETC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Khoan_ETC"])).Replace(".", ",")</td>
@@ -631,41 +635,43 @@
                             <tr id="total-row" style="background-color: burlywood">
                                 <td class="num"><strong>Tổng cộng:</strong></td>
 
-                                <td class="num" style="text-align:right" id="doanhthu-opc-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-opc-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_OTC"])).Replace(".", ",")</td>
-                                <td class="tyle-opc-otc num" style="text-align:right"><span id="tyle-doanhthu-opc-otc"></span></td>
-                                <td class="num" style="text-align:right" id="doanhthu-sui-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-sui-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_OTC"])).Replace(".", ",")</td>
-                                <td class="tyle-sui-otc" style="text-align:right"><span id="tyle-doanhthu-sui-otc"></span></td>
-                                <td class="num" style="text-align:right" id="doanhthu-con-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-con-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_OTC"])).Replace(".", ",")</td>
-                                <td class="tyle-con-otc" style="text-align:right"><span id="tyle-doanhthu-con-otc"></span></td>
-                                <td class="num" style="text-align:right" id="doanhthu-25-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-25-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_OTC"])).Replace(".", ",")</td>
-                                <td class="tyle-25-otc" style="text-align:right"><span id="tyle-doanhthu-25-otc"></span></td>
-                                <td class="num" style="text-align:right" id="doanhthu-phien-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_OTC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-phien-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_OTC"])).Replace(".", ",")</td>
-                                <td class="tyle-phien-otc" style="text-align:right"><span id="tyle-doanhthu-phien-otc"></span></td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue" id="doanhthu-opc-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue" id="khoan-opc-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_OTC"])).Replace(".", ",")</td>
+                                <td class="tyle-opc-otc num" style="text-align: right; background-color: dodgerblue"><span id="tyle-doanhthu-opc-otc"></span></td>
+                                <td class="num" style="text-align: right; background-color: coral" id="doanhthu-sui-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: coral" id="khoan-sui-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_OTC"])).Replace(".", ",")</td>
+                                <td class="tyle-sui-otc" style="text-align: right; background-color: coral"><span id="tyle-doanhthu-sui-otc"></span></td>
+                                <td class="num" style="text-align: right; background-color: yellow" id="doanhthu-con-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: yellow" id="khoan-con-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_OTC"])).Replace(".", ",")</td>
+                                <td class="tyle-con-otc" style="text-align: right; background-color: yellow"><span id="tyle-doanhthu-con-otc"></span></td>
+                                <td class="num" style="text-align: right; background-color: lightgreen" id="doanhthu-25-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen" id="khoan-25-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_OTC"])).Replace(".", ",")</td>
+                                <td class="tyle-25-otc" style="text-align: right; background-color: lightgreen"><span id="tyle-doanhthu-25-otc"></span></td>
+                                <td class="num" style="text-align: right; background-color: lightpink" id="doanhthu-phien-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_OTC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightpink" id="khoan-phien-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_OTC"])).Replace(".", ",")</td>
+                                <td class="tyle-phien-otc" style="text-align: right; background-color: lightpink"><span id="tyle-doanhthu-phien-otc"></span></td>
+                                <td class="num" style="text-align:right"></td>
                                 <td class="num" style="text-align:right"></td>
                                 <td class="num" style="text-align:right" id="doanhthu-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Doanh_Thu_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right" id="khoan-otc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Khoan_OTC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right"><span id="tyle-doanhthu-otc"></span></td>
-                               
-                                <td class="num" style="text-align:right" id="doanhthu-opc-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-opc-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_ETC"])).Replace(".", ",")</td>
-                                <td class="tyle-opc-etc" style="text-align:right"><span id="tyle-doanhthu-opc-etc"></span></td>
-                                <td class="num" style="text-align:right"id="doanhthu-sui-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-sui-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_ETC"])).Replace(".", ",")</td>
-                                <td class="tyle-sui-etc" style="text-align:right"><span id="tyle-doanhthu-sui-etc"></span></td>
-                                <td class="num" style="text-align:right" id="doanhthu-con-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-con-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_ETC"])).Replace(".", ",")</td>
-                                <td class="tyle-con-etc" style="text-align:right"><span id="tyle-doanhthu-con-etc"></span></td>
-                                <td class="num" style="text-align:right" id="doanhthu-25-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-25-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_ETC"])).Replace(".", ",")</td>
-                                <td class="tyle-25-etc" style="text-align:right"><span id="tyle-doanhthu-25-etc"></span></td>
-                                <td class="num" style="text-align:right" id="doanhthu-phien-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_ETC"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right" id="khoan-phien-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_ETC"])).Replace(".", ",")</td>
-                                <td class="tyle-phien-etc" style="text-align:right"><span id="tyle-doanhthu-phien-etc"></span></td>
+
+                                <td class="num" style="text-align: right; background-color: dodgerblue" id="doanhthu-opc-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_OPC_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: dodgerblue" id="khoan-opc-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_OPC_ETC"])).Replace(".", ",")</td>
+                                <td class="tyle-opc-etc" style="text-align: right; background-color: dodgerblue"><span id="tyle-doanhthu-opc-etc"></span></td>
+                                <td class="num" style="text-align: right; background-color: coral" id="doanhthu-sui-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Sui_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: coral" id="khoan-sui-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Sui_ETC"])).Replace(".", ",")</td>
+                                <td class="tyle-sui-etc" style="text-align: right; background-color: coral"><span id="tyle-doanhthu-sui-etc"></span></td>
+                                <td class="num" style="text-align: right; background-color: yellow" id="doanhthu-con-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Con_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: yellow" id="khoan-con-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Con_ETC"])).Replace(".", ",")</td>
+                                <td class="tyle-con-etc" style="text-align: right; background-color: yellow"><span id="tyle-doanhthu-con-etc"></span></td>
+                                <td class="num" style="text-align: right; background-color: lightgreen" id="doanhthu-25-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_TW25_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightgreen" id="khoan-25-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_TW25_ETC"])).Replace(".", ",")</td>
+                                <td class="tyle-25-etc" style="text-align: right; background-color: lightgreen"><span id="tyle-doanhthu-25-etc"></span></td>
+                                <td class="num" style="text-align: right; background-color: lightpink" id="doanhthu-phien-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Doanh_Thu_Phien_ETC"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align: right; background-color: lightpink" id="khoan-phien-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Khoan_Phien_ETC"])).Replace(".", ",")</td>
+                                <td class="tyle-phien-etc" style="text-align: right; background-color: lightpink"><span id="tyle-doanhthu-phien-etc"></span></td>
+                                <td class="num" style="text-align:right"><span id="doanhthu-tm-etc"></span></td>
                                 <td class="num" style="text-align:right"><span id="doanhthu-combo-etc"></span></td>
                                 <td class="num" style="text-align:right" id="doanhthu-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Doanh_Thu_ETC"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right" id="tong-khoan-etc">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Khoan_ETC"])).Replace(".", ",")</td>
@@ -673,8 +679,8 @@
                                 <td class="num" style="text-align:right"><span id="doanhthu-noibo"></span></td>
                                 <td class="num" style="text-align:right"><span id="doanhthu-xuatkhau"></span></td>
                                 <td class="num" style="text-align:right"><span id="doanhthukhac"></span></td>
-                                <td class="num" style="text-align:right"id="tongdoanhthu">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Thuc_Hien"])).Replace(".", ",")</td>
-                                <td class="num" style="text-align:right"id="tongkhoan">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Khoan"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align:right" id="tongdoanhthu">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Thuc_Hien"])).Replace(".", ",")</td>
+                                <td class="num" style="text-align:right" id="tongkhoan">@String.Format("{0:n0}", Convert.ToDecimal(row2["Tong_Khoan"])).Replace(".", ",")</td>
                                 <td class="num" style="text-align:right"><span id="tyle-tongkhoan"></span></td>
                             </tr>
                                         }
@@ -758,7 +764,7 @@
             calculateTotal();
 
             function calculateTotal() {
-                var totalColumns = new Array(45).fill(0); // Khởi tạo mảng chứa tổng của 39 cột
+                var totalColumns = new Array(47).fill(0); // Khởi tạo mảng chứa tổng của 39 cột
 
                 $('#example tbody tr:not(#total-row)').each(function () {
                     var cells = $(this).find('td');
@@ -776,7 +782,7 @@
 
                 // Hiển thị giá trị tổng từng cột lên view
                 for (var i = 1; i < totalColumns.length; i++) {
-                    if (![3, 6, 9, 12, 15, 19,22, 25, 28, 31, 34,38,44].includes(i)) { // Kiểm tra xem cột có cần tính tổng không
+                    if (![3, 6, 9, 12, 15, 20,23, 26, 29, 32, 35,40,46].includes(i)) { // Kiểm tra xem cột có cần tính tổng không
                         $('#total-row td:eq(' + (i) + ')').text(formatNumber(totalColumns[i]));
                     }
                 }
@@ -786,7 +792,7 @@
 
                 // Gọi hàm calculateRatio cho các cặp doanh thu và khoản khác tương tự
             }
-
+                
             function formatNumber(number) { 
                 return number.toLocaleString('en-US');
             }
@@ -824,8 +830,8 @@
                 var khoan25OtcElement = document.getElementById("khoan-25-otc");
                 var tyleDoanhThu25OtcElement = document.getElementById("tyle-doanhthu-25-otc");
 
-                var doanhThuphienOtcElement = document.getElementById("doanhthu-phien-otc");
-                var khoanphienOtcElement = document.getElementById("khoan-phien-otc");
+                var  = document.getElementById("doanhthu-phien-otc");
+                var khoanphienOtcElement = doanhThuphienOtcElement("khoan-phien-otc");
                 var tyleDoanhThuphienOtcElement = document.getElementById("tyle-doanhthu-phien-otc");
 
                 var doanhThuOtcElement = document.getElementById("doanhthu-otc");
@@ -849,7 +855,7 @@
                 var khoan25EtcElement = document.getElementById("khoan-25-etc");
                 var tyleDoanhThu25EtcElement = document.getElementById("tyle-doanhthu-25-etc");
 
-                var doanhThuPhienEtcElement = document.getElementById("doanhthu-etc");
+                var doanhThuPhienEtcElement = document.getElementById("doanhthu-phien-etc");
                 var khoanPhienEtcElement = document.getElementById("khoan-phien-etc");
                 var tyleDoanhThuPhienEtcElement = document.getElementById("tyle-doanhthu-phien-etc");
 

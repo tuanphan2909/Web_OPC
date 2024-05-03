@@ -44,50 +44,58 @@
                 </div>
             </button>
             <div id="submenu1" class="dropdown-container submenu-container">
-                <button class="submenu-btn" onclick="toggleSubmenu('submenu1_1','arrow-subicon')">
-                    1.Báo Cáo Quản Trị
-                    <div id="arrow-subicon" class="subicon-arrow">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                </button>
+                <div style="display:flex">
+                    <div class="color1"></div>
+                    <button class="submenu-btn" onclick="toggleSubmenu('submenu1_1','arrow-subicon')">
+                        1.Báo Cáo Quản Trị
+                        <div id="arrow-subicon" class="subicon-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </button>
+                </div>
                 <div id="submenu1_1" class="submenu-container">
-                   
+
                     <a href="#" onclick="runReport('@Url.Action("BaoCaoKetQuaKinhDoanh_Fill", "BaoCaoKetQuaKinhDoanh")'
                                                       )">1.1 Doanh Thu Tổng Hợp - Chi Tiết</a>
                 </div>
-                <button class="submenu-btn" onclick="toggleSubmenu('submenu1_2','arrow-subicon_2')">
-                    2.Báo Cáo Nghiệp Vụ  <div id="arrow-subicon_2" class="subicon-arrow">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                </button>
+                <div style="display:flex">
+                    <div class="color2"></div>
+                    <button class="submenu-btn" onclick="toggleSubmenu('submenu1_2','arrow-subicon_2')">
+                        2.Báo Cáo Nghiệp Vụ  <div id="arrow-subicon_2" class="subicon-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </button>
+                </div>
                 <div id="submenu1_2" class="submenu-container">
-                   
+
                     <a href="#" onclick="runReport('@Url.Action("BaoCaoBanHangTDV_DB_Fill", "BaoCaoBanHangTDV")'
                                                       )">2.1 BC Doanh Thu TDV</a>
-                  
-                   
+
+
                     <a href="#" onclick="runReport('@Url.Action("BaoCaoTienVeTDV_Fill", "BaoCaoTienVeCN")'
                                                       )">2.2 BC Tiền Về TDV</a>
-               
-                   
-                </div>
-               
-              
 
-                <button class="submenu-btn" onclick="toggleSubmenu('submenu1_5','arrow-subicon_5')">
-                    3.Báo Cáo Hợp Đồng <div id="arrow-subicon_5" class="subicon-arrow">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                </button>
+
+                </div>
+
+
+                <div style="display:flex">
+                    <div class="color5"></div>
+                    <button class="submenu-btn" onclick="toggleSubmenu('submenu1_5','arrow-subicon_5')">
+                        3.Báo Cáo Hợp Đồng <div id="arrow-subicon_5" class="subicon-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </button>
+                </div>
                 <div id="submenu1_5" class="submenu-container">
-                  
+
                     <a href="#" style="display:flex" onclick="runReport('@Url.Action("PhanTichBanHang_Fill", "PhanTichBanHang")'
                                                       )">
                         3.1 Phân Tích Bán Hàng
                     </a>
                 </div>
 
-               
+
             </div>
 
            

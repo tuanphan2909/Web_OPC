@@ -54,23 +54,12 @@
 
 
     <header class="header_part" style="background-color: #aec9e0; color: #3483bd ">
-        @if (Request.Cookies["UserName"].Value == "admin-cnct" || Request.Cookies["UserName"].Value == "admin-cntg" || Request.Cookies["UserName"].Value == "admin-cnmd" || Request.Cookies["UserName"].Value == "admin-cnh1" || Request.Cookies["UserName"].Value == "admin-cnvt"
-                     || Request.Cookies["UserName"].Value == "admin-cnnt" || Request.Cookies["UserName"].Value == "admin - cndn" || Request.Cookies["UserName"].Value == "admin - cnna" || Request.Cookies["UserName"].Value == "admin - cnhn")
-        {
 
+        <a style="cursor:pointer">
+            <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
+        </a>
 
-
-            <a href="/Home/About1" style="cursor:pointer">
-                <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
-            </a>
-        }
-        else
-        {
-            <a href="/Home/About" style="cursor:pointer">
-                <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
-            </a>
-        }
-        <h4 style="color:#3483bd">Danh Sách Theo Dõi Giao Hàng</h4>
+        <h4 style="color:#3483bd;font-family:'Times New Roman'">Danh Sách Sản Phẩm Trưng Bày</h4>
     </header>
     <!-- =======  Data-Table  = Start  ========================== -->
     <div class="container">
@@ -82,41 +71,85 @@
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th>Ngày Chứng từ</th>
-                                <th>Số Chứng Từ</th>
-                                <th>Mã Đt</th>
-                                <th>Tên Đt</th>
+                                <th>Ngày HĐ</th>
+                                <th>Số HĐ</th>
+                                <th>Mã KH</th>
+                                <th>Tên KH</th>
                                 <th>Ngày Bắt Đầu</th>
                                 <th>Ngày Kết Thúc</th>
                                 <th>Tên SP Trưng bày</th>
-                                <th>Tiền Trưng Bày</th>
+                                <th>Mức Trả Thưởng</th>
                                 <th>Option 1</th>
                                 <th>Option 2</th>
-                                <th>Mã Đvcs</th>
-                                <th></th>
+                                <th>Mã Chi Nhánh</th>
                                 <th></th>
                                 <th hidden>STT</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ 
+                          
+                                foreach (DataRow row2 in Model.Tables[0].Rows)
+                                {
+
+                                    var currentSoCt = row2["Ma_Dt"].ToString();
+                                  
+                                                        <tr data-soct="@currentSoCt">
+                                                            <td style="text-align:right">@row2["Ngay_Ct"]</td>
+                                                            <td style="text-align:right">@row2["So_CT"]</td>
+                                                            <td style="text-align:right" class="NV_GN">@row2["Ma_Dt"]</td>
+                                                            <td>@row2["Ten_Dt"]</td>
+                                                            <td>@row2["Ngay_Bat_Dau"]</td>
+                                                            <td>@row2["Ngay_Ket_Thuc"]</td>
+                                                            <td>@row2["Ten_SP"]</td>
+                                                            <td>@row2["Tien_TB"]</td>
+                                                            <td>@row2["Option_1"]</td>
+                                                            <td>@row2["Option_2"]</td>
+
+                                                            <td>@row2["Dvcs"]</td>
+                                                            <td><a href="#" class="editBtn">Chỉnh Sửa</a></td>
+
+                                                            <td hidden class="ctvid">@row2["Stt"]</td>
+                                                            <td><a href="#" onclick="scrollToBottom()">Xem Chi Tiết</a></td>
+                                                        </tr>
+                                      
+                                }
+                                }
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="data_table" style="margin-top:50px">
+                    <table id="example2" class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Mã ĐT</th>
+                                <th>Ngày HĐ</th>
+                                <th>Số HĐ</th>
+                                <th>Tên KH</th>
+
+                                <th>Tên SP Trưng bày</th>
+                                <th>Số Lượng</th>
+                                <th>Đơn Giá</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (DataRow row2 in Model.Tables[0].Rows)
                             {
                             <tr>
+                                <td style="text-align:right">@row2["Ma_Dt"]</td>
                                 <td style="text-align:right">@row2["Ngay_Ct"]</td>
                                 <td style="text-align:right">@row2["So_CT"]</td>
-                                <td style="text-align:right" class="NV_GN">@row2["Ma_Dt"]</td>
-                                <td>@row2["Ten_Dt"]</td>
-                                <td>@row2["Ngay_Bat_Dau"]</td>
-                                <td>@row2["Ngay_Ket_Thuc"]</td>
-                                <td>@row2["Ten_SP"]</td>
-                                <td>@row2["Tien_TB"]</td>
-                                <td>@row2["Option_1"]</td>
-                                <td>@row2["Option_2"]</td>
 
-                                <td>@row2["Dvcs"]</td>
-                                <td><a href="#" class="editBtn">Chỉnh Sửa</a></td>
-                                <td><a href="#" class="Coppy">Thêm Bản Sao</a></td>
-                                <td hidden class="ctvid">@row2["Stt"]</td>
+                                <td>@row2["Ten_Dt"]</td>
+                                <td>@row2["Ten_SP"]</td>
+                                <td></td>
+                                <td></td>
+
                             </tr>
                             }
 
@@ -130,7 +163,7 @@
     <!-- =======  Data-Table  = End  ===================== -->
     <!-- ============ Java Script Files  ================== -->
 
-
+    <div id="footer"></div>
     <script src="~/assets/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/js/jquery-3.6.0.min.js"></script>
     <script src="~/assets/js/datatables.min.js"></script>
@@ -161,7 +194,7 @@
             var NV_GN = $(this).closest('tr').find('.NV_GN').text();
             var newWindow = window.open('', '_blank');
             document.cookie = "stt=" + Stt + ";path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT";
-            
+
 
             newWindow.location.href = '/SPTrungBay/UpdateSPTrungBay?Stt=' + Stt;
 
@@ -175,7 +208,48 @@
         //    newWindow.location.href = '/TheoDoiGiaoHang/MauInGiaoHang?Stt=' + Stt;
         //});
     </script>
-   
+    <script>
+        function scrollToBottom() {
+            var footer = document.getElementById("footer"); 
+            if (footer) {
+                footer.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var table1Rows = document.querySelectorAll("#example tbody tr");
+            var table2Rows = document.querySelectorAll("#example2 tbody tr");
+     
+
+                
+            table2Rows.forEach(function (row2) {
+                row2.style.display = "none";
+            });
+
+            table1Rows.forEach(function (row) {
+                row.querySelector("td:last-child a").addEventListener("click", function () {
+                    var soCt = row.getAttribute("data-soct");
+                    console.log("Sự kiện click đã được kích hoạt");
+                    console.log("so chung tu", soCt);
+                   
+                    table2Rows.forEach(function (row2) {
+                        row2.style.display = "none";
+                    });
+                    if (soCt !== "") {
+                       
+                        table2Rows.forEach(function (row2) {
+                            var maDt = row2.querySelector("td:first-child").textContent;
+                            if (maDt === soCt) {
+                                row2.style.display = "table-row";
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
 </body>
 
 </html>

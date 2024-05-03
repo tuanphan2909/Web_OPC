@@ -314,7 +314,7 @@
 
         .data_table {
             width: max-content;
-            margin-left:0px;
+            margin-left: 0px;
         }
 
         .bieu_do {
@@ -604,10 +604,10 @@
             margin-bottom: 10px;
         }
 
-        .fancybox img {
-            max-width: 100px;
-            max-height: 100px;
-        }
+            .fancybox img {
+                max-width: 100px;
+                max-height: 100px;
+            }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -637,12 +637,13 @@
     <!-- Link thư viện Fancybox CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
 
-    <!-- Link thư viện jQuery -->                                                               
+    <!-- Link thư viện jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Link thư viện Fancybox JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-
-
+    <!-- Trong file _Layout.cshtml -->
+    <link rel="stylesheet" href="@Url.Content("https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css")" />
+    <script src="@Url.Content("https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js")"></script>
     <!-- jQuery -->
     <!-- Lightbox JavaScript -->
 
@@ -693,11 +694,11 @@
 
 
     <header class="header_part" style="background-color: #aec9e0; color: #3483bd ">
-       
-            <a style="cursor:pointer">
-                <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
-            </a>
-      
+
+        <a style="cursor:pointer">
+            <img src="~/Images/opc.png" style="height:60px;width:60px;margin-left:10px">
+        </a>
+
         <h4 style="color: #3483bd">QUẢN LÝ TRƯNG BÀY - CHI TIẾT</h4>
         <h4 style="color: #3483bd">Từ @formattedFromDate đến @formattedToDate </h4>
     </header>
@@ -829,6 +830,7 @@
     <script src="~/assets/js/pdfmake.min.js"></script>
     <script src="~/assets/js/vfs_fonts.js"></script>
     <script src="~/assets/js/custom.js"></script>
+
     <script>
         $(document).ready(function () {
             $('[data-fancybox^="group-"]').each(function () {
